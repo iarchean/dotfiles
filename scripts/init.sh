@@ -41,11 +41,11 @@ fi
 print_message "Script running as root, for user: $SUDO_USER"
 
 # Determine Home Directory based on OS for the SUDO_USER
-USER_HOME_="/home/$SUDO_USER"
-OS_TYPE_="linux" # Default to Linux
+USER_HOME="/home/$SUDO_USER"
+OS_TYPE="linux" # Default to Linux
 if [ "$(uname -s)" = "Darwin" ]; then
-  OS_TYPE_="macos"
-  USER_HOME_="/Users/$SUDO_USER"
+  OS_TYPE="macos"
+  USER_HOME="/Users/$SUDO_USER"
 fi
 print_message "Detected OS: $OS_TYPE. User home: $USER_HOME"
 
@@ -87,8 +87,8 @@ fi
 # --- Step 2: OS-Specific Actions ---
 
 # Define dotfiles repository and local path
-DOTFILES_REPO_URL_="https://github.com/iarchean/dotfiles.git" # OR your specific repo
-DOTFILES_LOCAL_PATH_="${USER_HOME_}/dotfiles" # Your dotfiles will be cloned here
+DOTFILES_REPO_URL="https://github.com/iarchean/dotfiles.git" # OR your specific repo
+DOTFILES_LOCAL_PATH="${USER_HOME_}/dotfiles" # Your dotfiles will be cloned here
 
 if [ "$OS_TYPE" = "macos" ]; then
   print_step "macOS: Setting up system with Nix-Darwin"
