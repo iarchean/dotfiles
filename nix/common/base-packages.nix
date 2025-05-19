@@ -85,7 +85,6 @@
     jq
     yq
     glow
-    urlview
     gnugrep
     gnused
     gnutar
