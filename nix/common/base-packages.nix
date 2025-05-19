@@ -32,15 +32,15 @@
     ollama   # Runs on Linux
 
     # Cloud & Kubernetes
-    kubernetes-cli # kubectl
+    kubectl
     k9s
     kind
-    minikube # Works on Linux
+    minikube
     helm
     helmfile
     kustomize
     skaffold
-    argocd     # CLI tool
+    argocd
     istioctl
     cilium-cli
     eksctl
@@ -116,13 +116,12 @@
     vegeta
     wrk
     k6
-    grpcui    # Web UI for gRPC, might open a browser. Consider if for headless.
-    grpcurl   # CLI for gRPC, definitely fine.
+    grpcui
+    grpcurl
 
     # Version Management
-    mise      # Replaces asdf, works well on Linux
-    # nvm # `mise` or `nix shell nixpkgs#nodejs` are often preferred over global nvm with Nix
-    pdm # Python package manager, fine if you use it.
+    mise
+    pdm
 
     # Build Tools
     gcc
