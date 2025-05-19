@@ -59,7 +59,6 @@
     iperf3
     tcptraceroute
     termshark
-    vnstat
     iftop
     ngrok
     mitmproxy

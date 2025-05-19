@@ -20,6 +20,7 @@
     global.autoUpdate = true;
     brews = [
       "sslyze"
+      "vnstat"
     ];
     taps = [ ];
     casks = [
