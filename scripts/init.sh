@@ -1,13 +1,6 @@
 #!/bin/bash
 set -e
 
-# Check if running with sudo
-if [ "$(id -u)" -ne 0 ]; then
-    print_error "Please run this script with sudo"
-    print_message "Example: curl -fsSL https://raw.githubusercontent.com/iarchean/dotfiles/main/scripts/init.sh | sudo sh"
-    exit 1
-fi
-
 # Colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -26,6 +19,13 @@ print_warning() {
 print_error() {
     echo -e "${RED}[ERROR]${NC} $1"
 }
+
+# Check if running with sudo
+if [ "$(id -u)" -ne 0 ]; then
+    print_error "Please run this script with sudo"
+    print_message "Example: curl -fsSL https://raw.githubusercontent.com/iarchean/dotfiles/main/scripts/init.sh | sudo sh"
+    exit 1
+fi
 
 # Function to detect OS
 detect_os() {
