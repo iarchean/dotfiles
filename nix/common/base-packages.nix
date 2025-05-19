@@ -19,39 +19,34 @@
     git
     stow
     pre-commit
-    rust
+    rustup
     go
-    nodejs
+    nodejs_20
     python3
-    python311
-    python312
     terraform
     awscli2
     aws-sam-cli
-    firebase-cli
+    firebase-tools
     gh
-    wrangler
-    ollama
+    wrangler # Cloudflare Wrangler CLI
+    ollama   # Runs on Linux
 
     # Cloud & Kubernetes
-    kubernetes-cli
-    kubectl-ai
+    kubernetes-cli # kubectl
     k9s
     kind
-    minikube
+    minikube # Works on Linux
     helm
     helmfile
     kustomize
     skaffold
-    argocd
+    argocd     # CLI tool
     istioctl
     cilium-cli
     eksctl
     docker
     docker-compose
     podman
-    lima
-    orbstack
 
     # Network Tools
     curl
@@ -63,18 +58,13 @@
     ipcalc
     iperf3
     tcptraceroute
-    wireshark
     termshark
-    sniffnet
     vnstat
     iftop
     ngrok
     mitmproxy
-    shadowsocks-libev
-    openvpn
     openconnect
     tailscale
-    cloudflare-warp
 
     # System & Monitoring
     htop
@@ -104,41 +94,38 @@
     findutils
     gawk
 
-    # Media & Graphics
+    # Media & Graphics (CLI tools are fine)
     ffmpeg
     imagemagick
     mpv
     yt-dlp
     graphviz
-    poppler
     vips
 
     # Security & Encryption
     gnupg
-    gpgme
     detect-secrets
     trufflehog
     sslyze
-    dive
-    crane
-    skopeo
+    dive      # Docker image analyzer
+    crane     # Tool for interacting with container registries
+    skopeo    # Tool for container image operations
 
     # Testing & Performance
     hey
     vegeta
     wrk
     k6
-    grpcui
-    grpcurl
+    grpcui    # Web UI for gRPC, might open a browser. Consider if for headless.
+    grpcurl   # CLI for gRPC, definitely fine.
 
     # Version Management
-    mise
-    nvm
-    pdm
+    mise      # Replaces asdf, works well on Linux
+    # nvm # `mise` or `nix shell nixpkgs#nodejs` are often preferred over global nvm with Nix
+    pdm # Python package manager, fine if you use it.
 
     # Build Tools
     gcc
-    llvm
     autoconf
     automake
     pkg-config
@@ -151,10 +138,6 @@
     # Utilities
     gcal
     croc
-    localsend
-    mackup
     mosh
-    qemu
-    sapling
   ];
 }
