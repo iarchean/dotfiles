@@ -105,7 +105,6 @@
     gnupg
     detect-secrets
     trufflehog
-    sslyze
     dive      # Docker image analyzer
     crane     # Tool for interacting with container registries
     skopeo    # Tool for container image operations

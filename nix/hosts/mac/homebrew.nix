@@ -18,7 +18,9 @@
       upgrade = true;
     };
     global.autoUpdate = true;
-    brews = [ ];
+    brews = [
+      "sslyze"
+    ];
     taps = [ ];
     casks = [
       "iina"
