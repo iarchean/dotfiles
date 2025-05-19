@@ -88,7 +88,7 @@ fi
 
 # Define dotfiles repository and local path
 DOTFILES_REPO_URL="https://github.com/iarchean/dotfiles.git" # OR your specific repo
-DOTFILES_LOCAL_PATH="${USER_HOME_}/dotfiles" # Your dotfiles will be cloned here
+DOTFILES_LOCAL_PATH="${USER_HOME}/dotfiles" # Your dotfiles will be cloned here
 
 if [ "$OS_TYPE" = "macos" ]; then
   print_step "macOS: Setting up system with Nix-Darwin"
