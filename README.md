@@ -1,3 +1,4 @@
+curl -fsSL https://raw.githubusercontent.com/iarchean/dotfiles/main/scripts/init.sh | sudo sh
 
 reference:
 - https://github.com/omerxx/dotfiles

@@ -96,11 +96,7 @@ install_nix() {
     echo "lazy-trees = true" | tee -a /etc/nix/nix.custom.conf
     
     # Source Nix environment
-    if [ -f /etc/profile.d/nix.sh ]; then
-        . /etc/profile.d/nix.sh
-    elif [ -f /etc/nix/nix.sh ]; then
-        . /etc/nix/nix.sh
-    fi
+    . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 }
 
 # Function to setup dotfiles using stow
