@@ -29,23 +29,23 @@ print_step() {
 
 # 1. Check if running with sudo and get the actual user
 if [ "$(id -u)" -ne 0 ]; then
-    print_error "This script must be run with sudo."
-    print_message "Example: curl -fsSL https://raw.githubusercontent.com/iarchean/dotfiles/main/scripts/init.sh | sudo sh"
-    exit 1
+  print_error "This script must be run with sudo."
+  print_message "Example: curl -fsSL https://raw.githubusercontent.com/iarchean/dotfiles/main/scripts/init.sh | sudo sh"
+  exit 1
 fi
 
 if [ -z "$SUDO_USER" ]; then
-    print_error "SUDO_USER is not set. This script expects to be run via sudo by a regular user."
-    exit 1
+  print_error "SUDO_USER is not set. This script expects to be run via sudo by a regular user."
+  exit 1
 fi
 print_message "Script running as root, for user: $SUDO_USER"
 
 # Determine Home Directory based on OS for the SUDO_USER
-USER_HOME="/home/$SUDO_USER"
-OS_TYPE="linux" # Default to Linux
+USER_HOME_="/home/$SUDO_USER"
+OS_TYPE_="linux" # Default to Linux
 if [ "$(uname -s)" = "Darwin" ]; then
-    OS_TYPE="macos"
-    USER_HOME="/Users/$SUDO_USER"
+  OS_TYPE_="macos"
+  USER_HOME_="/Users/$SUDO_USER"
 fi
 print_message "Detected OS: $OS_TYPE. User home: $USER_HOME"
 
@@ -53,77 +53,105 @@ print_message "Detected OS: $OS_TYPE. User home: $USER_HOME"
 # --- Step 1: Install Nix using Determinate Systems Installer ---
 print_step "Installing Nix (if not already installed)"
 if command -v nix >/dev/null 2>&1; then
-    print_message "Nix is already installed."
+  print_message "Nix is already installed."
 else
-    print_message "Nix not found. Installing Nix via Determinate Systems installer..."
-    if curl --proto '=https' --tlsv1.2 -fsSL https://install.determinate.systems/nix | sh -s -- install --no-confirm; then
-        print_message "Nix installation script completed."
-        # Source Nix environment for the current root shell to use `nix` command immediately
-        # This is primarily for `nix registry add` if we were to run it as root.
-        # For user commands, they'll need to source it or open a new shell.
-        if [ -f "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" ]; then
-            . "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
-            print_message "Sourced Nix profile for current root shell."
-        else
-            print_warning "Could not source Nix profile for root shell. Subsequent Nix commands in this script might fail if run as root."
-        fi
-    else
-        print_error "Nix installation failed."
-        exit 1
-    fi
+  print_message "Nix not found. Installing Nix via Determinate Systems installer..."
+  if curl --proto '=https' --tlsv1.2 -fsSL https://install.determinate.systems/nix | sh -s -- install --no-confirm; then
+    print_message "Nix installation script completed."
+  else
+    print_error "Nix installation failed."
+    exit 1
+  fi
 fi
+
+# Source Nix environment for the current root shell.
+# This is crucial for subsequent Nix commands run as root (like darwin-rebuild switch).
+if [ -f "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" ]; then
+  . "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
+  print_message "Sourced Nix profile for current root shell."
+else
+  print_warning "Could not source Nix profile for root shell. Subsequent Nix commands in this script might fail if run as root."
+  # Attempt common alternative path for Determinate Systems installer if the above isn't found immediately
+  if [ -f "/etc/profiles/per-user/$USER/etc/profile.d/nix-daemon.sh" ]; then # $USER here is root
+    . "/etc/profiles/per-user/root/etc/profile.d/nix-daemon.sh" # More specific
+     print_message "Sourced Nix profile (alternative path) for current root shell."
+  elif [ -f "/etc/profile.d/nix-daemon.sh" ]; then
+    . "/etc/profile.d/nix-daemon.sh"
+    print_message "Sourced Nix profile (common /etc/profile.d path) for current root shell."
+  else
+     print_warning "Still could not source Nix profile for root. darwin-rebuild switch might fail."
+  fi
+fi
+
 
 # --- Step 2: OS-Specific Actions ---
 
 # Define dotfiles repository and local path
-# IMPORTANT: Replace with your actual dotfiles repository URL
-DOTFILES_REPO_URL="https://github.com/iarchean/dotfiles.git" # OR your specific repo
-DOTFILES_LOCAL_PATH="${USER_HOME}/dotfiles" # Your dotfiles will be cloned here
+DOTFILES_REPO_URL_="https://github.com/iarchean/dotfiles.git" # OR your specific repo
+DOTFILES_LOCAL_PATH_="${USER_HOME_}/dotfiles" # Your dotfiles will be cloned here
 
 if [ "$OS_TYPE" = "macos" ]; then
-    print_step "macOS: Setting up system with Nix-Darwin"
+  print_step "macOS: Setting up system with Nix-Darwin"
 
-    print_message "Ensuring git is installed for cloning dotfiles..."
+  print_message "Ensuring git is installed for cloning dotfiles..."
+  if ! command -v git >/dev/null 2>&1; then
+    print_message "Git not found. Attempting to install Xcode Command Line Tools (this may require user interaction)."
+    # Running xcode-select as the user
+    sudo -u "$SUDO_USER" xcode-select --install || print_warning "Xcode tools installation might need manual confirmation."
+    print_message "Please ensure Xcode Command Line Tools are installed, then re-run if necessary or if git is still missing."
+    # Simple check, script might need to be re-run if this takes long.
     if ! command -v git >/dev/null 2>&1; then
-        print_message "Git not found. Attempting to install Xcode Command Line Tools (this may require user interaction)."
-        # Running xcode-select as the user
-        sudo -u "$SUDO_USER" xcode-select --install || print_warning "Xcode tools installation might need manual confirmation."
-        print_message "Please ensure Xcode Command Line Tools are installed, then re-run if necessary or if git is still missing."
-        # Simple check, script might need to be re-run if this takes long.
-        if ! command -v git >/dev/null 2>&1; then
-            print_error "Git still not found after attempting Xcode tools install. Please install git manually and re-run."
-            exit 1
-        fi
+      print_error "Git still not found after attempting Xcode tools install. Please install git manually and re-run."
+      exit 1
     fi
+  fi
 
-    print_message "Cloning/Updating dotfiles repository to ${DOTFILES_LOCAL_PATH} as user ${SUDO_USER}..."
-    if [ -d "$DOTFILES_LOCAL_PATH" ]; then
-        print_message "Dotfiles directory exists. Pulling latest changes..."
-        sudo -u "$SUDO_USER" git -C "$DOTFILES_LOCAL_PATH" pull || print_warning "Failed to pull dotfiles. Continuing with existing version."
-    else
-        sudo -u "$SUDO_USER" git clone "$DOTFILES_REPO_URL" "$DOTFILES_LOCAL_PATH" || { print_error "Failed to clone dotfiles repository."; exit 1; }
-    fi
-    # Ensure correct ownership
-    sudo chown -R "$SUDO_USER" "$DOTFILES_LOCAL_PATH"
+  print_message "Cloning/Updating dotfiles repository to ${DOTFILES_LOCAL_PATH} as user ${SUDO_USER}..."
+  if [ -d "$DOTFILES_LOCAL_PATH" ]; then
+    print_message "Dotfiles directory exists. Pulling latest changes..."
+    # Ensure the .git directory has correct ownership before pulling
+    sudo chown -R "$SUDO_USER" "$(dirname "$DOTFILES_LOCAL_PATH")" # chown parent dir if needed, or specific .git
+    sudo -u "$SUDO_USER" git -C "$DOTFILES_LOCAL_PATH" pull || print_warning "Failed to pull dotfiles. Continuing with existing version."
+  else
+    sudo -u "$SUDO_USER" git clone "$DOTFILES_REPO_URL" "$DOTFILES_LOCAL_PATH" || { print_error "Failed to clone dotfiles repository."; exit 1; }
+  fi
+  # Ensure correct ownership of the whole cloned repo
+  sudo chown -R "$SUDO_USER":"$(id -g "$SUDO_USER")" "$DOTFILES_LOCAL_PATH"
 
 
-    print_message "Building and switching Nix-Darwin configuration..."
-    print_message "This may take a while and might require your password for sudo operations within darwin-rebuild."
+  print_message "Building Nix-Darwin configuration as user $SUDO_USER..."
+  print_message "This may take a while."
+  # Command to build the system configuration as the SUDO_USER
+  # The 'cd' is important so 'result' symlink is created in the nix config directory
+  BUILD_CMD="cd '${DOTFILES_LOCAL_PATH}/nix' && nix build .#darwinConfigurations.mac.system --impure" # Added --impure for potential undeclared inputs
 
-    # The darwin-rebuild command needs to be run in a context where `nix` is available.
-    # We execute the command as the SUDO_USER, but darwin-rebuild itself will use sudo.
-    # The flake path must be correct.
-    DARWIN_REBUILD_CMD="cd '${DOTFILES_LOCAL_PATH}/nix' && nix build .#darwinConfigurations.mac.system && ./result/sw/bin/darwin-rebuild switch --flake .#mac"
+  # Execute build command as the user, sourcing the Nix profile first.
+  if ! sudo -u "$SUDO_USER" bash -c ". /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh && ${BUILD_CMD}"; then
+    print_error "Nix-Darwin build failed."
+    print_message "Please check the output above for errors. Ensure your flake at ${DOTFILES_LOCAL_PATH}/nix/flake.nix is correct."
+    exit 1
+  fi
+  print_message "Nix-Darwin configuration built successfully."
 
-    # Execute as the user, sourcing the Nix profile first.
-    # `darwin-rebuild` will handle its own `sudo` elevation.
-    if sudo -u "$SUDO_USER" bash -c ". /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh && ${DARWIN_REBUILD_CMD}"; then
-        print_message "Nix-Darwin system setup completed."
-    else
-        print_error "Nix-Darwin setup failed."
-        print_message "Please check the output above for errors. You might need to run the darwin-rebuild command manually after ensuring Nix is set up correctly for user ${SUDO_USER}."
-        exit 1
-    fi
+  print_message "Switching to new Nix-Darwin configuration as root..."
+  print_message "This might require your password again if darwin-rebuild needs to elevate further (though script is already root)."
+
+  # Command to switch the system configuration, run as root.
+  # It uses the './result' from the build step. The 'cd' is crucial.
+  # The main script is already root, so no 'sudo' needed here.
+  # We ensure the Nix environment is sourced for this root command too.
+  SWITCH_CMD="cd '${DOTFILES_LOCAL_PATH}/nix' && ./result/sw/bin/darwin-rebuild switch --flake .#mac --impure" # Added --impure
+
+  # Sourcing nix-daemon.sh here again in a subshell for `darwin-rebuild` ensures it finds `nix`
+  if bash -c ". /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh && ${SWITCH_CMD}"; then
+    print_message "Nix-Darwin system switch completed."
+  else
+    print_error "Nix-Darwin switch failed."
+    print_message "Please check the output above for errors. You might need to run the switch command manually:"
+    echo -e "   ${YELLOW}cd ${DOTFILES_LOCAL_PATH}/nix${NC}"
+    echo -e "   ${YELLOW}sudo ./result/sw/bin/darwin-rebuild switch --flake .#mac --impure${NC}"
+    exit 1
+  fi
 
     print_step "Next Steps for macOS User ($SUDO_USER):"
     echo -e "1. ${BLUE}Open a new terminal window${NC} to ensure all Nix environment changes are loaded."
