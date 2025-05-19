@@ -97,11 +97,10 @@ install_nix() {
     
     # Initialize nixpkgs
     print_message "Initializing nixpkgs..."
-    nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
-    nix-channel --update
+    nix registry add nixpkgs github:NixOS/nixpkgs/nixpkgs-unstable
     
-    # Set NIX_PATH after channel update
-    export NIX_PATH="nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixpkgs${NIX_PATH:+:$NIX_PATH}"
+    # Set NIX_PATH
+    export NIX_PATH="nixpkgs=github:NixOS/nixpkgs/nixpkgs-unstable${NIX_PATH:+:$NIX_PATH}"
     
     # Verify Nix installation
     if ! command -v nix >/dev/null 2>&1; then
@@ -114,9 +113,9 @@ install_nix() {
 setup_dotfiles() {
     print_message "Setting up dotfiles..."
     
-    # Use nix-shell to run stow as the actual user
+    # Use nix shell to run stow as the actual user
     cd "/home/$SUDO_USER/dotfiles"
-    sudo -u "$SUDO_USER" env PATH="$PATH" NIX_PATH="$NIX_PATH" nix-shell -p stow --run "stow -t /home/$SUDO_USER -d /home/$SUDO_USER/dotfiles ."
+    sudo -u "$SUDO_USER" env PATH="$PATH" NIX_PATH="$NIX_PATH" nix shell nixpkgs#stow --command "stow -t /home/$SUDO_USER -d /home/$SUDO_USER/dotfiles ."
 }
 
 # Function to setup system based on OS
