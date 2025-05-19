@@ -133,7 +133,7 @@ if [ "$OS_TYPE" = "macos" ]; then
   # Run darwin-rebuild switch as the SUDO_USER.
   # darwin-rebuild will handle its own sudo elevation for system changes.
   # The 'cd' is crucial.
-  SWITCH_CMD_AS_USER="cd '${DOTFILES_LOCAL_PATH}/nix' && ./result/sw/bin/darwin-rebuild switch --flake .#mac --impure"
+  SWITCH_CMD_AS_USER="cd '${DOTFILES_LOCAL_PATH}/nix' && sudo ./result/sw/bin/darwin-rebuild switch --flake .#mac --impure"
 
   # Execute as the user, sourcing the Nix profile first.
   if sudo -u "$SUDO_USER" bash -c ". /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh && ${SWITCH_CMD_AS_USER}"; then
@@ -142,7 +142,7 @@ if [ "$OS_TYPE" = "macos" ]; then
     print_error "Nix-Darwin switch failed."
     print_message "Please check the output above for errors. You might need to run the switch command manually as user ${SUDO_USER}:"
     echo -e "   ${YELLOW}cd ${DOTFILES_LOCAL_PATH}/nix${NC}"
-    echo -e "   ${YELLOW}./result/sw/bin/darwin-rebuild switch --flake .#mac --impure${NC} (this will prompt for sudo password)"
+    echo -e "   ${YELLOW}sudo ./result/sw/bin/darwin-rebuild switch --flake .#mac --impure${NC} (this will prompt for sudo password)"
     exit 1
   fi
 
