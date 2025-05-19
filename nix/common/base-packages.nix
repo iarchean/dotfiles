@@ -28,8 +28,7 @@
     aws-sam-cli
     firebase-tools
     gh
-    wrangler # Cloudflare Wrangler CLI
-    ollama   # Runs on Linux
+    ollama
 
     # Cloud & Kubernetes
     kubectl
