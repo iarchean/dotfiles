@@ -87,8 +87,24 @@ clone_repo() {
     fi
 }
 
+# Function to check if Nix is installed
+check_nix_installation() {
+    if command -v nix >/dev/null 2>&1; then
+        print_message "Nix is already installed"
+        # Export Nix environment variables
+        export PATH="/nix/var/nix/profiles/default/bin:$PATH"
+        return 0
+    fi
+    return 1
+}
+
 # Function to install Nix
 install_nix() {
+    # Check if Nix is already installed
+    if check_nix_installation; then
+        return 0
+    fi
+
     print_message "Installing Nix..."
     curl --proto '=https' --tlsv1.2 -fsSL https://install.determinate.systems/nix | sh -s -- install --no-confirm
     
