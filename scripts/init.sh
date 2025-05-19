@@ -113,9 +113,23 @@ install_nix() {
 setup_dotfiles() {
     print_message "Setting up dotfiles..."
     
+    # Get the absolute path of dotfiles directory
+    local dotfiles_dir="/home/$SUDO_USER/dotfiles"
+    local home_dir="/home/$SUDO_USER"
+    
+    # Change to dotfiles directory
+    cd "$dotfiles_dir" || {
+        print_error "Failed to change to dotfiles directory: $dotfiles_dir"
+        exit 1
+    }
+    
+    # List contents for debugging
+    print_message "Contents of dotfiles directory:"
+    ls -la
+    
     # Use nix shell to run stow as the actual user
-    cd "/home/$SUDO_USER/dotfiles"
-    sudo -u "$SUDO_USER" env PATH="$PATH" NIX_PATH="$NIX_PATH" nix shell nixpkgs#stow --command "stow -t /home/$SUDO_USER -d /home/$SUDO_USER/dotfiles ."
+    print_message "Running stow command..."
+    sudo -u "$SUDO_USER" env PATH="$PATH" NIX_PATH="$NIX_PATH" nix shell nixpkgs#stow --command "cd '$dotfiles_dir' && stow -t '$home_dir' -d '$dotfiles_dir' ."
 }
 
 # Function to setup system based on OS
