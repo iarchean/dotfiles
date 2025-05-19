@@ -96,10 +96,8 @@ if [ "$OS_TYPE" = "macos" ]; then
   print_message "Ensuring git is installed for cloning dotfiles..."
   if ! command -v git >/dev/null 2>&1; then
     print_message "Git not found. Attempting to install Xcode Command Line Tools (this may require user interaction)."
-    # Running xcode-select as the user
     sudo -u "$SUDO_USER" xcode-select --install || print_warning "Xcode tools installation might need manual confirmation."
     print_message "Please ensure Xcode Command Line Tools are installed, then re-run if necessary or if git is still missing."
-    # Simple check, script might need to be re-run if this takes long.
     if ! command -v git >/dev/null 2>&1; then
       print_error "Git still not found after attempting Xcode tools install. Please install git manually and re-run."
       exit 1
@@ -109,8 +107,7 @@ if [ "$OS_TYPE" = "macos" ]; then
   print_message "Cloning/Updating dotfiles repository to ${DOTFILES_LOCAL_PATH} as user ${SUDO_USER}..."
   if [ -d "$DOTFILES_LOCAL_PATH" ]; then
     print_message "Dotfiles directory exists. Pulling latest changes..."
-    # Ensure the .git directory has correct ownership before pulling
-    sudo chown -R "$SUDO_USER" "$(dirname "$DOTFILES_LOCAL_PATH")" # chown parent dir if needed, or specific .git
+    # Ensure correct ownership for pull if needed, though clone/chown below should cover it
     sudo -u "$SUDO_USER" git -C "$DOTFILES_LOCAL_PATH" pull || print_warning "Failed to pull dotfiles. Continuing with existing version."
   else
     sudo -u "$SUDO_USER" git clone "$DOTFILES_REPO_URL" "$DOTFILES_LOCAL_PATH" || { print_error "Failed to clone dotfiles repository."; exit 1; }
@@ -121,11 +118,8 @@ if [ "$OS_TYPE" = "macos" ]; then
 
   print_message "Building Nix-Darwin configuration as user $SUDO_USER..."
   print_message "This may take a while."
-  # Command to build the system configuration as the SUDO_USER
-  # The 'cd' is important so 'result' symlink is created in the nix config directory
-  BUILD_CMD="cd '${DOTFILES_LOCAL_PATH}/nix' && nix build .#darwinConfigurations.mac.system --impure" # Added --impure for potential undeclared inputs
+  BUILD_CMD="cd '${DOTFILES_LOCAL_PATH}/nix' && nix build .#darwinConfigurations.mac.system --impure"
 
-  # Execute build command as the user, sourcing the Nix profile first.
   if ! sudo -u "$SUDO_USER" bash -c ". /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh && ${BUILD_CMD}"; then
     print_error "Nix-Darwin build failed."
     print_message "Please check the output above for errors. Ensure your flake at ${DOTFILES_LOCAL_PATH}/nix/flake.nix is correct."
@@ -133,69 +127,68 @@ if [ "$OS_TYPE" = "macos" ]; then
   fi
   print_message "Nix-Darwin configuration built successfully."
 
-  print_message "Switching to new Nix-Darwin configuration as root..."
-  print_message "This might require your password again if darwin-rebuild needs to elevate further (though script is already root)."
+  print_message "Switching to new Nix-Darwin configuration (will be run as user $SUDO_USER, darwin-rebuild will use sudo internally)..."
+  print_message "This might require your password for sudo operations within darwin-rebuild."
 
-  # Command to switch the system configuration, run as root.
-  # It uses the './result' from the build step. The 'cd' is crucial.
-  # The main script is already root, so no 'sudo' needed here.
-  # We ensure the Nix environment is sourced for this root command too.
-  SWITCH_CMD="cd '${DOTFILES_LOCAL_PATH}/nix' && sudo ./result/sw/bin/darwin-rebuild switch --flake .#mac --impure" # Added --impure
+  # Run darwin-rebuild switch as the SUDO_USER.
+  # darwin-rebuild will handle its own sudo elevation for system changes.
+  # The 'cd' is crucial.
+  SWITCH_CMD_AS_USER="cd '${DOTFILES_LOCAL_PATH}/nix' && ./result/sw/bin/darwin-rebuild switch --flake .#mac --impure"
 
-  # Sourcing nix-daemon.sh here again in a subshell for `darwin-rebuild` ensures it finds `nix`
-  if bash -c ". /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh && ${SWITCH_CMD}"; then
+  # Execute as the user, sourcing the Nix profile first.
+  if sudo -u "$SUDO_USER" bash -c ". /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh && ${SWITCH_CMD_AS_USER}"; then
     print_message "Nix-Darwin system switch completed."
   else
     print_error "Nix-Darwin switch failed."
-    print_message "Please check the output above for errors. You might need to run the switch command manually:"
+    print_message "Please check the output above for errors. You might need to run the switch command manually as user ${SUDO_USER}:"
     echo -e "   ${YELLOW}cd ${DOTFILES_LOCAL_PATH}/nix${NC}"
-    echo -e "   ${YELLOW}sudo ./result/sw/bin/darwin-rebuild switch --flake .#mac --impure${NC}"
+    echo -e "   ${YELLOW}./result/sw/bin/darwin-rebuild switch --flake .#mac --impure${NC} (this will prompt for sudo password)"
     exit 1
   fi
 
-    print_step "Next Steps for macOS User ($SUDO_USER):"
-    echo -e "1. ${BLUE}Open a new terminal window${NC} to ensure all Nix environment changes are loaded."
-    echo -e "2. Your system packages (including 'stow' if declared in your flake) are now installed."
-    echo -e "3. To link your dotfiles using GNU Stow, run the following commands as user '${SUDO_USER}':"
-    echo -e "   ${YELLOW}cd ${DOTFILES_LOCAL_PATH}${NC}"
-    echo -e "   ${YELLOW}stow <package_name_1> <package_name_2> ...${NC} (e.g., stow nvim fish tmux)"
-    echo -e "   (Replace <package_name_...> with the actual directory names inside ${DOTFILES_LOCAL_PATH} you want to link, e.g., 'nvim', 'fish', 'tmux')"
-    echo -e "   Or, to stow all packages (subdirectories): ${YELLOW}stow */${NC}"
+  print_step "Next Steps for macOS User ($SUDO_USER):"
+  echo -e "1. ${BLUE}Open a new terminal window${NC} to ensure all Nix environment changes are loaded."
+  echo -e "2. Your system packages (including 'stow' if declared in your flake) are now installed."
+  echo -e "3. To link your dotfiles using GNU Stow, run the following commands as user '${SUDO_USER}':"
+  echo -e "   ${YELLOW}cd ${DOTFILES_LOCAL_PATH}${NC}"
+  echo -e "   ${YELLOW}stow <package_name_1> <package_name_2> ...${NC} (e.g., stow nvim fish tmux)"
+  echo -e "   (Replace <package_name_...> with the actual directory names inside ${DOTFILES_LOCAL_PATH} you want to link, e.g., 'nvim', 'fish', 'tmux')"
+  echo -e "   Or, to stow all packages (subdirectories): ${YELLOW}stow */${NC}"
 
 
 elif [ "$OS_TYPE" = "linux" ]; then
-    print_step "Linux: Next Steps for User ($SUDO_USER)"
-    echo -e "Nix has been installed. To configure your system and dotfiles:"
-    echo -e "1. ${BLUE}Open a new terminal window or run the following command to activate Nix for your current session:${NC}"
-    echo -e "   ${YELLOW}. /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh${NC}"
-    echo -e ""
-    echo -e "2. ${BLUE}Clone your dotfiles repository (if you haven't already):${NC}"
-    echo -e "   Make sure git is installed (e.g., ${YELLOW}sudo apt update && sudo apt install git${NC} on Debian/Ubuntu)."
-    echo -e "   Then run: ${YELLOW}git clone ${DOTFILES_REPO_URL} ${DOTFILES_LOCAL_PATH}${NC}"
-    echo -e "   And: ${YELLOW}cd ${DOTFILES_LOCAL_PATH}${NC}"
-    echo -e ""
-    echo -e "3. ${BLUE}Install GNU Stow and other essential tools using Nix:${NC}"
-    echo -e "   You can install 'stow' (and other tools defined in your flake) to your user profile:"
-    echo -e "   ${YELLOW}nix profile install nixpkgs#stow${NC}  (for just stow)"
-    echo -e "   Or, if your flake exposes a package set (e.g., 'tools-linux'):"
-    echo -e "   ${YELLOW}nix profile install .#tools-linux${NC} (run this from within ${DOTFILES_LOCAL_PATH})"
-    echo -e "   Alternatively, enter a development shell with all tools:"
-    echo -e "   ${YELLOW}nix develop .#env-linux${NC} (run this from within ${DOTFILES_LOCAL_PATH})"
-    echo -e ""
-    echo -e "4. ${BLUE}Link your dotfiles using GNU Stow:${NC}"
-    echo -e "   Once 'stow' is available (either via nix profile or inside nix develop shell):"
-    echo -e "   ${YELLOW}cd ${DOTFILES_LOCAL_PATH}${NC}"
-    echo -e "   ${YELLOW}stow <package_name_1> <package_name_2> ...${NC} (e.g., stow nvim fish tmux)"
-    echo -e "   Or, to stow all packages (subdirectories): ${YELLOW}stow */${NC}"
-    echo -e ""
-    echo -e "Your dotfiles flake (${DOTFILES_LOCAL_PATH}/flake.nix) likely contains configurations for these tools."
+  print_step "Linux: Next Steps for User ($SUDO_USER)"
+  echo -e "Nix has been installed. To configure your system and dotfiles:"
+  echo -e "1. ${BLUE}Open a new terminal window or run the following command to activate Nix for your current session:${NC}"
+  echo -e "   ${YELLOW}. /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh${NC}"
+  echo -e ""
+  echo -e "2. ${BLUE}Clone your dotfiles repository (if you haven't already):${NC}"
+  echo -e "   Make sure git is installed (e.g., ${YELLOW}sudo apt update && sudo apt install git${NC} on Debian/Ubuntu)."
+  echo -e "   Then run: ${YELLOW}git clone ${DOTFILES_REPO_URL} ${DOTFILES_LOCAL_PATH}${NC}"
+  echo -e "   And: ${YELLOW}cd ${DOTFILES_LOCAL_PATH}${NC}"
+  echo -e ""
+  echo -e "3. ${BLUE}Install GNU Stow and other essential tools using Nix:${NC}"
+  echo -e "   You can install 'stow' (and other tools defined in your flake) to your user profile:"
+  echo -e "   ${YELLOW}nix profile install nixpkgs#stow${NC}  (for just stow)"
+  echo -e "   Or, if your flake exposes a package set (e.g., 'tools-linux'):"
+  echo -e "   ${YELLOW}nix profile install .#tools-linux${NC} (run this from within ${DOTFILES_LOCAL_PATH})"
+  echo -e "   Alternatively, enter a development shell with all tools:"
+  echo -e "   ${YELLOW}nix develop .#env-linux${NC} (run this from within ${DOTFILES_LOCAL_PATH})"
+  echo -e ""
+  echo -e "4. ${BLUE}Link your dotfiles using GNU Stow:${NC}"
+  echo -e "   Once 'stow' is available (either via nix profile or inside nix develop shell):"
+  echo -e "   ${YELLOW}cd ${DOTFILES_LOCAL_PATH}${NC}"
+  echo -e "   ${YELLOW}stow <package_name_1> <package_name_2> ...${NC} (e.g., stow nvim fish tmux)"
+  echo -e "   Or, to stow all packages (subdirectories): ${YELLOW}stow */${NC}"
+  echo -e ""
+  echo -e "Your dotfiles flake (${DOTFILES_LOCAL_PATH}/flake.nix) likely contains configurations for these tools."
 
 else
-    print_error "Unsupported operating system: $(uname -s)"
-    exit 1
+  print_error "Unsupported operating system: $(uname -s)"
+  exit 1
 fi
 
 print_message "\nScript finished."
 if [ "$OS_TYPE" = "macos" ]; then
-    print_message "For macOS, some system changes might require a logout/login or restart."
+  print_message "For macOS, some system changes might require a logout/login or restart."
 fi
