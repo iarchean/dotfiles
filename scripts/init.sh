@@ -113,7 +113,7 @@ if [ "$OS_TYPE" = "macos" ]; then
     # The darwin-rebuild command needs to be run in a context where `nix` is available.
     # We execute the command as the SUDO_USER, but darwin-rebuild itself will use sudo.
     # The flake path must be correct.
-    DARWIN_REBUILD_CMD="cd '${DOTFILES_LOCAL_PATH}' && nix build .#darwinConfigurations.mac.system && ./result/sw/bin/darwin-rebuild switch --flake .#mac"
+    DARWIN_REBUILD_CMD="cd '${DOTFILES_LOCAL_PATH}/nix' && nix build .#darwinConfigurations.mac.system && ./result/sw/bin/darwin-rebuild switch --flake .#mac"
 
     # Execute as the user, sourcing the Nix profile first.
     # `darwin-rebuild` will handle its own `sudo` elevation.
