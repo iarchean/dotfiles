@@ -19,23 +19,11 @@
       specialArgs = { inherit inputs; };
 
       modules = [
-        ./darwin-configuration.nix
-
         nix-homebrew.darwinModules.nix-homebrew
 
-        {
-          nix-homebrew = {
-            enable = true;
-            user = "archean";
-            taps = {
-              "homebrew/homebrew-core" = homebrew-core;
-              "homebrew/homebrew-cask" = homebrew-cask;
-            };
-            mutableTaps = false;
-            # Apple Silicon Only: Also install Homebrew under the default Intel prefix for Rosetta 2
-            # enableRosetta = true;
-          };
-        }
+        ./darwin-configuration.nix
+        ./homebrew.nix
+        
       ];
     };
   };

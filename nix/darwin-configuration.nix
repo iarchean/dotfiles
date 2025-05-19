@@ -30,29 +30,6 @@ in
     pkgs.bash
   ];
 
-  homebrew = {
-    enable = true;
-    onActivation = {
-      # cleanup = "zap";
-      autoUpdate = true;
-      upgrade = true;
-    };
-    global.autoUpdate = true;
-    brews = [
-      # "bitwarden-cli"
-    ];
-    taps = [
-      #"FelixKratz/formulae" #sketchybar
-    ];
-    casks = [
-      "iina"
-      "raycast"
-    ];
-    masApps = {
-      # "Pages" = 409201541;
-    };
-  };
-
   fonts.packages = with pkgs; [
     maple-mono.truetype
     maple-mono.NF-unhinted
@@ -130,7 +107,7 @@ in
 #       SortDirection = 0;
 #     };
 #     "com.apple.Safari" = {
-#       # Privacy: don’t send search queries to Apple
+#       # Privacy: don't send search queries to Apple
 #       UniversalSearchEnabled = false;
 #       SuppressSearchSuggestions = true;
 #     };
