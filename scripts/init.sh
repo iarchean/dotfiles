@@ -92,12 +92,16 @@ install_nix() {
     print_message "Installing Nix..."
     curl --proto '=https' --tlsv1.2 -fsSL https://install.determinate.systems/nix | sh -s -- install --no-confirm
     
-    # Add lazy-trees configuration
-    echo "lazy-trees = true" | tee -a /etc/nix/nix.custom.conf
-    
     # Export Nix environment variables
-    export NIX_PATH="/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}"
     export PATH="/nix/var/nix/profiles/default/bin:$PATH"
+    
+    # Initialize nixpkgs
+    print_message "Initializing nixpkgs..."
+    nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
+    nix-channel --update
+    
+    # Set NIX_PATH after channel update
+    export NIX_PATH="nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixpkgs${NIX_PATH:+:$NIX_PATH}"
     
     # Verify Nix installation
     if ! command -v nix >/dev/null 2>&1; then
