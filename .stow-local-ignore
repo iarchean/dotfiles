@@ -1,0 +1,8 @@
+docs
+.gitignore
+.git
+.stowrc
+nix
+scripts
+README.md
+.pre-commit-config.yaml
