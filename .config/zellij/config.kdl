@@ -1,0 +1,20 @@
+session "custom-tmux-like-layout" {
+    layout {
+        pane size=1.0 split_direction="horizontal" {
+            pane size=0.15 split_direction="vertical" { // 顶部状态栏的部分
+                tab_name "btm"
+                run "btm" // 运行 btm 或其他状态工具
+            }
+            pane size=0.85 split_direction="vertical" { // 剩下的主要区域
+                pane size=0.1 split_direction="horizontal" { // 左侧编辑器部分
+                    tab_name "nvim"
+                    run "nvim" // 启动 nvim
+                }
+                pane size=0.9 split_direction="horizontal" { // 主终端
+                    tab_name "fish"
+                    run "fish" // 启动 fish shell
+                }
+            }
+        }
+    }
+}

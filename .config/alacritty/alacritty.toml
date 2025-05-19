@@ -1,0 +1,171 @@
+live_config_reload = true
+
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[[colors.indexed_colors]]
+color = "0x000000"
+index = 16
+
+[colors.bright]
+black = "0x505665"
+blue = "0x6FC1FA"
+cyan = "0x73CEDD"
+green = "0xB1DE82"
+magenta = "0xD079F8"
+red = "0xED6C72"
+white = "0xE6E6E6"
+yellow = "0xE5A769"
+
+[colors.cursor]
+cursor = "0xffffff"
+text = "0x000000"
+
+[colors.dim]
+black = "0x1e2127"
+blue = "0x61afef"
+cyan = "0x56b6c2"
+green = "0x98c379"
+magenta = "0xc678dd"
+red = "0xe06c75"
+white = "0x828791"
+yellow = "0xd19a66"
+
+[colors.normal]
+black = "0x404450"
+blue = "0x62A3EA"
+cyan = "0x63B1C0"
+green = "0x97C070"
+magenta = "0xB567D8"
+red = "0xD05E64"
+white = "0xD8DADF"
+yellow = "0xC7925C"
+
+[colors.primary]
+background = "0x1E1E2E"
+bright_foreground = "0xe6efff"
+foreground = "0xabb2bf"
+
+[cursor.style]
+shape = "Underline"
+
+[font]
+size = 15.0
+
+[font.bold]
+family = "Maple Mono CN"
+style = "Medium"
+
+[font.bold_italic]
+family = "Maple Mono CN"
+style = "Medium"
+
+[font.glyph_offset]
+x = 0
+y = 0
+
+[font.italic]
+family = "Maple Mono CN"
+style = "Light"
+
+[font.normal]
+family = "Maple Mono CN"
+style = "Regular"
+
+[font.offset]
+x = 0
+y = 0
+
+[[keyboard.bindings]]
+chars = "\f"
+key = "R"
+mode = "~Vi|~Search"
+mods = "Command"
+
+[[keyboard.bindings]]
+action = "ClearHistory"
+key = "R"
+mode = "~Vi|~Search"
+mods = "Command"
+
+[[keyboard.bindings]]
+action = "Hide"
+key = "W"
+mods = "Command"
+
+[[keyboard.bindings]]
+action = "Quit"
+key = "W"
+mods = "Command|Shift"
+
+[[keyboard.bindings]]
+action = "CreateNewWindow"
+key = "N"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u001Bb"
+key = "Left"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001Bf"
+key = "Right"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001BOH"
+key = "Left"
+mode = "AppCursor"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u001BOF"
+key = "Right"
+mode = "AppCursor"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0015"
+key = "Back"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u001B\u007F"
+key = "Back"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "`c"
+key = "T"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "`["
+key = "LBracket"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "`]"
+key = "RBracket"
+mods = "Command"
+
+[scrolling]
+history = 100000
+multiplier = 4
+
+[selection]
+save_to_clipboard = true
+semantic_escape_chars = ",│`|:\"' ()[]{}<>"
+
+[window]
+decorations = "buttonless"
+dynamic_padding = true
+
+[window.dimensions]
+columns = 160
+lines = 48
+
+[window.padding]
+x = 20
+y = 18

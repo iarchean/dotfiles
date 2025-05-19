@@ -1,0 +1,131 @@
+plugins:
+  get-all:
+    shortCut: g
+    confirm: false
+    description: ◈ Get all resources in current namespace
+    scopes:
+      - all
+    command: kubectl
+    background: false
+    args:
+      - -n
+      - $NAMESPACE
+      - --context
+      - $CONTEXT
+      - get
+      - all
+
+  debug-pod:
+    shortCut: u
+    confirm: true
+    description: ◈ Debug selected pod
+    scopes:
+      - containers
+    command: kubectl
+    background: false
+    args:
+      - debug
+      - -it
+      - -n
+      - $NAMESPACE
+      - $POD
+      - --target=$NAME
+      - --context
+      - $CONTEXT
+      - --image=nicolaka/netshoot
+      - --share-processes
+      - --
+      - bash
+
+  tcpdump:
+    shortCut: m
+    confirm: true
+    description: ◈ Tcpdump selected pod
+    scopes:
+      - pod
+    command: kubectl
+    background: false
+    args:
+      - debug
+      - -it
+      - $NAME
+      - -n
+      - $NAMESPACE
+      - --context
+      - $CONTEXT
+      - --image=nicolaka/netshoot
+      - --
+      - termshark
+      - -i
+      - eth0
+
+      # - "kubectl debug -it $NAME --image=nicolaka/netshoot -n $NAMESPACE -- termshark -i eth0"
+
+      # use kubectl and netshoot to debog a pod
+  busybox-pod:
+    shortCut: b
+    confirm: true
+    description: ◈ Run a busybox pod in current namespace
+    scopes:
+      - all
+    command: kubectl
+    background: false
+    args:
+      - -n
+      - $NAMESPACE
+      - --context
+      - $CONTEXT
+      - run
+      - -it
+      - --rm
+      - --restart=Never
+      - netshoot
+      - --image=nicolaka/netshoot
+      - --
+      - /bin/bash
+
+  # Defines a plugin to provide a `ctrl-l` shortcut to tail the logs while in pod view.
+  fred:
+    # Define a mnemonic to invoke the plugin
+    shortCut: Ctrl-L
+    # What will be shown on the K9s menu
+    description: ◈ Pod logs - in tail mode
+    # Collections of views that support this shortcut. (You can use `all`)
+    scopes:
+      - pod
+    # The command to run upon invocation. Can use Krew plugins here too!
+    command: kubectl
+    # Whether or not to run the command in background mode
+    background: false
+    # Defines the command arguments
+    args:
+      - logs
+      - -f
+      - $NAME
+      - -n
+      - $NAMESPACE
+      - --context
+      - $CONTEXT
+
+  dive:
+    shortCut: d
+    confirm: false
+    description: "◈ Dive image"
+    scopes:
+      - containers
+    command: dive
+    background: false
+    args:
+      - $COL-IMAGE
+
+  watch-events:
+    shortCut: Shift-E
+    confirm: false
+    description: ◈ Get Events
+    scopes:
+      - all
+    command: sh
+    background: false
+    args:
+      - -c
+      - "watch -n 5 kubectl get events --context $CONTEXT --namespace $NAMESPACE --field-selector involvedObject.name=$NAME"
