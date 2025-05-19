@@ -140,7 +140,7 @@ if [ "$OS_TYPE" = "macos" ]; then
   # It uses the './result' from the build step. The 'cd' is crucial.
   # The main script is already root, so no 'sudo' needed here.
   # We ensure the Nix environment is sourced for this root command too.
-  SWITCH_CMD="cd '${DOTFILES_LOCAL_PATH}/nix' && ./result/sw/bin/darwin-rebuild switch --flake .#mac --impure" # Added --impure
+  SWITCH_CMD="cd '${DOTFILES_LOCAL_PATH}/nix' && sudo ./result/sw/bin/darwin-rebuild switch --flake .#mac --impure" # Added --impure
 
   # Sourcing nix-daemon.sh here again in a subshell for `darwin-rebuild` ensures it finds `nix`
   if bash -c ". /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh && ${SWITCH_CMD}"; then

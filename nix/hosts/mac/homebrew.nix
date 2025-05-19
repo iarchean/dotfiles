@@ -18,10 +18,7 @@
       upgrade = true;
     };
     global.autoUpdate = true;
-    brews = [
-      "sslyze"
-      "vnstat"
-    ];
+    brews = [ ];
     taps = [ ];
     casks = [
       "iina"
