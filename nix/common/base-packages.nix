@@ -36,7 +36,7 @@
     k9s
     kind
     minikube
-    helm
+    kubernetes-helm
     helmfile
     kustomize
     skaffold
