@@ -43,27 +43,23 @@
   {
     # macOS Configuration
     darwinConfigurations."mac" = nix-darwin.lib.darwinSystem {
-      # You need to specify the correct system for your Mac,
-      # if you have multiple Macs with different architectures,
-      # you may need multiple darwinConfigurations or more complex logic.
-      # For simplicity, here we assume it's aarch64-darwin.
       system = "aarch64-darwin";
       specialArgs = {
         inherit inputs userName;
-        pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+        pkgs = import nixpkgs {
+          system = "aarch64-darwin";
+          config.allowUnfree = true;
+        };
       };
       modules = [
         commonGlobalSettings
-        (commonFontsConfig nixpkgs.legacyPackages.aarch64-darwin) # 传递 pkgs 实例
+        (commonFontsConfig nixpkgs.legacyPackages.aarch64-darwin)
         nix-homebrew.darwinModules.nix-homebrew
         ./hosts/mac/configuration.nix
         ./hosts/mac/homebrew.nix
-        # Integrate the contents of common/base-packages.nix into mac/configuration.nix
-        # Or directly import a module that sets environment.systemPackages
         ({ pkgs, ... }: {
           nixpkgs.config.allowUnfree = true;
           environment.systemPackages = commonBasePackages pkgs;
-          # Fish shell setup for Darwin, if not in configuration.nix
           users.users.${userName}.shell = pkgs.fish;
           programs.fish.enable = true;
           environment.shells = with pkgs; [ fish zsh bash ];
