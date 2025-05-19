@@ -30,7 +30,7 @@ print_step() {
 # 1. Check if running with sudo and get the actual user
 if [ "$(id -u)" -ne 0 ]; then
     print_error "This script must be run with sudo."
-    print_message "Example: curl -fsSL <your_script_url> | sudo sh"
+    print_message "Example: curl -fsSL https://raw.githubusercontent.com/iarchean/dotfiles/main/scripts/init.sh | sudo sh"
     exit 1
 fi
 
@@ -104,7 +104,7 @@ if [ "$OS_TYPE" = "macos" ]; then
         sudo -u "$SUDO_USER" git clone "$DOTFILES_REPO_URL" "$DOTFILES_LOCAL_PATH" || { print_error "Failed to clone dotfiles repository."; exit 1; }
     fi
     # Ensure correct ownership
-    sudo chown -R "$SUDO_USER:$SUDO_USER" "$DOTFILES_LOCAL_PATH"
+    sudo chown -R "$SUDO_USER" "$DOTFILES_LOCAL_PATH"
 
 
     print_message "Building and switching Nix-Darwin configuration..."
