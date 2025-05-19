@@ -2,7 +2,7 @@
 set -e
 
 # Check if running with sudo
-if [ "$EUID" -ne 0 ]; then
+if [ "$(id -u)" -ne 0 ]; then
     print_error "Please run this script with sudo"
     print_message "Example: curl -fsSL https://raw.githubusercontent.com/iarchean/dotfiles/main/scripts/init.sh | sudo sh"
     exit 1
@@ -95,8 +95,15 @@ install_nix() {
     # Add lazy-trees configuration
     echo "lazy-trees = true" | tee -a /etc/nix/nix.custom.conf
     
-    # Source Nix environment
-    . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+    # Export Nix environment variables
+    export NIX_PATH="/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}"
+    export PATH="/nix/var/nix/profiles/default/bin:$PATH"
+    
+    # Verify Nix installation
+    if ! command -v nix >/dev/null 2>&1; then
+        print_error "Nix installation failed or environment not properly set up"
+        exit 1
+    fi
 }
 
 # Function to setup dotfiles using stow
@@ -105,7 +112,7 @@ setup_dotfiles() {
     
     # Use nix-shell to run stow as the actual user
     cd "/home/$SUDO_USER/dotfiles"
-    sudo -u "$SUDO_USER" nix-shell -p stow --run "stow -t /home/$SUDO_USER -d /home/$SUDO_USER/dotfiles ."
+    sudo -u "$SUDO_USER" env PATH="$PATH" NIX_PATH="$NIX_PATH" nix-shell -p stow --run "stow -t /home/$SUDO_USER -d /home/$SUDO_USER/dotfiles ."
 }
 
 # Function to setup system based on OS
@@ -116,8 +123,8 @@ setup_system() {
         "macos")
             print_message "Setting up macOS system..."
             cd "/Users/$SUDO_USER/dotfiles"
-            sudo -u "$SUDO_USER" nix build .#darwinConfigurations.mac.system
-            sudo -u "$SUDO_USER" ./result/sw/bin/darwin-rebuild switch --flake .#mac
+            sudo -u "$SUDO_USER" env PATH="$PATH" NIX_PATH="$NIX_PATH" nix build .#darwinConfigurations.mac.system
+            sudo -u "$SUDO_USER" env PATH="$PATH" NIX_PATH="$NIX_PATH" ./result/sw/bin/darwin-rebuild switch --flake .#mac
             ;;
         "linux")
             print_message "Setting up Linux system..."
