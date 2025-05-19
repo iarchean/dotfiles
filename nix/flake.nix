@@ -61,6 +61,7 @@
         # Integrate the contents of common/base-packages.nix into mac/configuration.nix
         # Or directly import a module that sets environment.systemPackages
         ({ pkgs, ... }: {
+          nixpkgs.config.allowUnfree = true;
           environment.systemPackages = commonBasePackages pkgs;
           # Fish shell setup for Darwin, if not in configuration.nix
           users.users.${userName}.shell = pkgs.fish;
