@@ -59,5 +59,3 @@ set PATH ~/.bun/bin $PATH
 set GCODE_HOME "$HOME/gcode"
 set PATH $PATH $GCODE_HOME/bin
 
-# task
-set -x TASK_X_REMOTE_TASKFILES 1
