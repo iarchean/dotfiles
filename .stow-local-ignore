@@ -1,8 +1,11 @@
-docs
+docs/
 .gitignore
 .git
 .stowrc
-nix
-scripts
+nix/
+scripts/
 README.md
 .pre-commit-config.yaml
+.DS_Store
+result/
+.secrets.baseline

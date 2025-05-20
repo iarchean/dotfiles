@@ -7,6 +7,7 @@
   # This list serves as a reference for which fonts to install.
   fonts.packages = lib.mkIf pkgs.stdenv.isDarwin (with pkgs; [ # Only apply on Darwin
     maple-mono.truetype
+    maple-mono.CN-unhinted
     maple-mono.NF-unhinted
     maple-mono.NF-CN-unhinted
   ]);
