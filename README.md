@@ -61,7 +61,7 @@ Nix-Darwin will be used to configure your macOS system declaratively and install
 
     ```bash
     # Ensure you are in the dotfiles directory (e.g., ~/dotfiles)
-    # cd ~/dotfiles
+    # cd ~/dotfiles/nix
 
     # This command builds the configuration and then applies it.
     # It might ask for your sudo password during the 'switch' phase.

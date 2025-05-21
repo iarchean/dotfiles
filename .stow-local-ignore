@@ -1,11 +1,13 @@
-docs/
-.gitignore
+# folders need to be started with a slash
+/docs
+/nix
+/nix-sample
+/scripts
 .git
+.gitignore
+.gitmodules
 .stowrc
-nix/
-scripts/
-README.md
 .pre-commit-config.yaml
 .DS_Store
-result/
 .secrets.baseline
+README.md
