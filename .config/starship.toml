@@ -311,7 +311,7 @@ disabled = false
 
 [gcloud]
 format = 'on [$symbol(\($region\) )(\($project\))]($style) '
-symbol = '🅶 '
+symbol = ' '
 # style = 'bold blue'
 disabled = false
 

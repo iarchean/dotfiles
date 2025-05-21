@@ -1,3 +1,4 @@
 nix-sample
 .DS_Store
 result/
+.config/tmux/plugins/
