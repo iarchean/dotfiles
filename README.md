@@ -173,4 +173,4 @@ reference:
 - https://nixcademy.com/posts/nix-on-macos/
 - https://github.com/ironicbadger/nix-config/blob/main/justfile
 
-                      
+                       
