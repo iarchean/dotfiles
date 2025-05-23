@@ -56,7 +56,7 @@ tmux_conf_new_pane_retain_current_path=true
 #   - true
 #   - false (default)
 #   - disabled (do not modify split-window bindings)
-tmux_conf_new_pane_reconnect_ssh=false
+tmux_conf_new_pane_reconnect_ssh=true
 
 
 # -- display -------------------------------------------------------------------
@@ -259,7 +259,7 @@ title_format="#($(dirname $TMUX_CONF)/scripts/tmux-nerd-font-window-name #{pane_
 tmux_conf_theme_window_status_fg="default"
 tmux_conf_theme_window_status_bg="default"
 tmux_conf_theme_window_status_attr="none"
-tmux_conf_theme_window_status_format="#[fg=$tmux_conf_theme_colour_2,bg=$tmux_conf_theme_colour_7] #I #[fg=$tmux_conf_theme_colour_7,bg=$tmux_conf_theme_colour_1] #{?#{==:#{pane_current_command},ssh}, #{hostname_ssh},$title_format}#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,!,}#{?window_zoomed_flag,Z,} "
+tmux_conf_theme_window_status_format="#[fg=$tmux_conf_theme_colour_2,bg=$tmux_conf_theme_colour_7] #I #[fg=$tmux_conf_theme_colour_7,bg=$tmux_conf_theme_colour_1] #{?#{==:#{pane_current_command},ssh}, #{hostname_ssh},$title_format}#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,!,}#{?window_zoomed_flag,Z,} "
 # tmux_conf_theme_window_status_format="#I #{?#{==:#{pane_current_command},ssh}, #{hostname_ssh},$title_format}#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,!,}#{?window_zoomed_flag,Z,}"
 #tmux_conf_theme_window_status_format="#{circled_window_index} #W#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,!,}#{?window_zoomed_flag,Z,}"
 #tmux_conf_theme_window_status_format="#I #W#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,🔔,}#{?window_zoomed_flag,🔍,}"
@@ -277,7 +277,7 @@ tmux_conf_theme_window_status_format="#[fg=$tmux_conf_theme_colour_2,bg=$tmux_co
 tmux_conf_theme_window_status_current_fg="default"
 tmux_conf_theme_window_status_current_bg="default"
 tmux_conf_theme_window_status_current_attr="bold"
-tmux_conf_theme_window_status_current_format="#[fg=$tmux_conf_theme_colour_2,bg=$tmux_conf_theme_colour_4] #I #[fg=$tmux_conf_theme_colour_7,bg=$tmux_conf_theme_colour_12] #{?#{==:#{pane_current_command},ssh}, #{hostname_ssh},$title_format}#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,!,}#{?window_zoomed_flag,Z,} "
+tmux_conf_theme_window_status_current_format="#[fg=$tmux_conf_theme_colour_2,bg=$tmux_conf_theme_colour_4] #I #[fg=$tmux_conf_theme_colour_7,bg=$tmux_conf_theme_colour_12] #{?#{==:#{pane_current_command},ssh}, #{hostname_ssh},$title_format}#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,!,}#{?window_zoomed_flag,Z,} "
 # tmux_conf_theme_window_status_current_format="#I #{?#{==:#{pane_current_command},ssh}, #{hostname_ssh},#W}#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,!,}#{?window_zoomed_flag,Z,}"
 #tmux_conf_theme_window_status_current_format="#{circled_window_index} #W#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,!,}#{?window_zoomed_flag,Z,}#{?#{==:#{pane_current_command},ssh}, }"
 #tmux_conf_theme_window_status_current_format="#I #W#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,🔔,}#{?window_zoomed_flag,🔍,}"
@@ -336,10 +336,10 @@ tmux_conf_theme_right_separator_sub="|"
 #     - #{username_ssh}
 #     - #{kube_context_namespace}
 #     - #{gcp_project}
-tmux_conf_theme_status_left=" #{?client_prefix,◉,○} | #S |  #{loadavg}#{root}#{online} "
+tmux_conf_theme_status_left=" #{?client_prefix,◉,○} | #S |  #{loadavg}#{root} "
 # tmux_conf_theme_status_left=" ❐ #S | ↑#{?uptime_y, #{uptime_y}y,}#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} | #{pretty_pane_current_path} "
 # tmux_conf_theme_status_right=" #{mouse}#{pairing}#{synchronized}#{?battery_status,#{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , %R , %d %b | #{username}#{root} | #{hostname} "
-tmux_conf_theme_status_right=" #{pairing}#{synchronized}#{?battery_status,#{battery_status},}#{?battery_percentage, #{battery_percentage},} | #{kube_context_namespace} | #{gcp_project} | #{?#{==:#{pane_current_command},ssh}, #{hostname_ssh},#{?client_prefix,◉,○}} "
+tmux_conf_theme_status_right=" #{online} #{mouse}#{pairing}#{synchronized}#{?battery_status,#{battery_status},}#{?battery_percentage, #{battery_percentage},} | #{kube_context_namespace} | #{gcp_project} | #{?client_prefix,󰒆,󰒅} "
 
 # status left style
 tmux_conf_theme_status_left_fg="$tmux_conf_theme_colour_2,$tmux_conf_theme_colour_2,$tmux_conf_theme_colour_8"
@@ -354,7 +354,7 @@ tmux_conf_theme_status_right_bg="$tmux_conf_theme_colour_2,$tmux_conf_theme_colo
 tmux_conf_theme_status_right_attr="none,none,none,bold"
 
 # pairing indicator
-tmux_conf_theme_pairing=""                 # U+2687
+tmux_conf_theme_pairing="󰊠"                 # U+2687
 tmux_conf_theme_pairing_fg="none"
 tmux_conf_theme_pairing_bg="none"
 tmux_conf_theme_pairing_attr="none"
@@ -366,7 +366,7 @@ tmux_conf_theme_prefix_bg="none"
 tmux_conf_theme_prefix_attr="none"
 
 # mouse indicator
-tmux_conf_theme_mouse="↗"                   # U+2197
+tmux_conf_theme_mouse=""                   # U+2197
 tmux_conf_theme_mouse_fg="none"
 tmux_conf_theme_mouse_bg="none"
 tmux_conf_theme_mouse_attr="none"
@@ -531,6 +531,13 @@ tmux_conf_uninstall_plugins_on_reload=true
 
 # set -g @plugin 'joshmedeski/tmux-nerd-font-window-name'
 
+set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'jaclu/tmux-menus'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'tmux-plugins/tmux-continuum'
+
+set -g @menus_trigger 'Space'
+
 # -- custom variables ----------------------------------------------------------
 
 # to define a custom #{foo} variable, define a POSIX shell function between the
@@ -556,7 +563,7 @@ tmux_conf_uninstall_plugins_on_reload=true
 #
 # # usage: #{online}
 # online() {
-#   ping -c 1 1.1.1.1 >/dev/null 2>&1 && printf '' || printf '?'
+#   ping -c 1 1.1.1.1 >/dev/null 2>&1 && printf '' || printf '󰌙'
 # }
 #
 # # usage: #{wan_ip_v4}
@@ -579,47 +586,6 @@ tmux_conf_uninstall_plugins_on_reload=true
 #   url="https://api.github.com/repos/${repository:-gpakosz/.tmux}"
 #   curl -s "$url" | perl -MJSON::PP=decode_json -CO -0777 -E '$response = decode_json(readline *STDIN); say ($response->{stargazers_count})'
 #   sleep 300                                         # sleep for 5 minutes, throttle network requests whatever the value of status-interval
-# }
-
-# # render window title
-# # usage: #{window_title_render <pane_name>}
-# window_title_render() {
-#   _pane_name="${1:-"fish"}"
-#   _icon=""
-#   _title="#W" # # Default title
-#
-#   case "$_pane_name" in
-#     ssh|mosh)
-#       _title=" #{hostname_ssh}"
-#       ;;
-#     *)
-#       # # If not ssh or mosh, try to find an icon
-#       case "$_pane_name" in
-#         bash|zsh|sh|fish)
-#           _icon=""
-#           ;;
-#         ps|top|htop|k9s)
-#           _icon=""
-#           ;;
-#         vim|nvim)
-#           _icon=""
-#           ;;
-#         python|python3)
-#           _icon=""
-#           ;;
-#         node)
-#           _icon=""
-#           ;;
-#       esac
-#
-#       if [ -n "$_icon" ]; then
-#         _title="$_icon #W"
-#       fi
-#       ;;
-#   esac
-#
-#   printf "%s\n" "$_title"
-#   return 0
 # }
 
 # # Function to get and format Kubernetes context and namespace
@@ -660,9 +626,7 @@ tmux_conf_uninstall_plugins_on_reload=true
 #         _cluster="$_context"
 #         ;;
 #     esac
-#     if [ -n "$_namespace" ]; then
-#       # Using printf for more robust output, especially with special characters
-#       # The  character needs a terminal that supports it.
+#   if [ -n "$_namespace" ] && [ "$_namespace" != "default" ]; then
 #       printf " %s(%s)\n" "$_cluster" "$_namespace"
 #     else
 #       printf " %s\n" "$_cluster"

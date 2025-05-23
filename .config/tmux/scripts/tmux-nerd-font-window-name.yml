@@ -1,7 +1,7 @@
 # cSpell:disable
 config:
   fallback-icon: ""
-  show-name: false
+  show-name: true
 
 icons:
   apt: ""
@@ -108,6 +108,7 @@ icons:
   deno: ""
   tsc: ""
   minikube: "󱃾"
+  nix: ""
   aws: ""
   terraform: "ﲽ"
   ansible: ""
