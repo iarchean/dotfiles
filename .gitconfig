@@ -1,7 +1,0 @@
-[user]
-	name = Archean Zhang
-	email = xu.zhang@linktivity.co.jp
-	useConfigOnly = true
-
-[include]
-    path = ~/.gitconfig_global
