@@ -12,6 +12,8 @@ $character"""
 
 [directory]
 style = "blue"
+read_only = " "
+read_only_style = "bright-black"
 
 [character]
 format = '$symbol '

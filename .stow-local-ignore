@@ -10,4 +10,5 @@
 .pre-commit-config.yaml
 .DS_Store
 .secrets.baseline
+fun-icons.txt
 README.md

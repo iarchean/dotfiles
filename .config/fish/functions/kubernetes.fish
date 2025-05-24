@@ -89,7 +89,7 @@ end
 function k9sc
     set -l choice (kubectl config get-contexts -o name | fzf --height 50% --reverse --prompt "Select k8s context: ")
     if test -n "$choice"
-        k9s --context $choice -l debug
+        k9s --context $choice
         echo $choice | pbcopy
     else
         echo "No context selected."
