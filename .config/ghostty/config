@@ -13,8 +13,8 @@ font-family = "JetBrains Mono"
 font-size = 15
 title = " "
 macos-titlebar-proxy-icon = hidden
-# background-opacity = 0.90
-# background-blur = true
+background-opacity = 0.90
+background-blur = true
 
 # quick terminal
 

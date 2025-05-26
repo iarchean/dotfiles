@@ -19,24 +19,24 @@ yellow_bright: &yellow_bright "#d19a66"
 k9s:
   body:
     fgColor: *foreground
-    bgColor: *background
+    bgColor: default
     logoColor: *green
   prompt:
     fgColor: *foreground
-    bgColor: *background
+    bgColor: default
     suggestColor: *orange
   info:
     fgColor: *grey
     sectionColor: *green
   help:
     fgColor: *foreground
-    bgColor: *background
+    bgColor: default
     keyColor: *yellow
     numKeyColor: *blue
     sectionColor: *purple
   dialog:
     fgColor: *black
-    bgColor: *background
+    bgColor: default
     buttonFgColor: *foreground
     buttonBgColor: *green
     buttonFocusFgColor: *black
@@ -66,13 +66,13 @@ k9s:
       completedColor: *grey
     title:
       fgColor: *blue
-      bgColor: *background
+      bgColor: default
       highlightColor: *purple
       counterColor: *foreground
       filterColor: *blue
   views:
     charts:
-      bgColor: *background
+      bgColor: default
       defaultDialColors:
         - *green
         - *red
@@ -81,17 +81,17 @@ k9s:
         - *red
     table:
       fgColor: *yellow
-      bgColor: *background
+      bgColor: default
       cursorFgColor: *black
       cursorBgColor: *blue
       markColor: *yellow_bright
       header:
         fgColor: *grey
-        bgColor: *background
+        bgColor: default
         sorterColor: *orange
     xray:
       fgColor: *blue
-      bgColor: *background
+      bgColor: default
       cursorColor: *foreground
       graphicColor: *yellow_bright
       showIcons: false
@@ -101,14 +101,14 @@ k9s:
       valueColor: *grey
     logs:
       fgColor: *grey
-      bgColor: *background
+      bgColor: default
       indicator:
         fgColor: *blue
-        bgColor: *background
+        bgColor: default
         toggleOnColor: *red
         toggleOffColor: *grey
     help:
       fgColor: *grey
-      bgColor: *background
+      bgColor: default
       indicator:
         fgColor: *blue

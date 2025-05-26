@@ -229,7 +229,7 @@ tmux_conf_theme_mode_attr="bold"
 
 # status line style
 tmux_conf_theme_status_fg="$tmux_conf_theme_colour_3"
-tmux_conf_theme_status_bg="$tmux_conf_theme_colour_2"
+tmux_conf_theme_status_bg="default"
 tmux_conf_theme_status_attr="none"
 
 # terminal title
@@ -259,7 +259,8 @@ title_format="#($(dirname $TMUX_CONF)/scripts/tmux-nerd-font-window-name #{pane_
 tmux_conf_theme_window_status_fg="default"
 tmux_conf_theme_window_status_bg="default"
 tmux_conf_theme_window_status_attr="none"
-tmux_conf_theme_window_status_format="#[fg=$tmux_conf_theme_colour_2,bg=$tmux_conf_theme_colour_7] #I #[fg=$tmux_conf_theme_colour_7,bg=$tmux_conf_theme_colour_1] #{?#{==:#{pane_current_command},ssh}, #{hostname_ssh},$title_format}#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,!,}#{?window_zoomed_flag,Z,} "
+# tmux_conf_theme_window_status_format="#{circled_window_index} #{?#{==:#{pane_current_command},ssh},  #{hostname_ssh},$title_format}#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,!,}#{?window_zoomed_flag,Z,}"
+tmux_conf_theme_window_status_format="#[fg=$tmux_conf_theme_colour_2,bg=$tmux_conf_theme_colour_7] #I #[fg=$tmux_conf_theme_colour_7,bg=$tmux_conf_theme_colour_1] #{?#{==:#{pane_current_command},ssh}, #{hostname_ssh},$title_format}#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,!,}#{?window_zoomed_flag,Z,} "
 # tmux_conf_theme_window_status_format="#I #{?#{==:#{pane_current_command},ssh}, #{hostname_ssh},$title_format}#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,!,}#{?window_zoomed_flag,Z,}"
 #tmux_conf_theme_window_status_format="#{circled_window_index} #W#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,!,}#{?window_zoomed_flag,Z,}"
 #tmux_conf_theme_window_status_format="#I #W#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,🔔,}#{?window_zoomed_flag,🔍,}"
@@ -277,7 +278,8 @@ tmux_conf_theme_window_status_format="#[fg=$tmux_conf_theme_colour_2,bg=$tmux_co
 tmux_conf_theme_window_status_current_fg="default"
 tmux_conf_theme_window_status_current_bg="default"
 tmux_conf_theme_window_status_current_attr="bold"
-tmux_conf_theme_window_status_current_format="#[fg=$tmux_conf_theme_colour_2,bg=$tmux_conf_theme_colour_4] #I #[fg=$tmux_conf_theme_colour_7,bg=$tmux_conf_theme_colour_12] #{?#{==:#{pane_current_command},ssh}, #{hostname_ssh},$title_format}#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,!,}#{?window_zoomed_flag,Z,} "
+# tmux_conf_theme_window_status_current_format="#{circled_window_index} #{?#{==:#{pane_current_command},ssh},  #{hostname_ssh},#W}#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,!,}#{?window_zoomed_flag,Z,}"
+tmux_conf_theme_window_status_current_format="#[fg=$tmux_conf_theme_colour_2,bg=$tmux_conf_theme_colour_4] #I #[fg=$tmux_conf_theme_colour_7,bg=$tmux_conf_theme_colour_12] #{?#{==:#{pane_current_command},ssh}, #{hostname_ssh},$title_format}#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,,}#{?window_zoomed_flag,󰨤,} "
 # tmux_conf_theme_window_status_current_format="#I #{?#{==:#{pane_current_command},ssh}, #{hostname_ssh},#W}#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,!,}#{?window_zoomed_flag,Z,}"
 #tmux_conf_theme_window_status_current_format="#{circled_window_index} #W#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,!,}#{?window_zoomed_flag,Z,}#{?#{==:#{pane_current_command},ssh}, }"
 #tmux_conf_theme_window_status_current_format="#I #W#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,🔔,}#{?window_zoomed_flag,🔍,}"
@@ -334,12 +336,11 @@ tmux_conf_theme_right_separator_sub="|"
 #     - #{uptime_s}
 #     - #{username}
 #     - #{username_ssh}
-#     - #{kube_context_namespace}
-#     - #{gcp_project}
 tmux_conf_theme_status_left=" #{?client_prefix,◉,○} | #S |  #{loadavg}#{root} "
 # tmux_conf_theme_status_left=" ❐ #S | ↑#{?uptime_y, #{uptime_y}y,}#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} | #{pretty_pane_current_path} "
 # tmux_conf_theme_status_right=" #{mouse}#{pairing}#{synchronized}#{?battery_status,#{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , %R , %d %b | #{username}#{root} | #{hostname} "
-tmux_conf_theme_status_right=" #{online} #{mouse}#{pairing}#{synchronized}#{?battery_status,#{battery_status},}#{?battery_percentage, #{battery_percentage},} | #{kube_context_namespace} | #{gcp_project} | #{?client_prefix,󰒆,󰒅} "
+tmux_conf_theme_status_right=" #{online} #{mouse}#{pairing}#{synchronized}#{?battery_status,#{battery_status},}#{?battery_percentage, #{battery_percentage},} | #( '#{@starship_cmd}' kubernetes )| #( '#{@starship_cmd}' gcloud )| #{?client_prefix,󰒆,󰒅} "
+# tmux_conf_theme_status_right=" #{online} #{mouse}#{pairing}#{synchronized}#{?battery_status,#{battery_status},}#{?battery_percentage, #{battery_percentage},} | #{kube_context_namespace} | #{gcp_project} | #{?client_prefix,󰒆,󰒅} "
 
 # status left style
 tmux_conf_theme_status_left_fg="$tmux_conf_theme_colour_2,$tmux_conf_theme_colour_2,$tmux_conf_theme_colour_8"
@@ -348,7 +349,7 @@ tmux_conf_theme_status_left_attr="bold,none,none"
 
 # status right style
 tmux_conf_theme_status_right_fg="$tmux_conf_theme_colour_12,$tmux_conf_theme_colour_2,$tmux_conf_theme_colour_2,$tmux_conf_theme_colour_2"
-tmux_conf_theme_status_right_bg="$tmux_conf_theme_colour_2,$tmux_conf_theme_colour_11,$tmux_conf_theme_colour_4,$tmux_conf_theme_colour_16"
+tmux_conf_theme_status_right_bg="default,$tmux_conf_theme_colour_11,$tmux_conf_theme_colour_4,$tmux_conf_theme_colour_16"
 # tmux_conf_theme_status_right_fg="$tmux_conf_theme_colour_12,$tmux_conf_theme_colour_2,$tmux_conf_theme_colour_2,$tmux_conf_theme_colour_2"
 # tmux_conf_theme_status_right_bg="$tmux_conf_theme_colour_2,$tmux_conf_theme_colour_5,$tmux_conf_theme_colour_16,$tmux_conf_theme_colour_4"
 tmux_conf_theme_status_right_attr="none,none,none,bold"
@@ -372,13 +373,13 @@ tmux_conf_theme_mouse_bg="none"
 tmux_conf_theme_mouse_attr="none"
 
 # root indicator
-tmux_conf_theme_root="!"
+tmux_conf_theme_root=" 󱎜"
 tmux_conf_theme_root_fg="none"
 tmux_conf_theme_root_bg="none"
 tmux_conf_theme_root_attr="bold,blink"
 
 # synchronized indicator
-tmux_conf_theme_synchronized="⚏"            # U+268F
+tmux_conf_theme_synchronized="󰘸"            # U+268F
 tmux_conf_theme_synchronized_fg="none"
 tmux_conf_theme_synchronized_bg="none"
 tmux_conf_theme_synchronized_attr="none"
@@ -422,8 +423,10 @@ tmux_conf_battery_vbar_palette="gradient"
 #tmux_conf_battery_vbar_palette="gradient(#00afff,#47a2ff,#7c91ff,#ac7afb,#d65be2,#e163df,#eb6cdd,#f475db,#ec9ff1,#eac3fe,#efe2ff,#ffffff)"
 
 # symbols used to indicate whether battery is charging or discharging
-tmux_conf_battery_status_charging="▲"       # U+2191
-tmux_conf_battery_status_discharging="▼"    # U+2193
+#tmux_conf_battery_status_charging="▲"       # U+2191
+#tmux_conf_battery_status_discharging="▼"    # U+2193
+tmux_conf_battery_status_charging="󰬬"
+tmux_conf_battery_status_discharging="󰬦"
 #tmux_conf_battery_status_charging="🔌"     # U+1F50C
 #tmux_conf_battery_status_discharging="🔋"  # U+1F50B
 
@@ -500,18 +503,18 @@ bind t display-popup -E -d "#{pane_current_path}" "fish"
 # by default, launching tmux will update tpm and all plugins
 #   - true (default)
 #   - false
-tmux_conf_update_plugins_on_launch=true
+tmux_conf_update_plugins_on_launch=false
 
 # by default, reloading the configuration will update tpm and all plugins
 #   - true (default)
 #   - false
-tmux_conf_update_plugins_on_reload=true
+tmux_conf_update_plugins_on_reload=false
 
 # by default, reloading the configuration will uninstall tpm and plugins when no
 # plugins are enabled
 #   - true (default)
 #   - false
-tmux_conf_uninstall_plugins_on_reload=true
+tmux_conf_uninstall_plugins_on_reload=false
 
 # /!\ the tpm bindings differ slightly from upstream:
 #   - installing plugins: <prefix> + I
@@ -535,6 +538,7 @@ set -g @plugin 'tmux-plugins/tmux-sensible'
 set -g @plugin 'jaclu/tmux-menus'
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-continuum'
+set -g @plugin 'iarchean/tmux-starship'
 
 set -g @menus_trigger 'Space'
 
@@ -586,72 +590,6 @@ set -g @menus_trigger 'Space'
 #   url="https://api.github.com/repos/${repository:-gpakosz/.tmux}"
 #   curl -s "$url" | perl -MJSON::PP=decode_json -CO -0777 -E '$response = decode_json(readline *STDIN); say ($response->{stargazers_count})'
 #   sleep 300                                         # sleep for 5 minutes, throttle network requests whatever the value of status-interval
-# }
-
-# # Function to get and format Kubernetes context and namespace
-# # usage: #{kube_context_namespace}
-# kube_context_namespace() {
-#   # In POSIX sh, variables declared in a function are local to that function call.
-#   # Using a '_' prefix is a common convention to denote "private" or "internal" variables
-#   # and to reduce chances of collision if this script is sourced.
-#   _context=""
-#   _namespace=""
-#   _cluster=""
-
-#   # Get current context, suppressing errors (e.g., if kubectl is not configured)
-#   _context=$(kubectl config current-context 2>/dev/null)
-
-#   # Get current namespace for the current context, suppressing errors
-#   # The --minify flag ensures we only get the namespace for the current context.
-#   _namespace=$(kubectl config view --minify --output 'jsonpath={..namespace}' 2>/dev/null)
-
-#   if [ -n "$_context" ]; then
-#     # Use case statement for POSIX-compliant pattern matching
-#     case "$_context" in
-#       gke_*)
-#         # Extract cluster name for GKE contexts
-#         # e.g., gke_lkty-gds-s-dev_asia-northeast1-a_gds-gke-dev -> gds-gke-dev
-#         # ${_context##pattern} removes the longest prefix matching pattern.
-#         # We match "gke_" followed by anything up to the last underscore.
-#         _cluster="${_context##gke_*_}"
-#         ;;
-#       arn:aws:eks:*:cluster/*)
-#         # Extract cluster name for AWS EKS contexts
-#         # e.g., arn:aws:eks:ap-northeast-1:881267112524:cluster/main -> cluster/main
-#         # We match anything up to the last colon.
-#         _cluster="${_context##*:}"
-#         ;;
-#       *)
-#         # Fallback to full context if not GKE or EKS format recognized by above patterns
-#         _cluster="$_context"
-#         ;;
-#     esac
-#   if [ -n "$_namespace" ] && [ "$_namespace" != "default" ]; then
-#       printf " %s(%s)\n" "$_cluster" "$_namespace"
-#     else
-#       printf " %s\n" "$_cluster"
-#     fi
-#   else
-#     # If context is empty, print a newline (behavior of original `echo ""`)
-#     # If you want truly no output, remove this 'printf' or use 'return 1' to indicate failure.
-#     printf "\n"
-#   fi
-#   # Functions in sh return the exit status of the last command executed.
-#   # Explicitly return 0 for success if needed, though often implicit is fine.
-#   return 0
-# }
-
-# # get current gcp project
-# # usage: #{gcp_project}
-# gcp_project() {
-#   local project
-#   project=$(gcloud config get-value project 2>/dev/null)
-#   case "$project" in
-#     "linktivity-gds-platform") echo " gds" ;;
-#     "linktivity-tis")  echo " tis" ;;
-#     "project-prod")  echo " G-production" ;;
-#     *)               echo " $project" ;;
-#   esac
 # }
 #
 # "$@"

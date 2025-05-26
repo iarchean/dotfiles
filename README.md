@@ -172,3 +172,8 @@ reference:
 - https://nixcademy.com/cheatsheet/
 - https://nixcademy.com/posts/nix-on-macos/
 - https://github.com/ironicbadger/nix-config/blob/main/justfile
+
+
+[TODO] nvim and tmux pane switch plugin
+tmux shortcut to switch pane
+show vim status in tmux status bar

@@ -32,5 +32,6 @@ set -x XDG_CONFIG_HOME "$HOME/.config"
 # XDG_CACHE_HOME
 set -x XDG_CACHE_HOME "$HOME/.cache"
 
-# google cloud sdk path
+# google cloud sdk
 set -x CLOUDSDK_CONFIG "$HOME/.gcloud"
+set -x GOOGLE_APPLICATION_CREDENTIALS "$CLOUDSDK_CONFIG/application_default_credentials.json"

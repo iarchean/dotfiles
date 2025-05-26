@@ -10,6 +10,9 @@ $line_break\
 $python\
 $character"""
 
+right_format = """
+"""
+
 [directory]
 style = "blue"
 read_only = " "
@@ -17,12 +20,12 @@ read_only_style = "bright-black"
 
 [character]
 format = '$symbol '
-success_symbol = '[❯](bold green)'
-error_symbol = '[❯](bold red)'
-vimcmd_symbol = '[❮](bold green)'
-vimcmd_visual_symbol = '[❮](bold yellow)'
-vimcmd_replace_symbol = '[❮](bold purple)'
-vimcmd_replace_one_symbol = '[❮](bold purple)'
+success_symbol = '[󰚺](bold green)'
+error_symbol = '[󰚺](bold red)'
+vimcmd_symbol = '[󰧘](bold green)'
+vimcmd_visual_symbol = '[󰧘](bold yellow)'
+vimcmd_replace_symbol = '[󰧘](bold purple)'
+vimcmd_replace_one_symbol = '[󰧘](bold purple)'
 disabled = false
 
 [git_branch]
@@ -53,8 +56,8 @@ format = "[$virtualenv]($style) "
 style = "bright-black"
 
 [kubernetes]
-symbol = '☸ '
-format = '[$symbol$context:$namespace]($style) in '
+symbol = ' '
+format = '[$symbol$context]($style) '
 # style = 'cyan bold'
 detect_extensions = []
 detect_files = []
@@ -63,14 +66,15 @@ detect_env_vars = ["!TMUX"]
 disabled = false
 
 [[kubernetes.contexts]]
-# Using capture groups
-# Contexts from GKE, AWS and other cloud providers usually carry additional information, like the region/zone.
-# The following entry matches on the GKE format (`gke_projectname_zone_cluster-name`)
-# and renames every matching kube context into a more readable format (`gke-cluster-name`):
+# gke
 context_pattern = "gke_.*_(?P<cluster>[\\w-]+)"
 context_alias = "$cluster"
 
-[kubernetes.user_aliases]
+[[kubernetes.contexts]]
+# eks
+context_pattern = "arn:aws:eks:.*:.*:cluster/(?P<cluster>[\\w-]+)"
+context_alias = "$cluster"
+
 
 [gcloud]
 format = '[$symbol($region )($project)]($style) '
@@ -80,4 +84,3 @@ detect_env_vars = ["!TMUX"]
 [gcloud.region_aliases]
 us-central1 = 'uc1'
 asia-northeast1 = 'Tokyo'
-

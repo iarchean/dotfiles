@@ -3,8 +3,8 @@ return {
   opts = {
     style = "glyph",
     extension = {
-      ["yaml"] = { glyph = "У", hl = "MiniIconsPurple" },
-      ["yml"] = { glyph = "У", hl = "MiniIconsPurple" },
+      ["yaml"] = { glyph = "󰬠", hl = "MiniIconsPurple" },
+      ["yml"] = { glyph = "󰬠", hl = "MiniIconsPurple" },
       ["sh"] = { glyph = "", hl = "MiniIconsWhite" },
       ["zsh"] = { glyph = "", hl = "MiniIconsWhite" },
       ["bash"] = { glyph = "", hl = "MiniIconsWhite" },
