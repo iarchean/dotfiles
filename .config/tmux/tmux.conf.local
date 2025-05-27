@@ -6,6 +6,9 @@
 #         without any warranty.
 #         Copyright 2012— Gregory Pakosz (@gpakosz).
 
+# multiple status bar, this adds a padding between the status bar and the window
+set -g status 2
+set -g status-format[1] ""
 
 # -- bindings ------------------------------------------------------------------
 
