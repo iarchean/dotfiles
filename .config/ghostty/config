@@ -1,5 +1,6 @@
 theme = catppuccin-mocha
 maximize = true
+macos-titlebar-style = transparent
 window-padding-x = 17
 window-padding-y = 0,15
 clipboard-read = allow

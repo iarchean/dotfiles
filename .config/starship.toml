@@ -10,7 +10,7 @@ $line_break\
 $python\
 $character"""
 
-# add_newline = true
+# add_newline = false
 # [line_break] disabled = true
 
 [directory]
