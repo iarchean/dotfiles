@@ -25,5 +25,6 @@ return {
         never_show = { ".git" },
       },
     },
+
   },
 }

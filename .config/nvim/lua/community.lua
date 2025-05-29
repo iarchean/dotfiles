@@ -12,5 +12,6 @@ return {
   { import = "astrocommunity.colorscheme.catppuccin" },
   { import = "astrocommunity.utility.noice-nvim" },
   { import = "astrocommunity.bars-and-lines.dropbar-nvim" },
+  -- { import = "astrocommunity.recipes.heirline-nvchad-statusline" },
   -- { import = "astrocommunity.bars-and-lines.lualine-nvim" },
 }

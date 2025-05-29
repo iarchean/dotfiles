@@ -10,6 +10,8 @@ starship init fish | source
 # chsh -s $(which fish)
 
 source ~/.config/fish/functions/kubernetes.fish
+source ~/.config/fish/functions/tmux.fish
+source ~/.config/fish/functions/gcp.fish
 
 # vscode
 string match -q "$TERM_PROGRAM" "vscode"
