@@ -10,6 +10,16 @@
 set -g status 2
 set -g status-format[1] ""
 
+# toggle status bar
+# bind h set -g status-format[0] "#{?status-format[0],,}#{status-format[0]}" \; set -g status-format[1] "#{?status-format[1],,}#{status-format[1]}"
+bind h set status off
+bind H set status on
+
+# set-hook -g after-new-window      'if "[ #{session_windows} -gt 1 ]" "set status on"'
+# set-hook -g after-kill-pane       'if "[ #{session_windows} -lt 2 ]" "set status off"'
+# set-hook -g pane-exited           'if "[ #{session_windows} -lt 2 ]" "set status off"'
+# set-hook -g window-layout-changed 'if "[ #{session_windows} -lt 2 ]" "set status off"'
+
 # -- bindings ------------------------------------------------------------------
 
 # preserve tmux stock bindings,
@@ -205,7 +215,7 @@ tmux_conf_theme_focused_pane_bg="$tmux_conf_theme_colour_2"
 tmux_conf_theme_pane_border_style=thin
 
 # pane borders colours:
-tmux_conf_theme_pane_border="$tmux_conf_theme_colour_2"
+tmux_conf_theme_pane_border="$tmux_conf_theme_colour_1"
 tmux_conf_theme_pane_active_border="$tmux_conf_theme_colour_4"
 %if #{>=:#{version},3.2}
 tmux_conf_theme_pane_active_border="#{?pane_in_mode,$tmux_conf_theme_colour_9,#{?synchronize-panes,$tmux_conf_theme_colour_16,$tmux_conf_theme_colour_4}}"
@@ -492,7 +502,6 @@ set -g status-position top
 
 # popup fish
 bind t display-popup -E -d "#{pane_current_path}" "fish"
-
 
 # -- tpm -----------------------------------------------------------------------
 

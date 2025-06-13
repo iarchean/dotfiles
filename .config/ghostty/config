@@ -16,6 +16,8 @@ title = " "
 macos-titlebar-proxy-icon = hidden
 background-opacity = 0.90
 background-blur = true
+cursor-style = block
+cursor-style-blink = true
 
 # quick terminal
 
