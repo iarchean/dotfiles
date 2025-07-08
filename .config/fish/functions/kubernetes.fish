@@ -89,8 +89,23 @@ end
 function k9sc
     set -l choice (kubectl config get-contexts -o name | fzf --height 50% --reverse --prompt "Select k8s context: ")
     if test -n "$choice"
-        k9s --context $choice
-        echo $choice | pbcopy
+        if string match -q "*prod*" $choice
+
+            # change color to red for production mode
+            sed -i '' 's/fgColor: \*green/fgColor: \*red/g' ~/.config/k9s/skins/OneDark.yaml
+            sed -i '' 's/focusColor: \*green/focusColor: \*red/g' ~/.config/k9s/skins/OneDark.yaml
+            sed -i '' 's/logoColor: \*green/logoColor: \*red/g' ~/.config/k9s/skins/OneDark.yaml
+
+            echo "🔴 IN PRODUCTION MODE"
+
+            # start a background process to restore the skin file
+            fish -c 'sleep 3; sed -i "" "s/fgColor: \\*red/fgColor: \\*green/g" ~/.config/k9s/skins/OneDark.yaml; sed -i "" "s/focusColor: \\*red/focusColor: \\*green/g" ~/.config/k9s/skins/OneDark.yaml; sed -i "" "s/logoColor: \\*red/logoColor: \\*green/g" ~/.config/k9s/skins/OneDark.yaml' &
+
+            # run k9s directly in the foreground
+            k9s --context $choice
+        else
+            k9s --context $choice
+        end
     else
         echo "No context selected."
     end
