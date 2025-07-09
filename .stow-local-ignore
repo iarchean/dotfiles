@@ -11,4 +11,5 @@
 .DS_Store
 .secrets.baseline
 fun-icons.txt
+Brewfile
 README.md

@@ -27,9 +27,9 @@ set GOROOT $(go env GOROOT)
 set PATH $PATH $(go env GOPATH)/bin
 
 # Java
-set JAVA_HOME $(/usr/libexec/java_home -v 1.8)
-set PATH /usr/local/opt/openjdk/bin $PATH
-set CPPFLAGS -I/usr/local/opt/openjdk/include
+# set JAVA_HOME $(/usr/libexec/java_home -v 1.8)
+# set PATH /usr/local/opt/openjdk/bin $PATH
+# set CPPFLAGS -I/usr/local/opt/openjdk/include
 
 # GNU Coreutils
 set PATH /usr/local/opt/coreutils/libexec/gnubin $PATH
