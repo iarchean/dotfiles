@@ -494,6 +494,10 @@ bind _ split-window -v
 bind | split-window -h
 bind \\ split-window -h
 
+# shell integration jump to prompt
+bind -T copy-mode n send-keys -X next-prompt
+bind -T copy-mode p send-keys -X previous-prompt
+
 # if you don't want Oh my tmux! to alter a binding or a setting, use #!important
 # bind c new-window -c '#{pane_current_path}' #!important
 

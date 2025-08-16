@@ -7,6 +7,7 @@ clipboard-read = allow
 click-repeat-interval = 500
 quick-terminal-position = center
 quick-terminal-screen = mouse
+shell-integration = fish
 shell-integration-features = cursor,sudo,title
 auto-update-channel = stable
 # font-family = "Maple Mono NF CN"
@@ -34,3 +35,5 @@ keybind = command+6=text:\x60\x36
 keybind = command+7=text:\x60\x37
 keybind = command+8=text:\x60\x38
 keybind = command+9=text:\x60\x39
+keybind = command+up=jump_to_prompt:-1
+keybind = command+down=jump_to_prompt:1
