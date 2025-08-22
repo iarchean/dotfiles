@@ -63,7 +63,7 @@ plugins:
 
       # use kubectl and netshoot to debog a pod
   busybox-pod:
-    shortCut: b
+    shortCut: Shift-B
     confirm: true
     description: ◈ Run a busybox pod in current namespace
     scopes:

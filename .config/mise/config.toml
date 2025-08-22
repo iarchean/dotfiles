@@ -5,3 +5,5 @@ experimental = true
 [tools]
 "npm:@google/gemini-cli" = "latest"
 "npm:@anthropic-ai/claude-code" = "latest"
+"npm:@charmland/crush" = "latest"
+ko = "latest"

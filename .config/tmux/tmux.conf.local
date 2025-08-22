@@ -505,7 +505,7 @@ bind -T copy-mode p send-keys -X previous-prompt
 set -g status-position top
 
 # popup fish
-bind t display-popup -E -d "#{pane_current_path}" "fish"
+bind t display-popup -w 75% -h 60% -E -d "#{pane_current_path}" "fish"
 
 # -- tpm -----------------------------------------------------------------------
 
