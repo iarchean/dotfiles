@@ -50,6 +50,16 @@
 #       - CLUSTER-IP
 
 views:
+  apps/v1/deployments:
+    columns:
+      - NAMESPACE
+      - NAME
+      - PROJECT:.metadata.labels.app\.kubernetes\.io/name
+      - VERSION:.metadata.labels.app\.kubernetes\.io/version
+      - READY
+      - UP-TO-DATE
+      - AVAILABLE
+      - AGE
   gateway.networking.k8s.io/v1/httproutes:
     columns:
       - NAMESPACE
