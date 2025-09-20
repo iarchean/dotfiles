@@ -17,6 +17,8 @@ macos-titlebar-proxy-icon = hidden
 background-blur = true
 cursor-style = block
 cursor-style-blink = true
+clipboard-trim-trailing-spaces = true
+mouse-hide-while-typing = true
 
 # quick terminal
 quick-terminal-position = center
@@ -60,3 +62,11 @@ cursor-color = #f5e0dc
 cursor-text = #1e1e2e
 selection-background = #585b70
 selection-foreground = #cdd6f4
+
+# custom-shader = ghostty-shaders/cursor_blaze.glsl
+# custom-shader = ghostty-shaders/drunkard.glsl
+# custom-shader = ghostty-shaders/glitchy.glsl
+# custom-shader = ghostty-shaders/glow-rgbsplit-twitchy.glsl
+# custom-shader = ghostty-shaders/starfield-colors.glsl
+# custom-shader = ghostty-shaders/starfield.glsl
+custom-shader = ghostty-shaders/tft.glsl
