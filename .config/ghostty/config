@@ -19,6 +19,7 @@ cursor-style = block
 cursor-style-blink = true
 clipboard-trim-trailing-spaces = true
 mouse-hide-while-typing = true
+bell-features = no-title
 
 # quick terminal
 quick-terminal-position = center
@@ -26,7 +27,9 @@ quick-terminal-screen = macos-menu-bar
 quick-terminal-size = 50%,500px
 keybind = global:shift+control+option+command+t=toggle_quick_terminal
 
+# use xxd -p and ctrl + d to get the hex code
 keybind = command+t=text:\x60\x63
+keybind = command+f=text:\x60\x5b\x2f
 
 keybind = command+Digit1=text:\x60\x31
 keybind = command+Digit2=text:\x60\x32
