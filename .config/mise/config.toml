@@ -7,3 +7,4 @@ experimental = true
 "npm:@anthropic-ai/claude-code" = "latest"
 "npm:@charmland/crush" = "latest"
 ko = "latest"
+sops = "latest"
