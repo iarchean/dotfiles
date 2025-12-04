@@ -5,15 +5,11 @@ plugins:
     description: ◈ Get all resources in current namespace
     scopes:
       - all
-    command: kubectl
+    command: sh
     background: false
     args:
-      - -n
-      - $NAMESPACE
-      - --context
-      - $CONTEXT
-      - get
-      - all
+      - -c
+      - "$HOME/.config/k9s/tmux-exec.sh --keep-open kubectl -n $NAMESPACE --context $CONTEXT get all"
 
   debug-pod:
     shortCut: u
@@ -21,21 +17,11 @@ plugins:
     description: ◈ Debug selected pod
     scopes:
       - containers
-    command: kubectl
+    command: sh
     background: false
     args:
-      - debug
-      - -it
-      - -n
-      - $NAMESPACE
-      - $POD
-      - --target=$NAME
-      - --context
-      - $CONTEXT
-      - --image=nicolaka/netshoot
-      - --share-processes
-      - --
-      - bash
+      - -c
+      - "$HOME/.config/k9s/tmux-exec.sh kubectl debug -it -n $NAMESPACE $POD --target=$NAME --context $CONTEXT --image=nicolaka/netshoot --share-processes -- bash"
 
   tcpdump:
     shortCut: m
@@ -43,21 +29,11 @@ plugins:
     description: ◈ Tcpdump selected pod
     scopes:
       - pod
-    command: kubectl
+    command: sh
     background: false
     args:
-      - debug
-      - -it
-      - $NAME
-      - -n
-      - $NAMESPACE
-      - --context
-      - $CONTEXT
-      - --image=nicolaka/netshoot
-      - --
-      - termshark
-      - -i
-      - eth0
+      - -c
+      - "$HOME/.config/k9s/tmux-exec.sh kubectl debug -it $NAME -n $NAMESPACE --context $CONTEXT --image=nicolaka/netshoot -- termshark -i eth0"
 
       # - "kubectl debug -it $NAME --image=nicolaka/netshoot -n $NAMESPACE -- termshark -i eth0"
 
@@ -68,21 +44,11 @@ plugins:
     description: ◈ Run a busybox pod in current namespace
     scopes:
       - all
-    command: kubectl
+    command: sh
     background: false
     args:
-      - -n
-      - $NAMESPACE
-      - --context
-      - $CONTEXT
-      - run
-      - -it
-      - --rm
-      - --restart=Never
-      - netshoot
-      - --image=nicolaka/netshoot
-      - --
-      - /bin/bash
+      - -c
+      - "$HOME/.config/k9s/tmux-exec.sh kubectl -n $NAMESPACE --context $CONTEXT run -it --rm --restart=Never netshoot --image=nicolaka/netshoot -- bash"
 
   # Defines a plugin to provide a `ctrl-l` shortcut to tail the logs while in pod view.
   fred:
@@ -94,18 +60,13 @@ plugins:
     scopes:
       - pod
     # The command to run upon invocation. Can use Krew plugins here too!
-    command: kubectl
+    command: sh
     # Whether or not to run the command in background mode
     background: false
     # Defines the command arguments
     args:
-      - logs
-      - -f
-      - $NAME
-      - -n
-      - $NAMESPACE
-      - --context
-      - $CONTEXT
+      - -c
+      - "$HOME/.config/k9s/tmux-exec.sh kubectl logs -f $NAME -n $NAMESPACE --context $CONTEXT"
 
   dive:
     shortCut: d
@@ -128,4 +89,4 @@ plugins:
     background: false
     args:
       - -c
-      - "watch -n 5 kubectl get events --context $CONTEXT --namespace $NAMESPACE --field-selector involvedObject.name=$NAME"
+      - "$HOME/.config/k9s/tmux-exec.sh watch -n 5 kubectl get events --context $CONTEXT --namespace $NAMESPACE --field-selector involvedObject.name=$NAME"

@@ -3,8 +3,13 @@ idiomatic_version_file_enable_tools = ["node"]
 experimental = true
 
 [tools]
+# AI Agents
 "npm:@google/gemini-cli" = "latest"
 "npm:@anthropic-ai/claude-code" = "latest"
 "npm:@charmland/crush" = "latest"
+"npm:@openai/codex" = "latest"
+"npm:@github/copilot" = "latest"
+"npm:opencode-ai" = "latest"
+node = "latest"
 ko = "latest"
 sops = "latest"
