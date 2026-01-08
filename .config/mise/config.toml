@@ -11,7 +11,20 @@ experimental = true
 # "npm:@github/copilot" = "latest"
 "npm:opencode-ai" = "latest"
 
+# Languages
 node = "latest"
 ko = "latest"
 sops = "latest"
 python = "latest"
+
+# Develop tools
+yq = "latest"
+jq = "latest"
+kubectl = "latest"
+crane = "latest"
+helm = "latest"
+cmctl = "latest"
+croc = "latest"
+dive = "latest"
+task = "latest"
+lazygit = "latest"
