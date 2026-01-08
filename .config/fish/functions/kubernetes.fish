@@ -2,7 +2,6 @@ function kctx
   set choice (kubectl config get-contexts -o name | fzf --height 50% --reverse --prompt "Select k8s context: ")
   if test -n "$choice"
     kubectl config use-context $choice
-    echo $choice | pbcopy
   end
 end
 
@@ -10,7 +9,6 @@ function kdesc
   set choice (kubectl get pods -o name | sed "s/^pod\///" | fzf --height 50% --reverse --prompt "Select a pod: " --preview "kubectl get pod/\{} -o yaml | bat --color=always --style=grid --language=yaml --paging=never" --preview-window=right:50%)
   if test -n "$choice"
     kubectl describe pod $choice
-    echo $choice | pbcopy
   end
 end
 
@@ -25,7 +23,6 @@ function kedit
   set choice (kubectl get all -o name | fzf --height 50% --reverse --prompt "Select a resource: " --preview "kubectl get \{} -o yaml" --preview-window=right:50%)
   if test -n "$choice"
     kubectl edit $choice
-    echo $choice | pbcopy
   end
 end
 
@@ -33,7 +30,6 @@ function kexec
   set choice (kubectl get pods -o name | sed "s/^pod\///" | fzf --height 50% --reverse --prompt "Select a pod: " --preview "kubectl get pod/\{} -o yaml | bat --color=always --style=grid --language=yaml --paging=never" --preview-window=right:50%)
   if test -n "$choice"
     kubectl exec -it pod/$choice -- /bin/sh
-    echo $choice | pbcopy
   end
 end
 
@@ -48,7 +44,6 @@ function klogs
   set choice (kubectl get pods -o name | sed "s/^pod\///" | fzf --height 50% --reverse --prompt "Select a pod: " --preview "kubectl get pod/{} -o yaml | bat --color=always --style=grid --language=yaml --paging=never" --preview-window=right:50%)
   if test -n "$choice"
     kubectl logs -f $choice
-    echo $choice | pbcopy
   end
 end
 
