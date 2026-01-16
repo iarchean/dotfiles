@@ -20,9 +20,14 @@ source ~/.config/fish/functions/gcp.fish
 # thefuck
 # eval (thefuck --alias | tr '\n' ';')
 
-# sensitive profile
+# sensitive profile (using bass to source bash format)
 if test -f ~/.profile-sensitive
-    source ~/.profile-sensitive
+    bass source ~/.profile-sensitive
+end
+
+# sensitive aliases (same syntax works for fish)
+if test -f ~/.aliases-sensitive
+    source ~/.aliases-sensitive
 end
 
 # task
@@ -37,6 +42,7 @@ set -x XDG_CACHE_HOME "$HOME/.cache"
 # google cloud sdk
 set -x CLOUDSDK_CONFIG "$HOME/.gcloud"
 set -x GOOGLE_APPLICATION_CREDENTIALS "$CLOUDSDK_CONFIG/application_default_credentials.json"
+fish_add_path /opt/homebrew/share/google-cloud-sdk/bin
 
 # string match -q "$TERM_PROGRAM" "kiro" and . (kiro --locate-shell-integration-path fish)
 
