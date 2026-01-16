@@ -1,5 +1,3 @@
-shell = ["sh"]
-
 format = """
 $gcloud\
 $kubernetes\

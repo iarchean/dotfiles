@@ -16,6 +16,7 @@ node = "latest"
 ko = "latest"
 sops = "latest"
 python = "latest"
+pnpm = "latest"
 
 # Develop tools
 yq = "latest"
