@@ -1,8 +1,8 @@
 function t
     if test (count $argv) -eq 0
-        tmux attach -t BASE 2>/dev/null; or tmux new -s BASE
+        tmux -u attach -t BASE 2>/dev/null; or tmux -u new -s BASE
     else
-        tmux attach -t $argv[1] 2>/dev/null; or tmux new -s $argv[1]
+        tmux -u attach -t $argv[1] 2>/dev/null; or tmux -u new -s $argv[1]
     end
 end
 
@@ -21,6 +21,6 @@ function tl
             --color "marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8" \
             --prompt "select session 󰚺 ")
     if test -n "$session"
-        tmux attach -t $session
+        tmux -u attach -t $session
     end
 end

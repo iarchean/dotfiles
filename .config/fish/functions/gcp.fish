@@ -35,13 +35,12 @@ function gvm
         return 1
     end
 
-    # Get VM instance list
+    # Get VM instance list (JSON + jq: internal,external IPs combined with comma, one VM per line)
+    set -l jq_filter '.[] | (.networkInterfaces[0].networkIP // "") as $internal | (.networkInterfaces[0].accessConfigs[0].natIP // "") as $external | ($internal + (if $external != "" then "," + $external else "" end)) as $ips | "\(.name)\t\(.zone | split("/") | last)\t\($ips)\t\(.status)"'
     if test "$filter_gke_nodes" = true
-        # Filter out GKE nodes
-        set vm_list (gcloud compute instances list --project $project_name --format="table[no-heading](name,zone.basename(),INTERNAL_IP,EXTERNAL_IP,STATUS,Network)" 2>/dev/null | grep -v "gke")
+        set vm_list (gcloud compute instances list --project $project_name --format=json 2>/dev/null | jq -r ".[] | select(.name | test(\"gke\") | not) | (.networkInterfaces[0].networkIP // \"\") as \$internal | (.networkInterfaces[0].accessConfigs[0].natIP // \"\") as \$external | (\$internal + (if \$external != \"\" then \",\" + \$external else \"\" end)) as \$ips | \"\\(.name)\t\\(.zone | split(\"/\") | last)\t\\(\$ips)\t\\(.status)\"")
     else
-        # Get all VM instances
-        set vm_list (gcloud compute instances list --project $project_name --format="table[no-heading](name,zone.basename(),INTERNAL_IP,EXTERNAL_IP,STATUS,Network)" 2>/dev/null)
+        set vm_list (gcloud compute instances list --project $project_name --format=json 2>/dev/null | jq -r "$jq_filter")
     end
 
     # Check if there are available VMs
@@ -50,8 +49,8 @@ function gvm
         return 0
     end
 
-    # Use fzf to select server
-    set selected_vm (echo $vm_list | fzf --height 50% --reverse --info inline --prompt "Select a server to connect: ")
+    # Use fzf to select server (column aligns columns, printf preserves one VM per line)
+    set selected_vm (printf '%s\n' $vm_list | column -t -s \t | fzf --height 50% --reverse --info inline --prompt "Select a server to connect: ")
 
     # Exit if no server selected
     if test -z "$selected_vm"

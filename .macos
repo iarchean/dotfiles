@@ -23,8 +23,8 @@ defaults write NSGlobalDomain AppleLanguages -array "en-JP" "zh-Hans-JP" "ja-JP"
 defaults write NSGlobalDomain AppleLocale -string "en_JP"
 # AppleInterfaceStyle
 defaults write NSGlobalDomain AppleInterfaceStyle -string "Dark"
-# AppleInterfaceStyleSwitchesAutomatically
-defaults write NSGlobalDomain AppleInterfaceStyleSwitchesAutomatically -int 1
+# AppleInterfaceStyleSwitchesAutomatically (currently not set - uncomment if needed)
+# defaults write NSGlobalDomain AppleInterfaceStyleSwitchesAutomatically -int 1
 
 # Expand save panel by default
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
@@ -41,6 +41,11 @@ defaults write com.apple.LaunchServices LSQuarantine -bool false
 # Trackpad, mouse, keyboard, and input                                        #
 ###############################################################################
 
+# Trackpad: enable Force Click and haptic feedback
+defaults write com.apple.AppleMultitouchTrackpad ActuateDetents -int 1
+defaults write com.apple.AppleMultitouchTrackpad ForceSuppressed -int 0
+defaults write NSGlobalDomain com.apple.trackpad.forceClick -int 1
+
 # Trackpad: enable tap to click (Clicking = 1)
 defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
@@ -55,6 +60,32 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Dragging -bool
 # Your config shows this is disabled
 defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerTapGesture -int 0
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerTapGesture -int 0
+
+# Trackpad: configure multi-finger gestures
+# Four finger horizontal swipe for switching spaces
+defaults write com.apple.AppleMultitouchTrackpad TrackpadFourFingerHorizSwipeGesture -int 2
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadFourFingerHorizSwipeGesture -int 2
+# Four finger vertical swipe for Mission Control
+defaults write com.apple.AppleMultitouchTrackpad TrackpadFourFingerVertSwipeGesture -int 2
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadFourFingerVertSwipeGesture -int 2
+# Three finger horizontal swipe
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerHorizSwipeGesture -int 2
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerHorizSwipeGesture -int 2
+# Three finger vertical swipe
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerVertSwipeGesture -int 2
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerVertSwipeGesture -int 2
+# Two finger double tap for smart zoom
+defaults write com.apple.AppleMultitouchTrackpad TrackpadTwoFingerDoubleTapGesture -int 1
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadTwoFingerDoubleTapGesture -int 1
+# Two finger swipe from right edge for Notification Center
+defaults write com.apple.AppleMultitouchTrackpad TrackpadTwoFingerFromRightEdgeSwipeGesture -int 3
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadTwoFingerFromRightEdgeSwipeGesture -int 3
+# Pinch to zoom
+defaults write com.apple.AppleMultitouchTrackpad TrackpadPinch -int 1
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadPinch -int 1
+# Rotate gesture
+defaults write com.apple.AppleMultitouchTrackpad TrackpadRotate -int 1
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRotate -int 1
 
 # Disable "natural" (Lion-style) scrolling (if you prefer traditional scrolling)
 # Uncomment the following line if needed:
@@ -85,6 +116,12 @@ defaults write com.apple.screencapture type -string "png"
 # Finder                                                                      #
 ###############################################################################
 
+# Show drives on desktop
+defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+defaults write com.apple.finder ShowHardDrivesOnDesktop -bool false
+defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
+defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+
 # Finder: show all filename extensions
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 
@@ -113,9 +150,9 @@ defaults write NSGlobalDomain com.apple.springing.delay -float 0.5
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 
-# Use icon view as default
+# Use column view as default (your current setting)
 # Options: icnv (icon), Nlsv (list), clmv (column), glyv (gallery)
-defaults write com.apple.finder FXPreferredViewStyle -string "icnv"
+defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
 
 # # Show the ~/Library folder
 # chflags nohidden ~/Library 2>/dev/null
@@ -189,8 +226,9 @@ defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 # Only use UTF-8 in Terminal.app
 defaults write com.apple.terminal StringEncodings -array 4
 
-# Enable Secure Keyboard Entry in Terminal.app
-defaults write com.apple.terminal SecureKeyboardEntry -bool true
+# Enable Secure Keyboard Entry in Terminal.app (currently disabled on your system)
+# Uncomment to enable:
+# defaults write com.apple.terminal SecureKeyboardEntry -bool true
 
 # Disable the annoying line marks
 defaults write com.apple.Terminal ShowLineMarks -int 0
@@ -266,9 +304,26 @@ defaults write com.apple.controlcenter "NSStatusItem Visible AudioVideoModule" -
 # Spotlight                                                                   #
 ###############################################################################
 
-# Disable Spotlight keyboard shortcut (Cmd+Space) - useful if using Raycast/Alfred
-# This disables the "Show Spotlight search" shortcut (ID 64)
-defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 64 "<dict><key>enabled</key><false/></dict>"
+# Spotlight keyboard shortcut (Cmd+Space) is currently ENABLED on your system
+# Uncomment to disable (useful if using Raycast/Alfred):
+# defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 64 "<dict><key>enabled</key><false/></dict>"
+
+###############################################################################
+# Power                                                                       #
+###############################################################################
+
+# AC Power settings: disable system sleep, enable display sleep after 10 min
+sudo pmset -c sleep 0 disksleep 0 displaysleep 10 womp 1 powernap 1 autopoweroff 0 standby 0
+
+# Battery Power settings: system sleep after 1 min idle, display sleep after 2 min
+sudo pmset -b sleep 1 disksleep 10 displaysleep 2 powernap 1 standby 1 lessbright 1
+
+###############################################################################
+# Login Window                                                                #
+###############################################################################
+
+# Disable reopening windows when logging back in
+defaults write com.apple.loginwindow TALLogoutSavesState -bool false
 
 ###############################################################################
 # Kill affected applications                                                  #
