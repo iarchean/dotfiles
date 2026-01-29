@@ -3,3 +3,4 @@ nix-sample
 result/
 .config/tmux/plugins/
 .gitconfig
+node_modules/
