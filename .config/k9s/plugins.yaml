@@ -90,3 +90,51 @@ plugins:
     args:
       - -c
       - "$HOME/.config/k9s/tmux-exec.sh watch -n 5 kubectl get events --context $CONTEXT --namespace $NAMESPACE --field-selector involvedObject.name=$NAME"
+
+  tailspin-logs-pod:
+    shortCut: Shift-I
+    confirm: false
+    description: ◈ View logs with Tailspin
+    scopes:
+      - pod
+    command: sh
+    background: false
+    args:
+      - -c
+      - "$HOME/.config/k9s/tmux-exec.sh --keep-open bash -c 'kubectl logs --tail=2000 -n $NAMESPACE $NAME --context $CONTEXT | tspin'"
+
+  tailspin-logs-deploy:
+    shortCut: Shift-I
+    confirm: false
+    description: ◈ View logs with Tailspin
+    scopes:
+      - deployment
+    command: sh
+    background: false
+    args:
+      - -c
+      - "$HOME/.config/k9s/tmux-exec.sh --keep-open bash -c 'kubectl logs --tail=2000 -n $NAMESPACE deployment/$NAME --context $CONTEXT | tspin'"
+
+  tailspin-logs-sts:
+    shortCut: Shift-I
+    confirm: false
+    description: ◈ View logs with Tailspin
+    scopes:
+      - statefulset
+    command: sh
+    background: false
+    args:
+      - -c
+      - "$HOME/.config/k9s/tmux-exec.sh --keep-open bash -c 'kubectl logs --tail=2000 -n $NAMESPACE statefulset/$NAME --context $CONTEXT | tspin'"
+
+  tailspin-logs-ds:
+    shortCut: Shift-I
+    confirm: false
+    description: ◈ View logs with Tailspin
+    scopes:
+      - daemonset
+    command: sh
+    background: false
+    args:
+      - -c
+      - "$HOME/.config/k9s/tmux-exec.sh --keep-open bash -c 'kubectl logs --tail=2000 -n $NAMESPACE daemonset/$NAME --context $CONTEXT | tspin'"

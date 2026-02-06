@@ -42,7 +42,7 @@ if [ "$KEEP_OPEN" = true ]; then
     # Build command string with proper escaping
     CMD_ESCAPED=$(printf '%q ' "${ARGS[@]}")
     # Execute command and then start shell in the new pane
-    tmux split-window -h -l 75% "bash -c '$CMD_ESCAlED; exec $USER_SHELL'"
+    tmux split-window -h -l 75% "bash -c '$CMD_ESCAPED; exec $USER_SHELL'"
 else
     # Normal command execution
     tmux split-window -h -l 75% "${ARGS[@]}"
