@@ -69,5 +69,5 @@ function gvm
 
     # SSH to selected server
     echo "Connecting to $server_name (zone: $server_zone, project: $project_name)..."
-    gcloud compute ssh "$server_name" --zone "$server_zone" --project "$project_name" --tunnel-through-iap --ssh-key-file ~/.ssh/id_ed25519
+    gcloud compute ssh "$server_name" --zone "$server_zone" --project "$project_name" --tunnel-through-iap --ssh-key-file ~/.ssh/id_ed25519 --strict-host-key-checking=no --ssh-flag="-o UserKnownHostsFile=/dev/null"
 end
