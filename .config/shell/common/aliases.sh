@@ -43,3 +43,6 @@ alias aria='aria2c --conf-path="/Users/Archean/Misc/conf/aria2.conf" -D'
 alias console='screen /dev/tty.usbserial-AD0JJ0DU'
 
 # SSH connections are in ~/.aliases-sensitive
+
+# replase rm with trash
+alias rm='trash'
