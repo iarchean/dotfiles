@@ -13,6 +13,7 @@ export PATH="$PATH:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin"
 
 # User bin
 export PATH="$PATH:$HOME/.bin"
+export PATH="$HOME/.local/bin:$PATH"
 
 # GNU Coreutils
 export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:/usr/local/opt/coreutils/libexec/gnubin:$PATH"

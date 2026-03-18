@@ -1,7 +1,5 @@
 # folders need to be started with a slash
 /docs
-/nix
-/nix-sample
 /scripts
 .git
 .gitignore

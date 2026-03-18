@@ -44,6 +44,14 @@ set -x XDG_CONFIG_HOME "$HOME/.config"
 # XDG_CACHE_HOME
 set -x XDG_CACHE_HOME "$HOME/.cache"
 
+# User bin
+fish_add_path $HOME/.local/bin
+
+# mise
+if command -q mise
+    mise activate fish | source
+end
+
 # google cloud sdk
 set -x CLOUDSDK_CONFIG "$HOME/.gcloud"
 set -x GOOGLE_APPLICATION_CREDENTIALS "$CLOUDSDK_CONFIG/application_default_credentials.json"
