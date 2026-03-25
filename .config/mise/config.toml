@@ -5,11 +5,15 @@ experimental = true
 [tools]
 # AI Agents
 # "npm:@google/gemini-cli" = "latest"
-# "npm:@anthropic-ai/claude-code" = "latest"
+"npm:@anthropic-ai/claude-code" = "latest"
 # "npm:@charmland/crush" = "latest"
-# "npm:@openai/codex" = "latest"
+"npm:@openai/codex" = "latest"
 # "npm:@github/copilot" = "latest"
 "npm:opencode-ai" = "latest"
+"npm:happy-coder" = "latest"
+"npm:@openchamber/web" = "latest"
+"npm:@jackwener/opencli" = "latest"
+bun = "latest"
 
 # Languages
 node = "latest"
