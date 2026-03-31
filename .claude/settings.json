@@ -1,0 +1,11 @@
+{
+  "model": "claude-opus-4-6",
+  "statusLine": {
+    "type": "command",
+    "command": "bash /Users/archean/.claude/statusline-command.sh"
+  },
+  "enabledPlugins": {
+    "swift-lsp@claude-plugins-official": true
+  },
+  "language": "Chinese"
+}
