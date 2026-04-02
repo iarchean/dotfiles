@@ -10,10 +10,7 @@ experimental = true
 "npm:@openai/codex" = "latest"
 # "npm:@github/copilot" = "latest"
 "npm:opencode-ai" = "latest"
-"npm:happy-coder" = "latest"
-"npm:@openchamber/web" = "latest"
 "npm:@jackwener/opencli" = "latest"
-bun = "latest"
 
 # Languages
 node = "latest"
@@ -21,6 +18,7 @@ ko = "latest"
 sops = "latest"
 python = "latest"
 pnpm = "latest"
+bun = "latest"
 
 # Develop tools
 yq = "latest"

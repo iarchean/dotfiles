@@ -20,3 +20,6 @@ export GOROOT="$(go env GOROOT 2>/dev/null)"
 
 # Gcode
 export GCODE_HOME="$HOME/gcode"
+
+# Claude
+export CLAUDE_CODE_NO_FLICKER=1

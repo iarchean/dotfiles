@@ -26,7 +26,7 @@ mouse-hide-while-typing = true
 
 # Shell
 shell-integration = fish
-shell-integration-features = cursor,sudo,title
+shell-integration-features = cursor,sudo,title,ssh-terminfo,ssh-env
 
 # Fonts
 # font-family = "JetBrains Mono"
