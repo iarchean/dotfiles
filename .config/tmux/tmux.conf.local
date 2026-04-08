@@ -555,7 +555,7 @@ set -g @plugin 'jaclu/tmux-menus'
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-continuum'
 set -g @plugin 'iarchean/tmux-starship'
-
+set -g @plugin 'Ataraxy-Labs/opensessions'
 set -g @menus_trigger 'Space'
 
 # -- custom variables ----------------------------------------------------------
