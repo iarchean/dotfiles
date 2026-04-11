@@ -25,6 +25,11 @@ if test -f ~/.profile-sensitive
     bass source ~/.profile-sensitive
 end
 
+# common env (using bass to source bash format)
+if test -f ~/.config/shell/common/env.sh
+    bass source ~/.config/shell/common/env.sh
+end
+
 # common aliases (using bass to source bash format)
 if test -f ~/.config/shell/common/aliases.sh
     bass source ~/.config/shell/common/aliases.sh

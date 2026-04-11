@@ -11,6 +11,7 @@ experimental = true
 # "npm:@github/copilot" = "latest"
 "npm:opencode-ai" = "latest"
 "npm:@jackwener/opencli" = "latest"
+"npm:@getpaseo/cli" = "latest"
 
 # Languages
 node = "latest"
