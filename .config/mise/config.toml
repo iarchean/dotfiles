@@ -4,14 +4,14 @@ experimental = true
 
 [tools]
 # AI Agents
-# "npm:@google/gemini-cli" = "latest"
 "npm:@anthropic-ai/claude-code" = "latest"
-# "npm:@charmland/crush" = "latest"
 "npm:@openai/codex" = "latest"
-# "npm:@github/copilot" = "latest"
 "npm:opencode-ai" = "latest"
-"npm:@jackwener/opencli" = "latest"
 "npm:@getpaseo/cli" = "latest"
+
+# Cloudflare
+"npm:wrangler" = "latest"
+"npm:cf" = "latest"
 
 # Languages
 node = "latest"
@@ -34,4 +34,3 @@ task = "latest"
 lazygit = "latest"
 k6 = "latest"
 delta = "latest"
-"npm:wrangler" = "latest"
