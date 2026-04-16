@@ -1,0 +1,8 @@
+{
+  "completions": {
+    "prompted": true,
+    "installed": true,
+    "shell": "fish",
+    "path": "/Users/archean/.config/cf/completions/cf.fish"
+  }
+}
