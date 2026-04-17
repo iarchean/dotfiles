@@ -1,4 +1,5 @@
 format = """
+$hostname\
 $gcloud\
 $kubernetes\
 $directory\
@@ -75,6 +76,11 @@ context_alias = "$cluster"
 context_pattern = "arn:aws:eks:.*:.*:cluster/(?P<cluster>[\\w-]+)"
 context_alias = "$cluster"
 
+
+[hostname]
+ssh_only = true
+format = '$hostname '
+style = 'bold bright-purple'
 
 [gcloud]
 format = '[$symbol($region )($project)]($style) '
