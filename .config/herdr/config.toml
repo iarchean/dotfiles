@@ -1,4 +1,4 @@
-onboarding = true
+onboarding = false
 
 [theme]
 name = "catppuccin"
@@ -11,22 +11,25 @@ delivery = "system"
 
 [keys]
 prefix = "ctrl+b"
-new_workspace = "shift+n"
-rename_workspace = "$"
+new_workspace = "n"
+rename_workspace = "shift+n"
 close_workspace = "X"
+reload_config = ""                # optional, unset by default
+open_notification_target = ""     # optional, unset by default
 new_tab = "c"
-split_vertical = "|"
-split_horizontal = "-"
+split_vertical = "d"
+split_horizontal = "D"
 close_pane = "x"
-fullscreen = "z"
+rename_pane = ""                  # optional, unset by default
+fullscreen = "f"
 resize_mode = "r"
 toggle_sidebar = "b"
-previous_workspace = "("
-next_workspace = ")"
+previous_workspace = "ctrl+alt+["
+next_workspace = "ctrl+alt+]"
 previous_agent = "ctrl+["
 next_agent = "ctrl+]"
-previous_tab = "p"
-next_tab = "n"
+previous_tab = "alt+["
+next_tab = "alt+]"
 focus_pane_left = "alt+h"
 focus_pane_down = "alt+j"
 focus_pane_up = "alt+k"

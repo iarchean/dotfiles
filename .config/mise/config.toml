@@ -19,7 +19,7 @@ node = "latest"
 ko = "latest"
 sops = "latest"
 python = "latest"
-pnpm = "latest"
+"npm:pnpm" = "latest"
 bun = "latest"
 
 # Develop tools
