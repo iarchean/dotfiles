@@ -8,6 +8,7 @@ experimental = true
 "npm:@openai/codex" = "latest"
 "npm:opencode-ai" = "latest"
 "npm:@getpaseo/cli" = "latest"
+"ubi:ogulcancelik/herdr" = "latest"
 
 # Cloudflare
 "npm:wrangler" = "latest"

@@ -257,7 +257,7 @@ tmux_conf_theme_status_attr="none"
 #     - #{username_ssh}
 tmux_conf_theme_terminal_title="#h ○ #S | #I #W"
 
-title_format="#($(dirname $TMUX_CONF)/scripts/tmux-nerd-font-window-name #{pane_current_command} #{window_panes})"
+title_format="#($(dirname $TMUX_CONF)/scripts/tmux-nerd-font-window-name #{pane_current_command} #{window_panes} #{pane_pid})"
 
 # window status style
 #   - built-in variables are:

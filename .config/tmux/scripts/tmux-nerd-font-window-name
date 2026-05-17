@@ -9,6 +9,7 @@ fi
 # Define variables with arguments and config paths
 NAME="$1"
 PANES="$2"
+PANE_PID="$3"
 CURRENT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DEFAULT_CONFIG="$CURRENT_DIR/tmux-nerd-font-window-name.yml"
 USER_CONFIG="$HOME/.config/tmux/tmux-nerd-font-window-name.yml"
@@ -42,6 +43,23 @@ if [ "$PANES" -gt 1 ]; then
   MULTI_PANE_ICON="$(get_config_value '.config["multi-pane-icon"]')"
   if [ "$MULTI_PANE_ICON" != "null" ] && [ -n "$MULTI_PANE_ICON" ]; then
     ICON="$MULTI_PANE_ICON $ICON"
+  fi
+fi
+
+# For k9s: replace NAME with friendly cluster name from --context arg
+if [ "$NAME" = "k9s" ] && [ -n "$PANE_PID" ]; then
+  K9S_PID=$(pgrep -P "$PANE_PID" k9s 2>/dev/null | head -1)
+  CONTEXT=""
+  if [ -n "$K9S_PID" ]; then
+    K9S_ARGS=$(ps -o args= -p "$K9S_PID" 2>/dev/null)
+    CONTEXT=$(echo "$K9S_ARGS" | sed -n 's/.*--context[= ]*\([^ ]*\).*/\1/p')
+  fi
+  if [ -z "$CONTEXT" ]; then
+    CONTEXT=$(kubectl config current-context 2>/dev/null)
+  fi
+  if [ -n "$CONTEXT" ]; then
+    CLUSTER=$(echo "$CONTEXT" | awk -F_ '{print $NF}')
+    NAME=$(echo "$CLUSTER" | sed 's/-gke-/ /')
   fi
 fi
 

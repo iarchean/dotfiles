@@ -38,8 +38,10 @@ function gvm
     # Get VM instance list (JSON + jq: internal,external IPs combined with comma, one VM per line)
     set -l jq_filter '.[] | (.networkInterfaces[0].networkIP // "") as $internal | (.networkInterfaces[0].accessConfigs[0].natIP // "") as $external | ($internal + (if $external != "" then "," + $external else "" end)) as $ips | "\(.name)\t\(.zone | split("/") | last)\t\($ips)\t\(.status)"'
     if test "$filter_gke_nodes" = true
+        echo "> gcloud compute instances list --project $project_name --format=json" >&2
         set vm_list (gcloud compute instances list --project $project_name --format=json 2>/dev/null | jq -r ".[] | select(.name | test(\"gke\") | not) | (.networkInterfaces[0].networkIP // \"\") as \$internal | (.networkInterfaces[0].accessConfigs[0].natIP // \"\") as \$external | (\$internal + (if \$external != \"\" then \",\" + \$external else \"\" end)) as \$ips | \"\\(.name)\t\\(.zone | split(\"/\") | last)\t\\(\$ips)\t\\(.status)\"")
     else
+        echo "> gcloud compute instances list --project $project_name --format=json" >&2
         set vm_list (gcloud compute instances list --project $project_name --format=json 2>/dev/null | jq -r "$jq_filter")
     end
 
@@ -68,6 +70,7 @@ function gvm
     end
 
     # SSH to selected server
+    echo "> gcloud compute ssh \"$server_name\" --zone \"$server_zone\" --project \"$project_name\" --tunnel-through-iap --ssh-key-file ~/.ssh/id_ed25519 --strict-host-key-checking=no --ssh-flag=\"-o UserKnownHostsFile=/dev/null\""
     echo "Connecting to $server_name (zone: $server_zone, project: $project_name)..."
     gcloud compute ssh "$server_name" --zone "$server_zone" --project "$project_name" --tunnel-through-iap --ssh-key-file ~/.ssh/id_ed25519 --strict-host-key-checking=no --ssh-flag="-o UserKnownHostsFile=/dev/null"
 end

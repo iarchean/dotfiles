@@ -6,6 +6,10 @@ function t
     end
 end
 
+function ta
+    tmux -u attach -t AI-AGENT 2>/dev/null; or tmux -u new -s AI-AGENT
+end
+
 function tl
     set -l preview_cmd 'tmux list-panes -a -F "#{session_name}:#{window_index}.#{pane_index}: #{window_name}#{?window_active, (active),} #{pane_current_command}" | grep "^$1:"'
     set -l session (tmux list-sessions -F "#{session_name}" 2>/dev/null | \
