@@ -2,3 +2,10 @@
 .config/tmux/plugins/
 .gitconfig
 node_modules/
+
+# Local app data / runtime
+.config/alma/
+.config/raycast-x/
+.config/herdr/*.log
+.config/herdr/*.sock
+.config/herdr/session.json

@@ -1,0 +1,33 @@
+onboarding = true
+
+[theme]
+name = "catppuccin"
+
+[ui]
+show_agent_labels_on_pane_borders = true
+
+[ui.toast]
+delivery = "system"
+
+[keys]
+prefix = "ctrl+b"
+new_workspace = "shift+n"
+rename_workspace = "$"
+close_workspace = "X"
+new_tab = "c"
+split_vertical = "|"
+split_horizontal = "-"
+close_pane = "x"
+fullscreen = "z"
+resize_mode = "r"
+toggle_sidebar = "b"
+previous_workspace = "("
+next_workspace = ")"
+previous_agent = "ctrl+["
+next_agent = "ctrl+]"
+previous_tab = "p"
+next_tab = "n"
+focus_pane_left = "alt+h"
+focus_pane_down = "alt+j"
+focus_pane_up = "alt+k"
+focus_pane_right = "alt+l"
