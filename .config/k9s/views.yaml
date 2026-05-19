@@ -76,6 +76,18 @@ views:
       - HOSTS:.spec.listeners[*].hostname
       - PROGRAMMED
       - AGE
+  cert-manager.io/v1/certificates:
+    sortColumn: NOT-AFTER:asc
+    columns:
+      - NAMESPACE
+      - NAME
+      - 'READY:.status.conditions // [] | map(select(.type == "Ready") | .status) | .[0] // "-"'
+      - SECRET:.spec.secretName
+      - ISSUER:.spec.issuerRef.name
+      - DNS:.spec.dnsNames
+      - 'EXPIRES_DAYS:.status.notAfter | if . then fromdateiso8601 - now | . / 86400 | floor else "-" end'
+      - NOT-AFTER:.status.notAfter
+      - AGE
   # helm:
   #   columns:
   #     - NAMESPACE

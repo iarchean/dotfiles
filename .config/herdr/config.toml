@@ -10,7 +10,7 @@ show_agent_labels_on_pane_borders = true
 delivery = "system"
 
 [keys]
-prefix = "ctrl+b"
+prefix = "`"
 new_workspace = "n"
 rename_workspace = "shift+n"
 close_workspace = "X"
