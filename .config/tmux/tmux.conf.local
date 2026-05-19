@@ -15,6 +15,14 @@ set -g status-format[1] ""
 bind h set status off
 bind H set status on
 
+# Toggle narrow status bar (keep only the window list) — for phone SSH.
+bind N if-shell -F '#{==:#{status-left},}' \
+  "set -g status 2 ; set -gF status-left '#{@narrow-left-bak}' ; set -gF status-right '#{@narrow-right-bak}' ; display -d 1500 'status: WIDE'" \
+  "set -gF @narrow-left-bak '#{status-left}' ; set -gF @narrow-right-bak '#{status-right}' ; set -g status on ; set -g status-left '' ; set -g status-right '' ; display -d 1500 'status: NARROW'"
+bind a if-shell -F '#{==:#{status-left},}' \
+  "set -g status 2 ; set -gF status-left '#{@narrow-left-bak}' ; set -gF status-right '#{@narrow-right-bak}' ; display -d 1500 'status: WIDE'" \
+  "set -gF @narrow-left-bak '#{status-left}' ; set -gF @narrow-right-bak '#{status-right}' ; set -g status on ; set -g status-left '' ; set -g status-right '' ; display -d 1500 'status: NARROW'"
+
 # set-hook -g after-new-window      'if "[ #{session_windows} -gt 1 ]" "set status on"'
 # set-hook -g after-kill-pane       'if "[ #{session_windows} -lt 2 ]" "set status off"'
 # set-hook -g pane-exited           'if "[ #{session_windows} -lt 2 ]" "set status off"'
@@ -257,7 +265,7 @@ tmux_conf_theme_status_attr="none"
 #     - #{username_ssh}
 tmux_conf_theme_terminal_title="#h ○ #S | #I #W"
 
-title_format="#($(dirname $TMUX_CONF)/scripts/tmux-nerd-font-window-name #{pane_current_command} #{window_panes} #{pane_pid})"
+title_format="#($(dirname $TMUX_CONF)/scripts/tmux-nerd-font-window-name #{pane_current_command} #{window_panes} #{pane_pid} #{pane_current_path})"
 
 # window status style
 #   - built-in variables are:

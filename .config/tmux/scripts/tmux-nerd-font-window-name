@@ -10,6 +10,7 @@ fi
 NAME="$1"
 PANES="$2"
 PANE_PID="$3"
+PANE_CURRENT_PATH="$4"
 CURRENT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DEFAULT_CONFIG="$CURRENT_DIR/tmux-nerd-font-window-name.yml"
 USER_CONFIG="$HOME/.config/tmux/tmux-nerd-font-window-name.yml"
@@ -43,6 +44,18 @@ if [ "$PANES" -gt 1 ]; then
   MULTI_PANE_ICON="$(get_config_value '.config["multi-pane-icon"]')"
   if [ "$MULTI_PANE_ICON" != "null" ] && [ -n "$MULTI_PANE_ICON" ]; then
     ICON="$MULTI_PANE_ICON $ICON"
+  fi
+fi
+
+# For AI agents: replace NAME with current directory basename
+if [ -n "$PANE_CURRENT_PATH" ]; then
+  AI_AGENTS="$(get_config_value '.config["ai-agents"][]')"
+  if [ -n "$AI_AGENTS" ] && echo "$AI_AGENTS" | grep -Fxq "$NAME"; then
+    if [ "$PANE_CURRENT_PATH" = "$HOME" ]; then
+      NAME="~"
+    else
+      NAME="$(basename "$PANE_CURRENT_PATH")"
+    fi
   fi
 fi
 

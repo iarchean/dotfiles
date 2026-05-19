@@ -2,6 +2,15 @@
 config:
   fallback-icon: "󰚺"
   show-name: true
+  ai-agents:
+    - claude
+    - claude.exe
+    - codex
+    - opencode
+    - aider
+    - gemini
+    - cursor-agent
+    - crush
 
 icons:
   apt: ""
@@ -155,3 +164,11 @@ icons:
   sudo: ""
   scp: "󰣀"
   weechat: "󰭹"
+  claude: "󰚩"
+  claude.exe: "󰚩"
+  codex: "󱚝"
+  opencode: "󱚣"
+  aider: "󱚤"
+  gemini: "󰫢"
+  cursor-agent: "󱕁"
+  crush: "󰚩"
