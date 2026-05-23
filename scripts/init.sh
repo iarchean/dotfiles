@@ -135,7 +135,7 @@ if [ "$OS_TYPE" = "macos" ]; then
     print_error "stow was not found after brew bundle."
     exit 1
   fi
-  run_as_user "$STOW_BIN" --dir "$DOTFILES_LOCAL_PATH" --target "$USER_HOME" --restow .
+  run_as_user "$STOW_BIN" --dir "$DOTFILES_LOCAL_PATH" --restow .
 
   print_step "Restoring development tools with mise"
   MISE_BIN="$(find_mise)"
@@ -174,7 +174,7 @@ else
     print_error "stow is not available after installation."
     exit 1
   fi
-  run_as_user "$STOW_BIN" --dir "$DOTFILES_LOCAL_PATH" --target "$USER_HOME" --restow .
+  run_as_user "$STOW_BIN" --dir "$DOTFILES_LOCAL_PATH" --restow .
 
   print_step "Restoring development tools with mise"
   MISE_BIN="$(find_mise)"
