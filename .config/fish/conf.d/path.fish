@@ -23,8 +23,10 @@ set PATH $PATH /usr/local/bin/ /usr/local/sbin /usr/bin /bin /usr/sbin /sbin
 set PATH $PATH /Users/archean/.bin
 
 # golang
-set GOROOT $(go env GOROOT)
-set PATH $PATH $(go env GOPATH)/bin
+if command -q go
+    set GOROOT $(go env GOROOT)
+    set PATH $PATH $(go env GOPATH)/bin
+end
 
 # Java
 # set JAVA_HOME $(/usr/libexec/java_home -v 1.8)
