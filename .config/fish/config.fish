@@ -2,9 +2,6 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
-starship init fish | source
-# enable_transience
-
 # set fish the default shell
 # sudo bash -c 'echo $(which fish) >> /etc/shells'
 # chsh -s $(which fish)
@@ -55,6 +52,12 @@ fish_add_path $HOME/.local/bin
 # mise
 if command -q mise
     mise activate fish | source
+end
+
+# starship prompt (depends on tools on PATH, e.g. when starship lives in mise)
+if command -q starship
+    starship init fish | source
+    # enable_transience
 end
 
 # google cloud sdk
