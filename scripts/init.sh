@@ -141,6 +141,9 @@ if [ "$OS_TYPE" = "macos" ]; then
   MISE_BIN="$(find_mise)"
   if [ -n "$MISE_BIN" ]; then
     run_as_user "$MISE_BIN" install
+    print_step "Running postinstall for mise-installed npm packages"
+    run_as_user bash "$DOTFILES_LOCAL_PATH/scripts/fix-mise-npm-postinstall.sh" \
+      || print_warning "fix-mise-npm-postinstall.sh failed; run it manually if needed."
   else
     print_warning "mise was not found after brew bundle. Skipping 'mise install'."
   fi
@@ -185,6 +188,9 @@ else
 
   if [ -n "$MISE_BIN" ]; then
     run_as_user "$MISE_BIN" install
+    print_step "Running postinstall for mise-installed npm packages"
+    run_as_user bash "$DOTFILES_LOCAL_PATH/scripts/fix-mise-npm-postinstall.sh" \
+      || print_warning "fix-mise-npm-postinstall.sh failed; run it manually if needed."
   else
     print_warning "mise installation did not complete successfully. Run 'mise install' manually later."
   fi
