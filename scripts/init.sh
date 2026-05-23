@@ -135,7 +135,7 @@ if [ "$OS_TYPE" = "macos" ]; then
     print_error "stow was not found after brew bundle."
     exit 1
   fi
-  run_as_user "$STOW_BIN" --dir "$DOTFILES_LOCAL_PATH" --target "$USER_HOME" --restow .config .mackup
+  run_as_user "$STOW_BIN" --dir "$DOTFILES_LOCAL_PATH" --target "$USER_HOME" --restow .
 
   print_step "Restoring development tools with mise"
   MISE_BIN="$(find_mise)"
@@ -155,7 +155,7 @@ if [ "$OS_TYPE" = "macos" ]; then
   print_step "Next steps for macOS"
   echo -e "1. ${BLUE}Open a new terminal window${NC} so Homebrew and shell changes are loaded."
   echo -e "2. ${BLUE}If needed, re-run dotfile linking:${NC}"
-  echo -e "   ${YELLOW}stow --dir ${DOTFILES_LOCAL_PATH} --target ${USER_HOME} --restow .config .mackup${NC}"
+  echo -e "   ${YELLOW}cd ${DOTFILES_LOCAL_PATH} && stow --restow .${NC}"
   echo -e "3. ${BLUE}If needed, re-run tool restore:${NC}"
   echo -e "   ${YELLOW}${MISE_BIN:-mise} install${NC}"
   echo -e "4. ${BLUE}Some macOS settings may require logout or restart.${NC}"
@@ -174,7 +174,7 @@ else
     print_error "stow is not available after installation."
     exit 1
   fi
-  run_as_user "$STOW_BIN" --dir "$DOTFILES_LOCAL_PATH" --target "$USER_HOME" --restow .config .mackup
+  run_as_user "$STOW_BIN" --dir "$DOTFILES_LOCAL_PATH" --target "$USER_HOME" --restow .
 
   print_step "Restoring development tools with mise"
   MISE_BIN="$(find_mise)"
@@ -192,7 +192,7 @@ else
   print_step "Next steps for Linux"
   echo -e "1. ${BLUE}Install any missing GUI apps or system packages manually.${NC}"
   echo -e "2. ${BLUE}If needed, re-run dotfile linking:${NC}"
-  echo -e "   ${YELLOW}stow --dir ${DOTFILES_LOCAL_PATH} --target ${USER_HOME} --restow .config .mackup${NC}"
+  echo -e "   ${YELLOW}cd ${DOTFILES_LOCAL_PATH} && stow --restow .${NC}"
   echo -e "3. ${BLUE}If needed, re-run tool restore after installing mise:${NC}"
   echo -e "   ${YELLOW}${MISE_BIN:-mise} install${NC}"
 fi

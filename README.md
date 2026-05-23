@@ -37,7 +37,8 @@ brew bundle --file=~/dotfiles/Brewfile
 4. Restore dotfiles:
 
 ```bash
-stow --dir ~/dotfiles --target ~ --restow .config .mackup
+cd ~/dotfiles
+stow --restow .
 ```
 
 5. Restore development tools managed by `mise`:
@@ -77,7 +78,8 @@ cd ~/dotfiles
 3. Restore dotfiles:
 
 ```bash
-stow --dir ~/dotfiles --target ~ --restow .config .mackup
+cd ~/dotfiles
+stow --restow .
 ```
 
 4. Install `mise`:
@@ -117,7 +119,7 @@ Current script behavior:
 cd ~/dotfiles
 git pull
 brew bundle --file=~/dotfiles/Brewfile
-stow --dir ~/dotfiles --target ~ --restow .config .mackup
+stow --restow .
 mise install
 bash ~/dotfiles/.macos
 ```
@@ -127,7 +129,7 @@ bash ~/dotfiles/.macos
 ```bash
 cd ~/dotfiles
 git pull
-stow --dir ~/dotfiles --target ~ --restow .config .mackup
+stow --restow .
 mise install
 ```
 
