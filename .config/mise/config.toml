@@ -36,6 +36,12 @@ task = "latest"
 lazygit = "latest"
 k6 = "latest"
 delta = "latest"
+fzf = "latest"
+gh = "latest"
+awscli = "latest"
+"aqua:aws/aws-sam-cli" = "latest"
+"ubi:bensadeh/tailspin" = { version = "latest", exe = "tspin" }
+"ubi:fullstorydev/grpcui" = { version = "latest", exe = "grpcui", matching = "osx_arm64" }
 "github:neovim/neovim" = "latest"
 "github:starship/starship" = "latest"
 "github:zellij-org/zellij" = "latest"
