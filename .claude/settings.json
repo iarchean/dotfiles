@@ -1,21 +1,144 @@
 {
-  "model": "claude-opus-4-6",
-  "statusLine": {
-    "type": "command",
-    "command": "bash /Users/archean/.claude/statusline-command.sh"
+  "enabledPlugins" : {
+    "codex@openai-codex" : true,
+    "gopls-lsp@claude-plugins-official" : true,
+    "swift-lsp@claude-plugins-official" : true
   },
-  "enabledPlugins": {
-    "swift-lsp@claude-plugins-official": true,
-    "codex@openai-codex": true,
-    "gopls-lsp@claude-plugins-official": true
-  },
-  "extraKnownMarketplaces": {
-    "openai-codex": {
-      "source": {
-        "source": "github",
-        "repo": "openai/codex-plugin-cc"
+  "extraKnownMarketplaces" : {
+    "openai-codex" : {
+      "source" : {
+        "repo" : "openai\/codex-plugin-cc",
+        "source" : "github"
       }
     }
   },
-  "language": "Chinese"
+  "hooks" : {
+    "Notification" : [
+      {
+        "hooks" : [
+          {
+            "command" : "VIBE_ISLAND_PORTS=17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
+            "type" : "command"
+          }
+        ]
+      }
+    ],
+    "PermissionRequest" : [
+      {
+        "hooks" : [
+          {
+            "command" : "VIBE_ISLAND_PORTS=17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
+            "type" : "command"
+          }
+        ]
+      }
+    ],
+    "PostToolUse" : [
+      {
+        "hooks" : [
+          {
+            "command" : "VIBE_ISLAND_PORTS=17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
+            "type" : "command"
+          }
+        ]
+      }
+    ],
+    "PreCompact" : [
+      {
+        "hooks" : [
+          {
+            "command" : "VIBE_ISLAND_PORTS=17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
+            "type" : "command"
+          }
+        ]
+      }
+    ],
+    "PreToolUse" : [
+      {
+        "hooks" : [
+          {
+            "command" : "VIBE_ISLAND_PORTS=17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
+            "type" : "command"
+          }
+        ]
+      }
+    ],
+    "SessionEnd" : [
+      {
+        "hooks" : [
+          {
+            "command" : "VIBE_ISLAND_PORTS=17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
+            "type" : "command"
+          }
+        ]
+      }
+    ],
+    "SessionStart" : [
+      {
+        "hooks" : [
+          {
+            "command" : "VIBE_ISLAND_PORTS=17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
+            "type" : "command"
+          }
+        ]
+      }
+    ],
+    "Stop" : [
+      {
+        "hooks" : [
+          {
+            "command" : "VIBE_ISLAND_PORTS=17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
+            "type" : "command"
+          }
+        ]
+      }
+    ],
+    "StopFailure" : [
+      {
+        "hooks" : [
+          {
+            "command" : "VIBE_ISLAND_PORTS=17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
+            "type" : "command"
+          }
+        ]
+      }
+    ],
+    "SubagentStart" : [
+      {
+        "hooks" : [
+          {
+            "command" : "VIBE_ISLAND_PORTS=17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
+            "type" : "command"
+          }
+        ]
+      }
+    ],
+    "SubagentStop" : [
+      {
+        "hooks" : [
+          {
+            "command" : "VIBE_ISLAND_PORTS=17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
+            "type" : "command"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit" : [
+      {
+        "hooks" : [
+          {
+            "command" : "VIBE_ISLAND_PORTS=17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
+            "type" : "command"
+          }
+        ]
+      }
+    ]
+  },
+  "language" : "Chinese",
+  "model" : "claude-opus-4-6",
+  "statusLine" : {
+    "command" : "bash \/Users\/archean\/.claude\/statusline-command.sh",
+    "type" : "command"
+  },
+  "theme" : "auto"
 }
