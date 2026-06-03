@@ -9,6 +9,7 @@ experimental = true
 "npm:opencode-ai" = "latest"
 "npm:@getpaseo/cli" = "latest"
 "github:ogulcancelik/herdr" = "latest"
+"npm:kittylitter" = "latest"
 
 # Cloudflare
 "npm:wrangler" = "latest"
