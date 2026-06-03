@@ -4,9 +4,9 @@ experimental = true
 
 [tools]
 # AI Agents
-"npm:@anthropic-ai/claude-code" = "latest"
+"npm:@anthropic-ai/claude-code" = { version = "latest", postinstall = "cd $MISE_TOOL_INSTALL_PATH/lib/node_modules/@anthropic-ai/claude-code && /home/archean/.local/share/mise/installs/node/latest/bin/node install.cjs" }
 "npm:@openai/codex" = "latest"
-"npm:opencode-ai" = "latest"
+"npm:opencode-ai" = { version = "latest", postinstall = "cd $MISE_TOOL_INSTALL_PATH/lib/node_modules/opencode-ai && /home/archean/.local/share/mise/installs/node/latest/bin/node postinstall.mjs" }
 "npm:@getpaseo/cli" = "latest"
 "github:ogulcancelik/herdr" = "latest"
 "npm:kittylitter" = "latest"
