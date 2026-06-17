@@ -10,6 +10,7 @@ experimental = true
 "npm:@getpaseo/cli" = "latest"
 "github:ogulcancelik/herdr" = "latest"
 "npm:kittylitter" = "latest"
+"npm:@earendil-works/pi-coding-agent" = "latest"
 
 # Cloudflare
 "npm:wrangler" = "latest"
