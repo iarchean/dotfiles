@@ -11,6 +11,7 @@ experimental = true
 "github:ogulcancelik/herdr" = "latest"
 "npm:kittylitter" = "latest"
 "npm:@earendil-works/pi-coding-agent" = "latest"
+"github:rtk-ai/rtk" = "latest"
 
 # Cloudflare
 "npm:wrangler" = "latest"
