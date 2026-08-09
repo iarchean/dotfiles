@@ -83,18 +83,23 @@ end
 
 function k9sc
     set -l choice (kubectl config get-contexts -o name | fzf --height 50% --reverse --prompt "Select k8s context: ")
+    set -l skin ~/.config/k9s/skins/OneDark.yaml
     if test -n "$choice"
         if string match -q "*prod*" $choice
 
             # change color to red for production mode
-            sed -i '' 's/fgColor: \*green/fgColor: \*red/g' ~/.config/k9s/skins/OneDark.yaml
-            sed -i '' 's/focusColor: \*green/focusColor: \*red/g' ~/.config/k9s/skins/OneDark.yaml
-            sed -i '' 's/logoColor: \*green/logoColor: \*red/g' ~/.config/k9s/skins/OneDark.yaml
+            # (tmp file + write-back: portable across GNU/BSD sed and safe for symlinks)
+            set -l tmp (mktemp)
+            sed -e 's/fgColor: \*green/fgColor: *red/g' \
+                -e 's/focusColor: \*green/focusColor: *red/g' \
+                -e 's/logoColor: \*green/logoColor: *red/g' $skin >$tmp
+            cat $tmp >$skin
+            command rm -f $tmp
 
             echo "🔴 IN PRODUCTION MODE"
 
-            # start a background process to restore the skin file
-            fish -c 'sleep 3; sed -i "" "s/fgColor: \\*red/fgColor: \\*green/g" ~/.config/k9s/skins/OneDark.yaml; sed -i "" "s/focusColor: \\*red/focusColor: \\*green/g" ~/.config/k9s/skins/OneDark.yaml; sed -i "" "s/logoColor: \\*red/logoColor: \\*green/g" ~/.config/k9s/skins/OneDark.yaml' &
+            # start a background process to restore the skin file to green
+            fish -c "sleep 3; set -l t (mktemp); sed -e 's/fgColor: \\*red/fgColor: *green/g' -e 's/focusColor: \\*red/focusColor: *green/g' -e 's/logoColor: \\*red/logoColor: *green/g' $skin >\$t; cat \$t >$skin; command rm -f \$t" &
 
             # run k9s directly in the foreground
             k9s --context $choice

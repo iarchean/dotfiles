@@ -17,57 +17,83 @@
       {
         "hooks" : [
           {
-            "command" : "VIBE_ISLAND_PORTS=17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
+            "command" : "VIBE_ISLAND_PORTS=8323,17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
             "type" : "command"
           }
-        ]
+        ],
+        "matcher" : "*"
       }
     ],
     "PermissionRequest" : [
       {
         "hooks" : [
           {
-            "command" : "VIBE_ISLAND_PORTS=17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
+            "command" : "VIBE_ISLAND_PORTS=8323,17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
+            "timeout" : 86400,
             "type" : "command"
           }
-        ]
+        ],
+        "matcher" : "*"
+      }
+    ],
+    "PostCompact" : [
+      {
+        "hooks" : [
+          {
+            "command" : "VIBE_ISLAND_PORTS=8323,17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
+            "type" : "command"
+          }
+        ],
+        "matcher" : "manual|auto"
       }
     ],
     "PostToolUse" : [
       {
         "hooks" : [
           {
-            "command" : "VIBE_ISLAND_PORTS=17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
+            "command" : "VIBE_ISLAND_PORTS=8323,17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
             "type" : "command"
           }
-        ]
+        ],
+        "matcher" : "*"
       }
     ],
     "PreCompact" : [
       {
         "hooks" : [
           {
-            "command" : "VIBE_ISLAND_PORTS=17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
+            "command" : "VIBE_ISLAND_PORTS=8323,17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
             "type" : "command"
           }
-        ]
+        ],
+        "matcher" : "manual|auto"
       }
     ],
     "PreToolUse" : [
       {
         "hooks" : [
           {
-            "command" : "VIBE_ISLAND_PORTS=17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
+            "command" : "rtk hook claude",
             "type" : "command"
           }
-        ]
+        ],
+        "matcher" : "Bash"
+      },
+      {
+        "hooks" : [
+          {
+            "command" : "VIBE_ISLAND_PORTS=8323,17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
+            "type" : "command"
+          }
+        ],
+        "matcher" : "*"
       }
     ],
     "SessionEnd" : [
       {
         "hooks" : [
           {
-            "command" : "VIBE_ISLAND_PORTS=17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
+            "command" : "VIBE_ISLAND_PORTS=8323,17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
             "type" : "command"
           }
         ]
@@ -77,17 +103,18 @@
       {
         "hooks" : [
           {
-            "command" : "VIBE_ISLAND_PORTS=17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
+            "command" : "VIBE_ISLAND_PORTS=8323,17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
             "type" : "command"
           }
-        ]
+        ],
+        "matcher" : "startup|resume|clear"
       }
     ],
     "Stop" : [
       {
         "hooks" : [
           {
-            "command" : "VIBE_ISLAND_PORTS=17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
+            "command" : "VIBE_ISLAND_PORTS=8323,17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
             "type" : "command"
           }
         ]
@@ -97,7 +124,7 @@
       {
         "hooks" : [
           {
-            "command" : "VIBE_ISLAND_PORTS=17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
+            "command" : "VIBE_ISLAND_PORTS=8323,17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
             "type" : "command"
           }
         ]
@@ -107,7 +134,7 @@
       {
         "hooks" : [
           {
-            "command" : "VIBE_ISLAND_PORTS=17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
+            "command" : "VIBE_ISLAND_PORTS=8323,17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
             "type" : "command"
           }
         ]
@@ -117,7 +144,17 @@
       {
         "hooks" : [
           {
-            "command" : "VIBE_ISLAND_PORTS=17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
+            "command" : "VIBE_ISLAND_PORTS=8323,17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
+            "type" : "command"
+          }
+        ]
+      }
+    ],
+    "TeammateIdle" : [
+      {
+        "hooks" : [
+          {
+            "command" : "VIBE_ISLAND_PORTS=8323,17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
             "type" : "command"
           }
         ]
@@ -127,7 +164,7 @@
       {
         "hooks" : [
           {
-            "command" : "VIBE_ISLAND_PORTS=17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
+            "command" : "VIBE_ISLAND_PORTS=8323,17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
             "type" : "command"
           }
         ]
@@ -135,7 +172,13 @@
     ]
   },
   "language" : "Chinese",
-  "model" : "claude-opus-4-6",
+  "model" : "opus[1m]",
+  "permissions" : {
+    "allow" : [
+      "Bash(gh issue comment:*)"
+    ],
+    "defaultMode" : "auto"
+  },
   "statusLine" : {
     "command" : "bash \/Users\/archean\/.claude\/statusline-command.sh",
     "type" : "command"
