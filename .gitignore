@@ -31,6 +31,21 @@ node_modules/
 !.claude/skills/
 !.claude/hooks/
 
+# Cursor — 项目运行时数据（8.6M/1261 文件，路径含内部项目名）
+.cursor/projects/
+.cursor/skills-cursor/
+
+# Docker — buildx 状态、CLI 插件二进制（73M）、token seed
+.docker/
+
+# 各工具的运行时状态（非配置意图）
+.config/codex/
+.config/ku/state.json
+.config/htop/htoprc
+# 机器特定的部署产物；PATH 里混着 macOS 路径，待清理后再考虑纳入
+.config/systemd/
+
 # Credentials — 切勿提交（仓库是公开的）
 .config/.cf/
 .claude/.credentials.json
+.config/kittylitter/
