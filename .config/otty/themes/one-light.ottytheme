@@ -1,0 +1,20 @@
+[meta]
+name = "One Light"
+mode = "light"
+
+[terminal]
+foreground = "#2A2B33"
+background = "#F8F8F8"
+palette = [
+    "#000000", "#DE3D35", "#3E953A", "#D2B67B",
+    "#2F5AF3", "#A00095", "#3E953A", "#BBBBBB",
+    "#000000", "#DE3D35", "#3E953A", "#D2B67B",
+    "#2F5AF3", "#A00095", "#3E953A", "#FFFFFF",
+]
+
+[tab-bar]
+border-bottom = "1px solid auto"
+separator = true
+
+[titlebar]
+background = "#ffffff"

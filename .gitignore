@@ -15,6 +15,22 @@ node_modules/
 .config/btop/btop.conf
 .config/btop/btop.log
 
+.config/otty/recipes/
+
+# Claude Code — 白名单式：只跟踪配置意图，运行时数据一律忽略
+# （devtoy 上 .claude/projects 已达 67M 会话历史，且含凭据）
+.claude/*
+!.claude/settings.json
+!.claude/settings.local.json
+!.claude/CLAUDE.md
+!.claude/RTK.md
+!.claude/keybindings.json
+!.claude/statusline-command.sh
+!.claude/agents/
+!.claude/commands/
+!.claude/skills/
+!.claude/hooks/
+
 # Credentials — 切勿提交（仓库是公开的）
 .config/.cf/
 .claude/.credentials.json
