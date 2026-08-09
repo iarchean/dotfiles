@@ -42,6 +42,8 @@ node_modules/
 .config/codex/
 .config/ku/state.json
 .config/htop/htoprc
+# Homebrew 6 tap 信任机制：trust.json 是配置意图（纳入），.lock 是运行时锁
+.config/homebrew/*.lock
 # 机器特定的部署产物；PATH 里混着 macOS 路径，待清理后再考虑纳入
 .config/systemd/
 
