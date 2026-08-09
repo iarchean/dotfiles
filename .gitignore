@@ -48,4 +48,3 @@ node_modules/
 # Credentials — 切勿提交（仓库是公开的）
 .config/.cf/
 .claude/.credentials.json
-.config/kittylitter/

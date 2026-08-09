@@ -17,7 +17,7 @@
       {
         "hooks" : [
           {
-            "command" : "VIBE_ISLAND_PORTS=8323,17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
+            "command" : "sh -c 'H=$HOME/.vibe-island/bin/vibe-island-hook; B=$HOME/.vibe-island/bin/vibe-island-bridge; if [ -x \"$H\" ]; then VIBE_ISLAND_PORTS=8323,17891 exec \"$H\" --host archean@35.187.201.107; elif [ -x \"$B\" ]; then exec \"$B\" --source claude; fi'",
             "type" : "command"
           }
         ],
@@ -28,7 +28,7 @@
       {
         "hooks" : [
           {
-            "command" : "VIBE_ISLAND_PORTS=8323,17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
+            "command" : "sh -c 'H=$HOME/.vibe-island/bin/vibe-island-hook; B=$HOME/.vibe-island/bin/vibe-island-bridge; if [ -x \"$H\" ]; then VIBE_ISLAND_PORTS=8323,17891 exec \"$H\" --host archean@35.187.201.107; elif [ -x \"$B\" ]; then exec \"$B\" --source claude; fi'",
             "timeout" : 86400,
             "type" : "command"
           }
@@ -40,7 +40,7 @@
       {
         "hooks" : [
           {
-            "command" : "VIBE_ISLAND_PORTS=8323,17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
+            "command" : "sh -c 'H=$HOME/.vibe-island/bin/vibe-island-hook; B=$HOME/.vibe-island/bin/vibe-island-bridge; if [ -x \"$H\" ]; then VIBE_ISLAND_PORTS=8323,17891 exec \"$H\" --host archean@35.187.201.107; elif [ -x \"$B\" ]; then exec \"$B\" --source claude; fi'",
             "type" : "command"
           }
         ],
@@ -51,7 +51,7 @@
       {
         "hooks" : [
           {
-            "command" : "VIBE_ISLAND_PORTS=8323,17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
+            "command" : "sh -c 'H=$HOME/.vibe-island/bin/vibe-island-hook; B=$HOME/.vibe-island/bin/vibe-island-bridge; if [ -x \"$H\" ]; then VIBE_ISLAND_PORTS=8323,17891 exec \"$H\" --host archean@35.187.201.107; elif [ -x \"$B\" ]; then exec \"$B\" --source claude; fi'",
             "type" : "command"
           }
         ],
@@ -62,7 +62,7 @@
       {
         "hooks" : [
           {
-            "command" : "VIBE_ISLAND_PORTS=8323,17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
+            "command" : "sh -c 'H=$HOME/.vibe-island/bin/vibe-island-hook; B=$HOME/.vibe-island/bin/vibe-island-bridge; if [ -x \"$H\" ]; then VIBE_ISLAND_PORTS=8323,17891 exec \"$H\" --host archean@35.187.201.107; elif [ -x \"$B\" ]; then exec \"$B\" --source claude; fi'",
             "type" : "command"
           }
         ],
@@ -82,7 +82,7 @@
       {
         "hooks" : [
           {
-            "command" : "VIBE_ISLAND_PORTS=8323,17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
+            "command" : "sh -c 'H=$HOME/.vibe-island/bin/vibe-island-hook; B=$HOME/.vibe-island/bin/vibe-island-bridge; if [ -x \"$H\" ]; then VIBE_ISLAND_PORTS=8323,17891 exec \"$H\" --host archean@35.187.201.107; elif [ -x \"$B\" ]; then exec \"$B\" --source claude; fi'",
             "type" : "command"
           }
         ],
@@ -93,7 +93,7 @@
       {
         "hooks" : [
           {
-            "command" : "VIBE_ISLAND_PORTS=8323,17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
+            "command" : "sh -c 'H=$HOME/.vibe-island/bin/vibe-island-hook; B=$HOME/.vibe-island/bin/vibe-island-bridge; if [ -x \"$H\" ]; then VIBE_ISLAND_PORTS=8323,17891 exec \"$H\" --host archean@35.187.201.107; elif [ -x \"$B\" ]; then exec \"$B\" --source claude; fi'",
             "type" : "command"
           }
         ]
@@ -103,7 +103,7 @@
       {
         "hooks" : [
           {
-            "command" : "VIBE_ISLAND_PORTS=8323,17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
+            "command" : "sh -c 'H=$HOME/.vibe-island/bin/vibe-island-hook; B=$HOME/.vibe-island/bin/vibe-island-bridge; if [ -x \"$H\" ]; then VIBE_ISLAND_PORTS=8323,17891 exec \"$H\" --host archean@35.187.201.107; elif [ -x \"$B\" ]; then exec \"$B\" --source claude; fi'",
             "type" : "command"
           }
         ],
@@ -114,7 +114,7 @@
       {
         "hooks" : [
           {
-            "command" : "VIBE_ISLAND_PORTS=8323,17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
+            "command" : "sh -c 'H=$HOME/.vibe-island/bin/vibe-island-hook; B=$HOME/.vibe-island/bin/vibe-island-bridge; if [ -x \"$H\" ]; then VIBE_ISLAND_PORTS=8323,17891 exec \"$H\" --host archean@35.187.201.107; elif [ -x \"$B\" ]; then exec \"$B\" --source claude; fi'",
             "type" : "command"
           }
         ]
@@ -124,7 +124,7 @@
       {
         "hooks" : [
           {
-            "command" : "VIBE_ISLAND_PORTS=8323,17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
+            "command" : "sh -c 'H=$HOME/.vibe-island/bin/vibe-island-hook; B=$HOME/.vibe-island/bin/vibe-island-bridge; if [ -x \"$H\" ]; then VIBE_ISLAND_PORTS=8323,17891 exec \"$H\" --host archean@35.187.201.107; elif [ -x \"$B\" ]; then exec \"$B\" --source claude; fi'",
             "type" : "command"
           }
         ]
@@ -134,7 +134,7 @@
       {
         "hooks" : [
           {
-            "command" : "VIBE_ISLAND_PORTS=8323,17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
+            "command" : "sh -c 'H=$HOME/.vibe-island/bin/vibe-island-hook; B=$HOME/.vibe-island/bin/vibe-island-bridge; if [ -x \"$H\" ]; then VIBE_ISLAND_PORTS=8323,17891 exec \"$H\" --host archean@35.187.201.107; elif [ -x \"$B\" ]; then exec \"$B\" --source claude; fi'",
             "type" : "command"
           }
         ]
@@ -144,7 +144,7 @@
       {
         "hooks" : [
           {
-            "command" : "VIBE_ISLAND_PORTS=8323,17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
+            "command" : "sh -c 'H=$HOME/.vibe-island/bin/vibe-island-hook; B=$HOME/.vibe-island/bin/vibe-island-bridge; if [ -x \"$H\" ]; then VIBE_ISLAND_PORTS=8323,17891 exec \"$H\" --host archean@35.187.201.107; elif [ -x \"$B\" ]; then exec \"$B\" --source claude; fi'",
             "type" : "command"
           }
         ]
@@ -154,7 +154,7 @@
       {
         "hooks" : [
           {
-            "command" : "VIBE_ISLAND_PORTS=8323,17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
+            "command" : "sh -c 'H=$HOME/.vibe-island/bin/vibe-island-hook; B=$HOME/.vibe-island/bin/vibe-island-bridge; if [ -x \"$H\" ]; then VIBE_ISLAND_PORTS=8323,17891 exec \"$H\" --host archean@35.187.201.107; elif [ -x \"$B\" ]; then exec \"$B\" --source claude; fi'",
             "type" : "command"
           }
         ]
@@ -164,7 +164,7 @@
       {
         "hooks" : [
           {
-            "command" : "VIBE_ISLAND_PORTS=8323,17891 ~\/.vibe-island\/bin\/vibe-island-hook --host archean@35.187.201.107",
+            "command" : "sh -c 'H=$HOME/.vibe-island/bin/vibe-island-hook; B=$HOME/.vibe-island/bin/vibe-island-bridge; if [ -x \"$H\" ]; then VIBE_ISLAND_PORTS=8323,17891 exec \"$H\" --host archean@35.187.201.107; elif [ -x \"$B\" ]; then exec \"$B\" --source claude; fi'",
             "type" : "command"
           }
         ]
