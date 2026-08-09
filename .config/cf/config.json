@@ -4,5 +4,9 @@
     "installed": true,
     "shell": "fish",
     "path": "/Users/archean/.config/cf/completions/cf.fish"
+  },
+  "defaults": {
+    "accountId": "574193209517256f0f975a23525e6c80",
+    "zone": "thehamster.io"
   }
 }

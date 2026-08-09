@@ -5,32 +5,75 @@ name = "catppuccin"
 
 [ui]
 show_agent_labels_on_pane_borders = true
+agent_panel_sort = "spaces"   # herdr 0.8.0+；旧版本会忽略
 
 [ui.toast]
 delivery = "system"
 
+# 键位对齐 tmux（oh-my-tmux + tmux.conf.local，prefix = `）
+# 概念映射：herdr workspace ≈ tmux session，herdr tab ≈ tmux window，pane ≈ pane
 [keys]
-prefix = "`"
-new_workspace = "n"
-rename_workspace = "shift+n"
-close_workspace = "X"
-reload_config = ""                # optional, unset by default
-open_notification_target = ""     # optional, unset by default
-new_tab = "c"
-split_vertical = "d"
-split_horizontal = "D"
-close_pane = "x"
-rename_pane = ""                  # optional, unset by default
-fullscreen = "f"
-resize_mode = "r"
-toggle_sidebar = "b"
-previous_workspace = "ctrl+alt+["
-next_workspace = "ctrl+alt+]"
-previous_agent = "ctrl+["
-next_agent = "ctrl+]"
-previous_tab = "alt+["
-next_tab = "alt+]"
-focus_pane_left = "alt+h"
-focus_pane_down = "alt+j"
-focus_pane_up = "alt+k"
-focus_pane_right = "alt+l"
+prefix = "`"                            # tmux: set -g prefix `
+
+# ── 全局 ────────────────────────────────────────────────
+help = "prefix+?"                       # tmux: prefix ?   list-keys
+settings = "prefix+shift+s"             # 让位给 workspace_picker
+reload_config = "prefix+r"              # tmux: prefix r   source config
+detach = "prefix+d"                     # tmux: prefix d   detach-client
+goto = "prefix+g"
+open_notification_target = ""           # 留空，prefix+o 给 cycle_pane_next
+
+# ── workspace（≈ tmux session）─────────────────────────
+new_workspace = "prefix+ctrl+c"         # tmux: prefix C-c new-session
+workspace_picker = "prefix+s"           # tmux: prefix s   choose-tree
+rename_workspace = "prefix+$"           # tmux: prefix $   rename-session
+close_workspace = "prefix+shift+d"      # tmux 无默认 kill-session 绑定
+previous_workspace = "prefix+("         # tmux: prefix (   switch-client -p
+next_workspace = "prefix+)"             # tmux: prefix )   switch-client -n
+switch_workspace = "prefix+shift+1..9"
+
+# ── agent（herdr 特有，tmux 无对应）────────────────────
+previous_agent = "prefix+ctrl+p"        # 原 "ctrl+[" 等同 ESC，已避开
+next_agent = "prefix+ctrl+n"            # 原 "ctrl+]"
+focus_agent = "prefix+alt+1..9"
+
+# ── tab（≈ tmux window）────────────────────────────────
+new_tab = "prefix+c"                    # tmux: prefix c   new-window
+close_tab = "prefix+ampersand"          # tmux: prefix &   kill-window
+rename_tab = "prefix+comma"             # tmux: prefix ,   rename-window
+previous_tab = "prefix+p"               # tmux: prefix p   previous-window
+next_tab = "prefix+n"                   # tmux: prefix n   next-window
+switch_tab = "prefix+1..9"              # tmux: prefix 1-9 select-window
+
+# ── pane ───────────────────────────────────────────────
+# 注意 herdr 的 horizontal/vertical 指分割线方向，与 tmux 的 -h/-v 相反
+split_horizontal = "prefix+minus"       # tmux: prefix -   上下切分
+split_vertical = "prefix+|"             # tmux: prefix |   左右切分
+close_pane = "prefix+x"                 # tmux: prefix x   kill-pane
+zoom = "prefix+z"                       # tmux: prefix z   resize-pane -Z
+resize_mode = "prefix+ctrl+r"           # 让位给 reload_config = prefix+r
+copy_mode = "prefix+["                  # tmux: prefix [   copy-mode
+edit_scrollback = "prefix+e"            # tmux: prefix e   编辑配置（语义近似）
+rename_pane = "prefix+shift+p"
+
+focus_pane_left = "prefix+h"            # tmux: prefix h/j/k/l  select-pane
+focus_pane_down = "prefix+j"
+focus_pane_up = "prefix+k"
+focus_pane_right = "prefix+l"
+swap_pane_left = "prefix+shift+h"       # tmux 用 < >，herdr 分四向
+swap_pane_down = "prefix+shift+j"
+swap_pane_up = "prefix+shift+k"
+swap_pane_right = "prefix+shift+l"
+cycle_pane_next = "prefix+o"            # tmux: prefix o   select-pane -t :.+
+cycle_pane_previous = "prefix+shift+tab"
+last_pane = "prefix+;"                  # tmux: prefix ;   last-pane
+
+toggle_sidebar = "prefix+b"
+
+# ── navigate 模式内的局部移动（不带 prefix）────────────
+navigate_workspace_up = "up"
+navigate_workspace_down = "down"
+navigate_pane_left = "h"
+navigate_pane_down = "j"
+navigate_pane_up = "k"
+navigate_pane_right = "l"

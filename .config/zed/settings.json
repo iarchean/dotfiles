@@ -1,11 +1,55 @@
 {
+  "ssh_connections": [
+    {
+      "host": "Archeans-Macbook-Pro-M2.local",
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "/Users/archean/Developer/linktivity/helm-charts/./"
+          ]
+        },
+        {
+          "paths": [
+            "/Users/archean/Developer/linktivity/terraform"
+          ]
+        },
+        {
+          "paths": [
+            "/Users/archean/Developer/linktivity/terraform.code-workspace"
+          ]
+        }
+      ]
+    }
+  ],
+  "icon_theme": "Soft Charmed Icons",
+  "project_panel": {
+    "dock": "left"
+  },
+  "outline_panel": {
+    "dock": "left"
+  },
+  "collaboration_panel": {
+    "dock": "left"
+  },
+  "agent": {
+    "dock": "right",
+    "favorite_models": [],
+    "model_parameters": []
+  },
+  "git_panel": {
+    "dock": "left"
+  },
+  "session": {
+    "trust_all_worktrees": true
+  },
   "base_keymap": "SublimeText",
   "ui_font_size": 16,
-  "buffer_font_family": "Maple Mono CN",
-  "buffer_font_size": 15,
+  "buffer_font_family": "Maple Mono NF CN",
+  "buffer_font_size": 13.0,
   "theme": {
     "mode": "system",
     "light": "One Light",
-    "dark": "Catppuccin Mocha (Blur) [Light]"
+    "dark": "Vesper Blur"
   }
 }

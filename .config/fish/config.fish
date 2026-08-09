@@ -70,3 +70,11 @@ fish_add_path /opt/homebrew/share/google-cloud-sdk/bin
 # Added by OrbStack: command-line tools and integration
 # This won't be added again if you remove it.
 source ~/.orbstack/shell/init2.fish 2>/dev/null || :
+
+# >>> otty shell integration >>>
+# Added by Otty — toggle in Settings > Shell > Shell Integration.
+# Inert unless launched by Otty (it sets $OTTY_SHELL_INTEGRATION).
+if test -n "$OTTY_SHELL_INTEGRATION" -a -r "$OTTY_SHELL_INTEGRATION/otty-integration.fish"
+    source "$OTTY_SHELL_INTEGRATION/otty-integration.fish"
+end
+# <<< otty shell integration <<<

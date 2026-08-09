@@ -42,6 +42,11 @@ background-blur = true
 bell-features = no-title
 quick-terminal-size = 50%,500px
 
+# Glass
+
+# background-opacity = 0.0 
+# background-blur = macos-glass-clear 
+
 # Cursor
 cursor-style = block
 
@@ -91,7 +96,7 @@ selection-foreground = #cdd6f4
 
 # Advanced
 # custom-shader = ghostty-shaders/cursor_frozen.glsl
-custom-shader = ghostty-shaders/party_sparks.glsl
+# custom-shader = ghostty-shaders/party_sparks.glsl
 
 # custom-shader = ghostty-shaders/blaze_sparks.glsl
 # custom-shader = ghostty-shaders/cursor_blaze_no_trail.glsl
@@ -107,3 +112,4 @@ custom-shader = ghostty-shaders/party_sparks.glsl
 # custom-shader = ghostty-shaders/manga_slash.glsl
 # custom-shader = ghostty-shaders/shake.glsl
 # custom-shader = ghostty-shaders/sparks.glslcursor_blaze_tapered.glsl
+# custom-shader = ghostty-shaders/water_ripple.glsl

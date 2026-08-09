@@ -9,3 +9,12 @@ node_modules/
 .config/herdr/*.log
 .config/herdr/*.sock
 .config/herdr/session.json
+.config/herdr/release-notes.json
+.config/herdr/.plugins.lock
+# btop 退出时自动重写，各机器版本不同，属机器本地状态
+.config/btop/btop.conf
+.config/btop/btop.log
+
+# Credentials — 切勿提交（仓库是公开的）
+.config/.cf/
+.claude/.credentials.json
