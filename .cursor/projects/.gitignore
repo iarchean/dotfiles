@@ -1,0 +1,6 @@
+# 覆盖 .cursor/.gitignore 里 Cursor 自动写入的反忽略规则。
+# 那套规则是为项目仓库设计的（团队共享 agent 上下文），但这里是用户级
+# ~/.cursor，且本仓库公开 —— agent 记录、终端输出、内部项目名不得入库。
+# 本文件比 .cursor/.gitignore 更深，因此优先级更高。
+*
+!.gitignore
