@@ -50,6 +50,45 @@
 #       - CLUSTER-IP
 
 views:
+  v1/nodes:
+    columns:
+      - NAME
+      - STATUS
+      # NOTE: k9s 只有在表达式含 >=2 个 `|` 时才走 gojq，否则当 JSONPath 解析并报错
+      # (internal/render/cust_cols.go: isJQSpec)。故刻意用 `.metadata.labels | .[...]` 拆成三段。
+      # GKE: spot 节点带有 cloud.google.com/gke-provisioning=spot (以及 gke-spot=true)
+      - 'SPOT:.metadata.labels | .["cloud.google.com/gke-provisioning"] | if . == "spot" then "SPOT" else "-" end'
+      # GKE custom compute class: default / stable-primary / cost-optimized / ci-runners ...
+      - 'CLASS:.metadata.labels | .["cloud.google.com/compute-class"] | . // "-"'
+      - 'MACHINE:.metadata.labels | .["node.kubernetes.io/instance-type"] | . // "-"'
+      # 以下 |W = wide,平时隐藏, Ctrl-W 展开
+      - TAINTS|W
+      - VERSION|W
+      - PODS
+      - CPU
+      - CPU/A
+      - '%CPU'
+      - MEM
+      - MEM/A
+      - '%MEM'
+      - AGE
+      # NOTE: 自定义 columns 不是"替换"而是"合并" —— k9s 会把这里没写到的默认列
+      # 追加到末尾 (internal/render/cust_cols.go: ColumnSpecs.Header)。GPU 那四列在
+      # 默认 header 里恰好没有 Wide 属性,不显式声明就会一直霸占屏幕。以下全部标 W 压掉。
+      # ROLE 在 GKE 上恒为 <none>(无 node-role.kubernetes.io/* 标签)。注意:从列表里
+      # 删掉它并不能隐藏,反而会被按默认属性追加到行尾,必须显式声明才压得住。
+      - ROLE|W
+      - GPU/A|W
+      - GPU/C|W
+      - SH-GPU/A|W
+      - SH-GPU/C|W
+      - ARCH|W
+      - OS-IMAGE|W
+      - KERNEL|W
+      - INTERNAL-IP|W
+      - EXTERNAL-IP|W
+      - LABELS|W
+      - VALID|W
   apps/v1/deployments:
     columns:
       - NAMESPACE
