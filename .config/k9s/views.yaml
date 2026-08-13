@@ -89,6 +89,24 @@ views:
       - EXTERNAL-IP|W
       - LABELS|W
       - VALID|W
+  # VPA 没有内置 renderer,走 CRD 通用表格渲染,默认列 = CRD 的 additionalPrinterColumns
+  # (NAME/MODE/CPU/MEM/PROVIDED/AGE),其中 CPU/MEM 只取 containerRecommendations[0].target。
+  # uncappedTarget 是未经 min/maxAllowed 裁剪的原始推荐值,和 target 一比就能看出上下限在
+  # 多大程度上改写了推荐结果。多容器时逗号连接,无推荐时显示 "-"。
+  autoscaling.k8s.io/v1/verticalpodautoscalers:
+    columns:
+      # CRD 的 server-side table 不含 Namespace 列(kubectl 里那列是客户端加的),直接写
+      # `- NAMESPACE` 会 n/a,只能自己从对象里取。列名保持 NAMESPACE,这样单 ns 模式下
+      # 仍会被 FilterColIndices 自动隐藏,行为和内置视图一致。
+      - 'NAMESPACE:.metadata | .namespace | . // "-"'
+      - NAME
+      - MODE
+      - CPU
+      - 'UNCAP-CPU:.status.recommendation.containerRecommendations // [] | map(.uncappedTarget.cpu // "-") | if length == 0 then "-" else join(",") end'
+      - MEM
+      - 'UNCAP-MEM:.status.recommendation.containerRecommendations // [] | map(.uncappedTarget.memory // "-") | if length == 0 then "-" else join(",") end'
+      - PROVIDED
+      - AGE
   apps/v1/deployments:
     columns:
       - NAMESPACE
