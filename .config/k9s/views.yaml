@@ -117,16 +117,17 @@ views:
       - UP-TO-DATE
       - AVAILABLE
       - AGE
+  # 以下三个都是 CRD,NAMESPACE 同样得自己从对象里取,理由见上方 VPA 段的注释
   gateway.networking.k8s.io/v1/httproutes:
     columns:
-      - NAMESPACE
+      - 'NAMESPACE:.metadata | .namespace | . // "-"'
       - NAME
       - GATEWAY:.spec.parentRefs[0].name
       - HOSTNAMES
       - AGE
   gateway.networking.k8s.io/v1/gateways:
     columns:
-      - NAMESPACE
+      - 'NAMESPACE:.metadata | .namespace | . // "-"'
       - NAME
       - CLASS
       - ADDRESS
@@ -136,7 +137,7 @@ views:
   cert-manager.io/v1/certificates:
     sortColumn: NOT-AFTER:asc
     columns:
-      - NAMESPACE
+      - 'NAMESPACE:.metadata | .namespace | . // "-"'
       - NAME
       - 'READY:.status.conditions // [] | map(select(.type == "Ready") | .status) | .[0] // "-"'
       - SECRET:.spec.secretName
