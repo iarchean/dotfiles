@@ -54,6 +54,12 @@ views:
     columns:
       - NAME
       - STATUS
+      # cluster-autoscaler 缩容分两级,都是 taint,value 为打标时刻的 unix 秒:
+      #   DeletionCandidateOfClusterAutoscaler (PreferNoSchedule) -> CAND,还可能被撤销
+      #   ToBeDeletedByClusterAutoscaler       (NoSchedule)       -> DEL, 已在删,通常伴随 cordon
+      # 两个同时存在时显示 DEL(sort_by 把它排在前面)。后缀是已被标记的时长,越久越接近回收。
+      # tonumber? 兜住 value 缺失或非数字的情况,避免整个表达式抛错回落到 JSONPath。
+      - 'SCALE-DOWN:.spec.taints // [] | map(select(.key | contains("ClusterAutoscaler"))) | sort_by(.key != "ToBeDeletedByClusterAutoscaler") | .[0] as $t | if $t == null then "-" else (if $t.key == "ToBeDeletedByClusterAutoscaler" then "DEL" else "CAND" end) + (($t.value | tonumber? // null) as $ts | if $ts == null then "" else ((now - $ts) as $a | "/" + (if $a < 60 then ($a|floor|tostring)+"s" elif $a < 3600 then ($a/60|floor|tostring)+"m" else ($a/3600|floor|tostring)+"h" end)) end) end'
       # NOTE: k9s 只有在表达式含 >=2 个 `|` 时才走 gojq，否则当 JSONPath 解析并报错
       # (internal/render/cust_cols.go: isJQSpec)。故刻意用 `.metadata.labels | .[...]` 拆成三段。
       # GKE: spot 节点带有 cloud.google.com/gke-provisioning=spot (以及 gke-spot=true)
