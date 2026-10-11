@@ -1,0 +1,11 @@
+{
+  "trustedcasks": [
+    "darrylmorley/whatcable/whatcable",
+    "jarvis322/tap/sysdata",
+    "sozercan/repo/kaset"
+  ],
+  "trustedformulae": [
+    "fluxcd/tap/flux",
+    "nklmilojevic/sofka/sofka"
+  ]
+}
