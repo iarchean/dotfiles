@@ -1,0 +1,12 @@
+{
+  "theme": "system",
+  "lang": "zh",
+  "tray": "panel",
+  "currency": "usd",
+  "trayUsageEvery": 3,
+  "textSize": 100,
+  "window": [
+    1012,
+    932
+  ]
+}

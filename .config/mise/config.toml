@@ -12,6 +12,7 @@ minimum_release_age_excludes = ["npm:@anthropic-ai/claude-code"]
 "github:ogulcancelik/herdr" = "latest"
 "npm:@earendil-works/pi-coding-agent" = "latest"
 "github:rtk-ai/rtk" = "latest"
+"npm:aws-cost-cli" = "latest"
 
 # Cloudflare
 "npm:wrangler" = "latest"
@@ -55,3 +56,4 @@ awscli = "latest"
 "github:kubenetworks/kubevpn" = "latest"
 "aqua:hashicorp/terraform" = "latest"
 btop = "latest"
+flux2 = "latest"
