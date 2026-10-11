@@ -1,187 +1,224 @@
 {
-  "enabledPlugins" : {
-    "codex@openai-codex" : true,
-    "gopls-lsp@claude-plugins-official" : true,
-    "swift-lsp@claude-plugins-official" : true
+  "permissions": {
+    "allow": [
+      "Bash(gh issue comment:*)",
+      "Bash(python3 /home/archean/.claude/scripts/triplabo-idp-delete.py:*)",
+      "Bash(rtk python3 /home/archean/.claude/scripts/triplabo-idp-delete.py:*)",
+      "mcp__claude_ai_Slack__slack_add_reaction"
+    ],
+    "defaultMode": "auto"
   },
-  "extraKnownMarketplaces" : {
-    "openai-codex" : {
-      "source" : {
-        "repo" : "openai\/codex-plugin-cc",
-        "source" : "github"
-      }
-    }
-  },
-  "hooks" : {
-    "Notification" : [
+  "hooks": {
+    "Notification": [
       {
-        "hooks" : [
+        "matcher": "*",
+        "hooks": [
           {
-            "command" : "sh -c 'H=$HOME/.vibe-island/bin/vibe-island-hook; B=$HOME/.vibe-island/bin/vibe-island-bridge; if [ -x \"$H\" ]; then VIBE_ISLAND_PORTS=8323,17891 exec \"$H\" --host archean@35.187.201.107; elif [ -x \"$B\" ]; then exec \"$B\" --source claude; fi'",
-            "type" : "command"
+            "type": "command",
+            "command": "VIBE_ISLAND_PORTS=8323,17891 VIBE_ISLAND_RAW_PORTS=8323,17891 ~/.vibe-island/bin/vibe-island-hook --host archean@35.187.201.107"
           }
-        ],
-        "matcher" : "*"
+        ]
       }
     ],
-    "PermissionRequest" : [
+    "PermissionRequest": [
       {
-        "hooks" : [
+        "matcher": "*",
+        "hooks": [
           {
-            "command" : "sh -c 'H=$HOME/.vibe-island/bin/vibe-island-hook; B=$HOME/.vibe-island/bin/vibe-island-bridge; if [ -x \"$H\" ]; then VIBE_ISLAND_PORTS=8323,17891 exec \"$H\" --host archean@35.187.201.107; elif [ -x \"$B\" ]; then exec \"$B\" --source claude; fi'",
-            "timeout" : 86400,
-            "type" : "command"
+            "type": "command",
+            "command": "VIBE_ISLAND_PORTS=8323,17891 VIBE_ISLAND_RAW_PORTS=8323,17891 ~/.vibe-island/bin/vibe-island-hook --host archean@35.187.201.107",
+            "timeout": 86400
           }
-        ],
-        "matcher" : "*"
+        ]
       }
     ],
-    "PostCompact" : [
+    "PostCompact": [
       {
-        "hooks" : [
+        "matcher": "manual|auto",
+        "hooks": [
           {
-            "command" : "sh -c 'H=$HOME/.vibe-island/bin/vibe-island-hook; B=$HOME/.vibe-island/bin/vibe-island-bridge; if [ -x \"$H\" ]; then VIBE_ISLAND_PORTS=8323,17891 exec \"$H\" --host archean@35.187.201.107; elif [ -x \"$B\" ]; then exec \"$B\" --source claude; fi'",
-            "type" : "command"
+            "type": "command",
+            "command": "VIBE_ISLAND_PORTS=8323,17891 VIBE_ISLAND_RAW_PORTS=8323,17891 ~/.vibe-island/bin/vibe-island-hook --host archean@35.187.201.107"
           }
-        ],
-        "matcher" : "manual|auto"
+        ]
       }
     ],
-    "PostToolUse" : [
+    "PostToolUse": [
       {
-        "hooks" : [
+        "matcher": "*",
+        "hooks": [
           {
-            "command" : "sh -c 'H=$HOME/.vibe-island/bin/vibe-island-hook; B=$HOME/.vibe-island/bin/vibe-island-bridge; if [ -x \"$H\" ]; then VIBE_ISLAND_PORTS=8323,17891 exec \"$H\" --host archean@35.187.201.107; elif [ -x \"$B\" ]; then exec \"$B\" --source claude; fi'",
-            "type" : "command"
+            "type": "command",
+            "command": "VIBE_ISLAND_PORTS=8323,17891 VIBE_ISLAND_RAW_PORTS=8323,17891 ~/.vibe-island/bin/vibe-island-hook --host archean@35.187.201.107"
           }
-        ],
-        "matcher" : "*"
+        ]
       }
     ],
-    "PreCompact" : [
+    "PreCompact": [
       {
-        "hooks" : [
+        "matcher": "manual|auto",
+        "hooks": [
           {
-            "command" : "sh -c 'H=$HOME/.vibe-island/bin/vibe-island-hook; B=$HOME/.vibe-island/bin/vibe-island-bridge; if [ -x \"$H\" ]; then VIBE_ISLAND_PORTS=8323,17891 exec \"$H\" --host archean@35.187.201.107; elif [ -x \"$B\" ]; then exec \"$B\" --source claude; fi'",
-            "type" : "command"
+            "type": "command",
+            "command": "VIBE_ISLAND_PORTS=8323,17891 VIBE_ISLAND_RAW_PORTS=8323,17891 ~/.vibe-island/bin/vibe-island-hook --host archean@35.187.201.107"
           }
-        ],
-        "matcher" : "manual|auto"
+        ]
       }
     ],
-    "PreToolUse" : [
+    "PreToolUse": [
       {
-        "hooks" : [
+        "matcher": "Bash",
+        "hooks": [
           {
-            "command" : "rtk hook claude",
-            "type" : "command"
+            "type": "command",
+            "command": "rtk hook claude"
           }
-        ],
-        "matcher" : "Bash"
+        ]
       },
       {
-        "hooks" : [
+        "matcher": "*",
+        "hooks": [
           {
-            "command" : "sh -c 'H=$HOME/.vibe-island/bin/vibe-island-hook; B=$HOME/.vibe-island/bin/vibe-island-bridge; if [ -x \"$H\" ]; then VIBE_ISLAND_PORTS=8323,17891 exec \"$H\" --host archean@35.187.201.107; elif [ -x \"$B\" ]; then exec \"$B\" --source claude; fi'",
-            "type" : "command"
-          }
-        ],
-        "matcher" : "*"
-      }
-    ],
-    "SessionEnd" : [
-      {
-        "hooks" : [
-          {
-            "command" : "sh -c 'H=$HOME/.vibe-island/bin/vibe-island-hook; B=$HOME/.vibe-island/bin/vibe-island-bridge; if [ -x \"$H\" ]; then VIBE_ISLAND_PORTS=8323,17891 exec \"$H\" --host archean@35.187.201.107; elif [ -x \"$B\" ]; then exec \"$B\" --source claude; fi'",
-            "type" : "command"
+            "type": "command",
+            "command": "VIBE_ISLAND_PORTS=8323,17891 VIBE_ISLAND_RAW_PORTS=8323,17891 ~/.vibe-island/bin/vibe-island-hook --host archean@35.187.201.107"
           }
         ]
       }
     ],
-    "SessionStart" : [
+    "SessionEnd": [
       {
-        "hooks" : [
+        "hooks": [
           {
-            "command" : "sh -c 'H=$HOME/.vibe-island/bin/vibe-island-hook; B=$HOME/.vibe-island/bin/vibe-island-bridge; if [ -x \"$H\" ]; then VIBE_ISLAND_PORTS=8323,17891 exec \"$H\" --host archean@35.187.201.107; elif [ -x \"$B\" ]; then exec \"$B\" --source claude; fi'",
-            "type" : "command"
-          }
-        ],
-        "matcher" : "startup|resume|clear"
-      }
-    ],
-    "Stop" : [
-      {
-        "hooks" : [
-          {
-            "command" : "sh -c 'H=$HOME/.vibe-island/bin/vibe-island-hook; B=$HOME/.vibe-island/bin/vibe-island-bridge; if [ -x \"$H\" ]; then VIBE_ISLAND_PORTS=8323,17891 exec \"$H\" --host archean@35.187.201.107; elif [ -x \"$B\" ]; then exec \"$B\" --source claude; fi'",
-            "type" : "command"
+            "type": "command",
+            "command": "VIBE_ISLAND_PORTS=8323,17891 VIBE_ISLAND_RAW_PORTS=8323,17891 ~/.vibe-island/bin/vibe-island-hook --host archean@35.187.201.107"
           }
         ]
       }
     ],
-    "StopFailure" : [
+    "SessionStart": [
       {
-        "hooks" : [
+        "matcher": "startup|resume|clear",
+        "hooks": [
           {
-            "command" : "sh -c 'H=$HOME/.vibe-island/bin/vibe-island-hook; B=$HOME/.vibe-island/bin/vibe-island-bridge; if [ -x \"$H\" ]; then VIBE_ISLAND_PORTS=8323,17891 exec \"$H\" --host archean@35.187.201.107; elif [ -x \"$B\" ]; then exec \"$B\" --source claude; fi'",
-            "type" : "command"
+            "type": "command",
+            "command": "VIBE_ISLAND_PORTS=8323,17891 VIBE_ISLAND_RAW_PORTS=8323,17891 ~/.vibe-island/bin/vibe-island-hook --host archean@35.187.201.107"
           }
         ]
       }
     ],
-    "SubagentStart" : [
+    "Stop": [
       {
-        "hooks" : [
+        "hooks": [
           {
-            "command" : "sh -c 'H=$HOME/.vibe-island/bin/vibe-island-hook; B=$HOME/.vibe-island/bin/vibe-island-bridge; if [ -x \"$H\" ]; then VIBE_ISLAND_PORTS=8323,17891 exec \"$H\" --host archean@35.187.201.107; elif [ -x \"$B\" ]; then exec \"$B\" --source claude; fi'",
-            "type" : "command"
+            "type": "command",
+            "command": "VIBE_ISLAND_PORTS=8323,17891 VIBE_ISLAND_RAW_PORTS=8323,17891 ~/.vibe-island/bin/vibe-island-hook --host archean@35.187.201.107"
           }
         ]
       }
     ],
-    "SubagentStop" : [
+    "StopFailure": [
       {
-        "hooks" : [
+        "hooks": [
           {
-            "command" : "sh -c 'H=$HOME/.vibe-island/bin/vibe-island-hook; B=$HOME/.vibe-island/bin/vibe-island-bridge; if [ -x \"$H\" ]; then VIBE_ISLAND_PORTS=8323,17891 exec \"$H\" --host archean@35.187.201.107; elif [ -x \"$B\" ]; then exec \"$B\" --source claude; fi'",
-            "type" : "command"
+            "type": "command",
+            "command": "VIBE_ISLAND_PORTS=8323,17891 VIBE_ISLAND_RAW_PORTS=8323,17891 ~/.vibe-island/bin/vibe-island-hook --host archean@35.187.201.107"
           }
         ]
       }
     ],
-    "TeammateIdle" : [
+    "SubagentStart": [
       {
-        "hooks" : [
+        "hooks": [
           {
-            "command" : "sh -c 'H=$HOME/.vibe-island/bin/vibe-island-hook; B=$HOME/.vibe-island/bin/vibe-island-bridge; if [ -x \"$H\" ]; then VIBE_ISLAND_PORTS=8323,17891 exec \"$H\" --host archean@35.187.201.107; elif [ -x \"$B\" ]; then exec \"$B\" --source claude; fi'",
-            "type" : "command"
+            "type": "command",
+            "command": "VIBE_ISLAND_PORTS=8323,17891 VIBE_ISLAND_RAW_PORTS=8323,17891 ~/.vibe-island/bin/vibe-island-hook --host archean@35.187.201.107"
           }
         ]
       }
     ],
-    "UserPromptSubmit" : [
+    "SubagentStop": [
       {
-        "hooks" : [
+        "hooks": [
           {
-            "command" : "sh -c 'H=$HOME/.vibe-island/bin/vibe-island-hook; B=$HOME/.vibe-island/bin/vibe-island-bridge; if [ -x \"$H\" ]; then VIBE_ISLAND_PORTS=8323,17891 exec \"$H\" --host archean@35.187.201.107; elif [ -x \"$B\" ]; then exec \"$B\" --source claude; fi'",
-            "type" : "command"
+            "type": "command",
+            "command": "VIBE_ISLAND_PORTS=8323,17891 VIBE_ISLAND_RAW_PORTS=8323,17891 ~/.vibe-island/bin/vibe-island-hook --host archean@35.187.201.107"
+          }
+        ]
+      }
+    ],
+    "TeammateIdle": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "VIBE_ISLAND_PORTS=8323,17891 VIBE_ISLAND_RAW_PORTS=8323,17891 ~/.vibe-island/bin/vibe-island-hook --host archean@35.187.201.107"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "VIBE_ISLAND_PORTS=8323,17891 VIBE_ISLAND_RAW_PORTS=8323,17891 ~/.vibe-island/bin/vibe-island-hook --host archean@35.187.201.107"
           }
         ]
       }
     ]
   },
-  "language" : "Chinese",
-  "model" : "opus[1m]",
-  "permissions" : {
-    "allow" : [
-      "Bash(gh issue comment:*)"
+  "statusLine": {
+    "type": "command",
+    "command": "npx -y ccstatusline@latest",
+    "padding": 0,
+    "refreshInterval": 10
+  },
+  "enabledPlugins": {
+    "codex@openai-codex": true,
+    "gopls-lsp@claude-plugins-official": true,
+    "swift-lsp@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "openai-codex": {
+      "source": {
+        "source": "github",
+        "repo": "openai/codex-plugin-cc"
+      }
+    }
+  },
+  "language": "Chinese",
+  "theme": "auto",
+  "autoMode": {
+    "soft_deny": [
+      "$defaults",
+      "Bash(kubectl delete:*) in prod namespaces",
+      "Bash(terraform apply:*) against deploy/triplabo/prod/*"
     ],
-    "defaultMode" : "auto"
-  },
-  "statusLine" : {
-    "command" : "bash \/Users\/archean\/.claude\/statusline-command.sh",
-    "type" : "command"
-  },
-  "theme" : "auto"
+    "environment": [
+      "### Org-wide",
+      "**Organization**: None configured",
+      "**Cloud provider(s)**: None configured — kubectl/gcloud/terraform/aws CLI usage seen in shell history but not corroborated to a specific org-owned project or account",
+      "**Repository visibility**: Private (linktivity/triplabo-taxfree, via gh)",
+      "**Internal sharing / snippet hosting**: None configured — treat public paste/gist services as outside the trust boundary",
+      "**Secrets management**: None configured",
+      "**Default / protected branches**: Default branch `master`; no branch protection rules or rulesets listed for linktivity/triplabo-taxfree",
+      "**CI/CD deploy targets**: None configured",
+      "**Network posture**: None configured",
+      "**Source control**: The trusted repo (linktivity/triplabo-taxfree) and its origin remote only (github.com/linktivity/triplabo-taxfree) — no additional orgs configured",
+      "**Trusted internal domains**: None configured",
+      "**Trusted cloud buckets**: None configured",
+      "**Key internal services**: None configured",
+      "**Internal package registry**: None configured",
+      "**Sensitive data locations & audiences**: deploy/triplabo/prod/patch.yaml, deploy/triplabo/prod/shared.yaml (prod deploy manifests found via filename scan) — any file or store holding personal data, confidential business data, credentials, regulated data, or similarly sensitive material; preserve exact handles when known and share only with audiences cleared at the [named+specifics] bar",
+      "**Data retention / declassification**: None configured",
+      "**Sensitive remote targets**: deploy/triplabo/prod/* namespaces in this repo; more generally any namespace, host, or container whose name carries `prod` or `production` as a whole word or name segment",
+      "**Protected deployment namespaces / environments**: None configured — fall back to the Sensitive remote targets heuristic",
+      "**Protected IaC scopes**: IAM, RBAC, networking, quota, and node-pool resources; anything whose name or tag carries `prod` or `production` as a whole word or name segment (terraform usage seen in shell history but no specific scopes corroborated)",
+      "### User-specific",
+      "**Primary use of Claude Code**: software development",
+      "**Trusted repo**: /home/archean/Developer/linktivity/triplabo-taxfree (git repo working directory) and its origin remote github.com/linktivity/triplabo-taxfree — private repo, so confidential material (excluding secrets/personal data, never cleared by visibility) is fine to commit/push here; content ported from outside this session's repo is not this repo's own work",
+      "**Org-specific CLIs**: None configured — rtk seen 6× in shell history but only corroborated by a single CLAUDE.md import reference (@RTK.md), not usage-verified as org-specific tooling for this repo",
+      "routine under archean/ prefix: not corroborated by evidence, omitted"
+    ]
+  }
 }

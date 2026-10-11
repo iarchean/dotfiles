@@ -8,3 +8,22 @@ go
 helm
 mole
 raycast
+
+# --- machine-local state / secrets (cleanup 2026-10) ---
+homebrew/trust.json
+systemd/
+tern/
+htop/
+procps/
+codex/
+ku/
+slackwatch/
+croc/
+sops/
+magpie/*
+!magpie/settings.json
+monid/credentials.yaml
+mise/config.local.toml
+tmux/*.bak-*
+# Vibe Island auto-generates this per machine
+opencode/plugins/vibe-island.*

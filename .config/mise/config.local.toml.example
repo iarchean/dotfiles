@@ -1,0 +1,4 @@
+# Per-machine overrides. Copy to config.local.toml (gitignored) and edit.
+# Example (devtoy): don't install claude-code via mise on this host.
+[settings]
+disable_tools = ["npm:@anthropic-ai/claude-code"]

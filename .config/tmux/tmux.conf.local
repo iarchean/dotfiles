@@ -555,6 +555,7 @@ tmux_conf_uninstall_plugins_on_reload=false
 #set -g @plugin 'tmux-plugins/tmux-resurrect'
 #set -g @plugin 'tmux-plugins/tmux-continuum'
 #set -g @continuum-restore 'on'
+set -g @continuum-restore-max-delay '60'   # 默认仅 10s, 负载高时自动恢复会赶不上
 
 # set -g @plugin 'joshmedeski/tmux-nerd-font-window-name'
 
@@ -565,6 +566,25 @@ set -g @plugin 'tmux-plugins/tmux-continuum'
 set -g @plugin 'iarchean/tmux-starship'
 set -g @plugin 'Ataraxy-Labs/opensessions'
 set -g @menus_trigger 'Space'
+
+# -- session 持久化 (2026-08-26 修复) -------------------------------------------
+# 背景: oh-my-tmux 的 TPM 加载逻辑在主 tmux.conf 中被整段注释掉, 上面的
+# `set -g @plugin` 声明因此无人执行。另外 tmux-continuum 仅在「本机唯一
+# tmux server」时才安装自动保存插值 —— 任何残留的 `tmux -L <name>` 测试
+# server 都会让它静默跳过, 表现为自动存档彻底停止而毫无报错。
+# 故此处显式加载两个插件。延迟加载是为了等 oh-my-tmux 应用完主题,
+# 否则 continuum 插入 status-right 的插值会被主题覆盖掉。
+# Linux only (devtoy): systemd timer + tmux-save-guarded.sh handle saving.
+if-shell 'test "$(uname)" = Linux' {
+  set -g @resurrect-dir "$HOME/.local/share/tmux/resurrect"
+  set -g @resurrect-capture-pane-contents 'on'
+  # continuum 只负责 server 启动时的自动恢复; 定时保存交给 systemd timer +
+  # tmux-save-guarded.sh。设 0 是因为 continuum 的 status-right 插值会绕过
+  # 闸门直接写 last, 把防覆盖保护整条瓦解掉 (2026-08-26 实测踩到)。
+  set -g @continuum-save-interval '0'
+  set -g @continuum-restore 'on'
+  run-shell -b 'sleep 5; "$HOME/.config/tmux/plugins/tmux-resurrect/resurrect.tmux" >/dev/null 2>&1; "$HOME/.config/tmux/plugins/tmux-continuum/continuum.tmux" >/dev/null 2>&1'
+}
 
 # -- custom variables ----------------------------------------------------------
 
