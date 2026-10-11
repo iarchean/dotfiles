@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "lines": [
     [
       {
@@ -13,7 +13,7 @@
       },
       {
         "id": "3",
-        "type": "context-length",
+        "type": "session-usage",
         "color": "brightBlack"
       },
       {
@@ -22,7 +22,7 @@
       },
       {
         "id": "5",
-        "type": "git-branch",
+        "type": "weekly-usage",
         "color": "magenta"
       },
       {
@@ -31,7 +31,7 @@
       },
       {
         "id": "7",
-        "type": "git-changes",
+        "type": "git-branch",
         "color": "yellow"
       }
     ],
@@ -41,8 +41,11 @@
   "flexMode": "full-minus-40",
   "compactThreshold": 60,
   "colorLevel": 2,
+  "defaultPaddingSide": "both",
   "inheritSeparatorColors": false,
   "globalBold": false,
+  "gitCacheTtlSeconds": 5,
+  "minimalistMode": false,
   "powerline": {
     "enabled": false,
     "separators": [
@@ -53,6 +56,11 @@
     ],
     "startCaps": [],
     "endCaps": [],
-    "autoAlign": false
+    "autoAlign": false,
+    "continueThemeAcrossLines": false
+  },
+  "installation": {
+    "method": "auto-update",
+    "packageManager": "npm"
   }
 }
